@@ -1,0 +1,94 @@
+:root {
+  --bg-page: #0b0e14;
+  --bg-panel: #12151d;
+  --bg-card: rgba(255, 255, 255, 0.03);
+  --bg-card-hover: rgba(255, 255, 255, 0.05);
+  --bg-input: rgba(255, 255, 255, 0.04);
+  --border-subtle: rgba(255, 255, 255, 0.05);
+  --text-primary: #f4f6fa;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --accent-blue: #38bdf8;
+  --accent-amber: #fbbf24;
+  --raduis-lg: 24px;
+  --radius-md: 16px;
+  --radius-sm: 12px;
+  --radius-pill: 999px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+.weather-app {
+  min-height: 100vh;
+  width: 100%;
+  background: var(--bg-page);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+}
+
+.weather-panel {
+  width: 100%;
+  max-width: 1152px;
+  border-radius: var(--raduis-lg);
+  background: var(--bg-panel);
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+  padding: 24px; 
+}
+
+.weather-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 72px 1fr 300px;
+  grid-template-rows: auto auto auto;
+  grid-template-areas: 
+  'nav search search'
+  'nav hero forecast'
+  'nav bento forecast';
+}
+
+/*sidebar*/
+.nav {
+    grid-area: nav;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 0;
+}
+
+.nav-logo {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-sm);
+    background: rgba(56, 189, 248, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    color: var(--accent-blue);
+}
+
+.nav-item {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 12px 0;
+    border-radius: var(--radius-sm);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: color 0.15s ease;
+}
