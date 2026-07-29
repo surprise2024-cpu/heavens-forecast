@@ -185,7 +185,7 @@ export const WeatherDashboard = () => {
 
                                         <ConditionIcon condition={h.condition} size={26}/>
 
-                                        <span className={styles['hourly-temp']}>{h.temp}</span>
+                                        <span className={styles['hourly-temp']}>{h.temp}*</span>
                                     
                                     </div>
                                 ))
