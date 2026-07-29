@@ -16,7 +16,6 @@ import {
     Droplet,
     Gauge, 
     Thermometer,
-    Icon,
 } from 'lucide-react'
 
 //Types
@@ -63,38 +62,43 @@ const navItems = [
     {icon: Settings, label: 'Settings', active: false},
 ];
 
+const iconClassMap: Record<Condition, string> = {
+    sunny: 'icon-sunny',
+    cloudy: 'icon-cloudy',
+    rainy: 'icon-rainy',
+    storm: 'icon-storm',
+};
+
 function ConditionIcon ({
     condition, 
     size = 22, 
-    className=''
 }: {
     condition: Condition;
     size?: number;
-    className?: string
 }) {
-    const common = { size, strokeWidth: 1.75 };
+    const common = { size, strokeWidth: 1.75,className: styles[iconClassMap[condition]] };
 
     switch (condition) {
         case 'sunny': 
-            return <Sun {...common} className={`text-amber-400 ${className}`} />
+            return <Sun {...common} />
         case 'cloudy': 
-            return <Cloud {...common} className={`text-slate-300 ${className}`} />
+            return <Cloud {...common} />
         case 'rainy': 
-            return <CloudRain {...common} className={`text-sky-300 ${className}`} />
+            return <CloudRain {...common} />
         case 'storm': 
             return (
-                <CloudLightning {...common} className={`text-amber-300 ${className}`} />
+                <CloudLightning {...common} />
             );
         }
 }
 
 function conditionLabel(c: Condition) {
     return c === 'sunny'
-    ? 'sunny'
+    ? 'Sunny'
     : c === 'cloudy'
     ? 'Cloudy'
     : c === 'rainy'
-    ? 'rainy'
+    ? 'Rainy'
     : 'Storm';
 }
 
@@ -119,14 +123,20 @@ export const WeatherDashboard = () => {
                 <aside className={styles['nav']}>
 
                     <div className={styles['nav-logo']}>
+
                         <Wind size={20} strokeWidth={1.75}/>
+
                     </div>
 
                     {
                         navItems.map(({ icon: Icon, label, active }) => (
-                            <button key={label} className={`nav-item ${active ? 'active' : ''}`}>
+
+                            <button key={label} className={`${styles['nav-item']} ${active ? styles['active'] : ''}`}>
+
                                 <Icon size={20} strokeWidth={1.75} />
+
                                 <span>{label}</span>
+
                             </button>
                         ))
                     }
@@ -135,25 +145,34 @@ export const WeatherDashboard = () => {
                 
                 {/*Searchbar */}
                 <div className={styles['search-bar']} >
+
                     <Search size={16} />
+
                     <input value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder='Search for cities'
                     />
+
                 </div>
 
                 {/*Hero */}
                 <div className={styles['hero']}>
+                   
                     <div>
+
                         <h1 className={styles['hero-city']} >{city}</h1>
                         <p className={styles['hero-subtext']}>Chance of rain: {chanceOfRain}%</p>
                         <p className={styles['hero-temp']}>{currentTemp}*</p>
+                    
                     </div>
+                    
                     <Sun size={110} strokeWidth={1.25} className={styles['hero-icon']}/>
+                
                 </div>
                 
                 {/*bento */}
                 <div className={styles['bento-col']}>
+
                     {/*todays forecast strip */}
                     <div className={styles['card']}>
                         <p className={styles['card-label']}>TODAY'S FORECAST</p>
@@ -161,9 +180,13 @@ export const WeatherDashboard = () => {
                             {
                                 hourly.map((h) => (
                                     <div key={h.time} className={styles['hourly-item']}> 
+
                                         <span className={styles['hourly-time']}>{h.time}</span>
+
                                         <ConditionIcon condition={h.condition} size={26}/>
+
                                         <span className={styles['hourly-temp']}>{h.temp}</span>
+                                    
                                     </div>
                                 ))
                             }
@@ -172,37 +195,37 @@ export const WeatherDashboard = () => {
                     
                     {/*Air condition */}
                     <div className={styles['card']}>
-                        <div className={styles['card-header-tow']}>
-                            <p className={styles['card-label']}>Air CONDITIONS</p>
+                        <div className={styles['card-header-row']}>
+                            <p className={styles['card-label']}>AIR CONDITIONS</p>
                             <button className={styles['see-more-btn']}>See  more</button>
                         </div>
                         <div className={styles['condition-grid']}>
-                            <div className={styles['consdition-item']}>
+                            <div className={styles['condition-item']}>
                                 <Thermometer size={16} strokeWidth={1.75}/>
                                 <div>
                                     <p className={styles['condition-label']}>Real Feel</p>
-                                    <p className={styles['consition-value']}>{realFeel}*</p>
+                                    <p className={styles['condition-value']}>{realFeel}*</p>
                                 </div>
                             </div>
-                            <div className={styles['consdition-item']}>
+                            <div className={styles['condition-item']}>
                                 <Wind size={16} strokeWidth={1.75}/>
                                 <div>
                                     <p className={styles['condition-label']}>Wind</p>
-                                    <p className={styles['consition-value']}>{wind}*</p>
+                                    <p className={styles['condition-value']}>{wind}</p>
                                 </div>
                             </div>
-                            <div className={styles['consdition-item']}>
+                            <div className={styles['condition-item']}>
                                 <Droplet size={16} strokeWidth={1.75}/>
                                 <div>
                                     <p className={styles['condition-label']}>Chance of rain</p>
-                                    <p className={styles['consition-value']}>{chanceOfRain}*</p>
+                                    <p className={styles['condition-value']}>{chanceOfRain}%</p>
                                 </div>
                             </div>
-                            <div className={styles['consdition-item']}>
+                            <div className={styles['condition-item']}>
                                 <Gauge size={16} strokeWidth={1.75}/>
                                 <div>
                                     <p className={styles['condition-label']}>UV Index</p>
-                                    <p className={styles['consition-value']}>{uvIndex}*</p>
+                                    <p className={styles['condition-value']}>{uvIndex}</p>
                                 </div>
                             </div>
                         </div>
@@ -231,7 +254,7 @@ export const WeatherDashboard = () => {
                                         <span className={styles['forecast-temps']}>
 
                                             {d.high}
-                                            <span className={styles['low']}>{d.low}</span>
+                                            <span className={styles['low']}>/{d.low}</span>
 
                                         </span>
                                     </div>
@@ -241,13 +264,6 @@ export const WeatherDashboard = () => {
                 </div>
 
             </div>
-
-   
-
-          
-
-            
-
         </div>
     </div>
   );
