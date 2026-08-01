@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import styles from './WeatherDashboard.module.css'
 
 import {
-    Search,
     Wind, 
     Sun, 
     Cloud,
@@ -14,6 +13,7 @@ import {
     Thermometer,
 } from 'lucide-react'
 import { Navbar } from '../Navbar/Navbar';
+import { Searchbar } from '../Searchbar/Searchbar';
 
 //Types
 
@@ -93,7 +93,7 @@ function conditionLabel(c: Condition) {
 }
 
 export const WeatherDashboard = () => {
-    const [query, setQuery] = useState('');
+
     const city = 'Madrid';
     const currentTemp = 31;
     const chanceOfRain = 0;
@@ -113,16 +113,7 @@ export const WeatherDashboard = () => {
                 <Navbar />
                 
                 {/*Searchbar */}
-                <div className={styles['search-bar']} >
-
-                    <Search size={16} />
-
-                    <input value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                    placeholder='Search for cities'
-                    />
-
-                </div>
+                <Searchbar />
 
                 {/*Hero */}
                 <div className={styles['hero']}>
