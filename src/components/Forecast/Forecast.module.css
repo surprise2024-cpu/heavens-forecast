@@ -1,0 +1,88 @@
+:root {
+  --bg-page: #0b0e14;
+  --bg-panel: #12151d;
+  --bg-card: rgba(255, 255, 255, 0.03);
+  --bg-card-hover: rgba(255, 255, 255, 0.05);
+  --bg-input: rgba(255, 255, 255, 0.04);
+  --border-subtle: rgba(255, 255, 255, 0.05);
+  --text-primary: #f4f6fa;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --accent-blue: #38bdf8;
+  --accent-amber: #fbbf24;
+  --raduis-lg: 24px;
+  --radius-md: 16px;
+  --radius-sm: 12px;
+  --radius-pill: 999px;
+}
+
+.forecast-col {
+  grid-area: forecast;
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  padding: 20px;
+}
+
+.forecast-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.forecast-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.forecast-row:last-child {
+  border-bottom: none;
+}
+
+.forecast-day {
+  font-size: 14px;
+  color: var(--text-secondary);
+  width: 40px;
+  flex-shrink: 0;
+}
+
+.forecast-condition {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  padding-left: 8px;
+}
+
+.forecast-condition span {
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+.forecast-temps {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.forecast-temps .low {
+  color: var(--text-muted);
+}
+
+/*weather condition icon colors*/
+.icon-sunny {
+  color: var(--accent-amber);
+}
+
+.icon-cloudy {
+  color: #cbd5e1;
+}
+
+.icon-rainy {
+  color: #7dd3fc;
+}
+
+.icon-storm {
+  color: #fcd34d;
+}
