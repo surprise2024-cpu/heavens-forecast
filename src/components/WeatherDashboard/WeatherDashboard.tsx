@@ -5,10 +5,6 @@ import styles from './WeatherDashboard.module.css'
 import {
     Search,
     Wind, 
-    CloudSun, 
-    List, 
-    Map as MapIcon,
-    Settings,
     Sun, 
     Cloud,
     CloudRain, 
@@ -17,6 +13,7 @@ import {
     Gauge, 
     Thermometer,
 } from 'lucide-react'
+import { Navbar } from '../Navbar/Navbar';
 
 //Types
 
@@ -53,13 +50,6 @@ const daily: DailyPoint[] = [
     {day: 'Fri', condition: 'cloudy', high: 37, low: 21},
     {day: 'Sat', condition: 'rainy', high: 37, low: 21},
     {day: 'Sun', condition: 'storm', high: 37, low: 21},
-];
-
-const navItems = [
-    {icon: CloudSun, label: 'Weather', active: true},
-    {icon: List, label: 'Cities', active: false},
-    {icon: MapIcon, label: 'Map', active: false},
-    {icon: Settings, label: 'Settings', active: false},
 ];
 
 const iconClassMap: Record<Condition, string> = {
@@ -119,29 +109,8 @@ export const WeatherDashboard = () => {
 
             <div className={styles['weather-grid']}>
 
-                             {/*Sidebar*/}
-                <aside className={styles['nav']}>
-
-                    <div className={styles['nav-logo']}>
-
-                        <Wind size={20} strokeWidth={1.75}/>
-
-                    </div>
-
-                    {
-                        navItems.map(({ icon: Icon, label, active }) => (
-
-                            <button key={label} className={`${styles['nav-item']} ${active ? styles['active'] : ''}`}>
-
-                                <Icon size={20} strokeWidth={1.75} />
-
-                                <span>{label}</span>
-
-                            </button>
-                        ))
-                    }
-
-                </aside>
+                {/*Sidebar*/}
+                <Navbar />
                 
                 {/*Searchbar */}
                 <div className={styles['search-bar']} >
@@ -233,7 +202,7 @@ export const WeatherDashboard = () => {
                 </div>
 
 
-                {/*7 day forsecast */}
+                {/*7 day forecast */}
                 <div className={styles['forecast-col']}>
                     <p className={styles['card-label']}>DAY FORECAST</p>
                     <div className={styles['forecast-list']}>

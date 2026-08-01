@@ -7,9 +7,13 @@ function App() {
 
   return (
     <div id='app-cont'>
+
       <div className='scrollable'>
+
         <WeatherDashboard />
+
       </div>
+      
     </div>
   )
 }
