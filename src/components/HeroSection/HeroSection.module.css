@@ -1,0 +1,37 @@
+/*Hero: current weather*/
+
+.hero {
+  grid-area: hero;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: transparent;
+  border-radius: var(--radius-md);
+  padding: 24px;
+}
+
+.hero-city {
+  font-size: 30px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.hero-subtext {
+  color: var(--text-muted);
+  font-size: 14px;
+  margin: 4px 0 0;
+}
+
+.hero-temp {
+  font-size: 64px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 16px 0 0;
+  line-height: 1;
+}
+
+.hero-icon {
+  color: var(--accent-amber);
+  filter: drop-shadow(0 0 25px rgba(251, 191, 36, 0.35));
+}

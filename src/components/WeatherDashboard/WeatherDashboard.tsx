@@ -14,6 +14,7 @@ import {
 } from 'lucide-react'
 import { Navbar } from '../Navbar/Navbar';
 import { Searchbar } from '../Searchbar/Searchbar';
+import { HeroSection } from '../HeroSection/HeroSection';
 
 //Types
 
@@ -94,8 +95,6 @@ function conditionLabel(c: Condition) {
 
 export const WeatherDashboard = () => {
 
-    const city = 'Madrid';
-    const currentTemp = 31;
     const chanceOfRain = 0;
     const realFeel = 30;
     const wind = '0.2 km/h';
@@ -116,19 +115,7 @@ export const WeatherDashboard = () => {
                 <Searchbar />
 
                 {/*Hero */}
-                <div className={styles['hero']}>
-                   
-                    <div>
-
-                        <h1 className={styles['hero-city']} >{city}</h1>
-                        <p className={styles['hero-subtext']}>Chance of rain: {chanceOfRain}%</p>
-                        <p className={styles['hero-temp']}>{currentTemp}*</p>
-                    
-                    </div>
-                    
-                    <Sun size={110} strokeWidth={1.25} className={styles['hero-icon']}/>
-                
-                </div>
+                <HeroSection />
                 
                 {/*bento */}
                 <div className={styles['bento-col']}>
