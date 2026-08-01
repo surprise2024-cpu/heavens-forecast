@@ -4,11 +4,11 @@ const API_KEY = '3d555e3f7afc3df8ec94c2202cbbb0fe'
 const BASE_URL = 'https://api.openweathermap.org/data/2.5'
 const GEO_URL = 'https://api.openweathermap.org/geo/1.0'
 
-export const getCurrentWeather = async (city) => {
+export const getCurrentWeather = async (city: string) => {
     try {
         const response = await fetch(`${BASE_URL}/weather?q=${city}&appid=${API_KEY}&units=metric`);
 
-        if(response.ok) {
+        if(!response.ok) {
 
             if(response.status === 404) {
                 throw new Error(
@@ -50,11 +50,11 @@ export const getCurrentWeather = async (city) => {
         
 }
 
-export const getCurrentWeatherByCoords = async (lat, long) => {
+export const getCurrentWeatherByCoords = async (lat: number, long: number) => {
     try {
         const response = await fetch(`${BASE_URL}/weather?lat=${lat}&lon=${long}&appid=${API_KEY}&units=metric`);
 
-        if(response.ok) {
+        if(!response.ok) {
 
             if (response.status === 401) {
                 throw new Error(
@@ -91,11 +91,11 @@ export const getCurrentWeatherByCoords = async (lat, long) => {
         
 }
 
-export const getWeatherForecast = async (city) => {
+export const getWeatherForecast = async (city: string) => {
     try {
         const response = await fetch(`${BASE_URL}/forecast?q=${city}&appid=${API_KEY}&units=metric`);
 
-        if(response.ok) {
+        if(!response.ok) {
 
             if(response.status === 404) {
                 throw new Error(
@@ -130,14 +130,22 @@ export const getWeatherForecast = async (city) => {
         
 }
 
-export const searchCities = async (query) => {
+interface GeoCity {
+    name: string;
+    country: string;
+    lat: number;
+    lon: number;
+    state?: string;
+}
+
+export const searchCities = async (query: string) => {
     try {
 
         const response = await fetch(`
             ${GEO_URL}/direct?q=${query}&limit=5&appid=${API_KEY}`
         );
 
-        if(response.ok) {
+        if(!response.ok) {
 
             if (response.status === 401) {
                 throw new Error(
@@ -152,7 +160,7 @@ export const searchCities = async (query) => {
             );
         }
 
-        const data = await response.json();
+        const data: GeoCity[] = await response.json();
 
         //transorms geolocation data into a more usable format
 

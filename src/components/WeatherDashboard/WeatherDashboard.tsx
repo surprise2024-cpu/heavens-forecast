@@ -7,11 +7,23 @@ import { Searchbar } from '../Searchbar/Searchbar';
 import { HeroSection } from '../HeroSection/HeroSection';
 import { BentoSection } from '../BentoSection/BentoSection';
 import { Forecast } from '../Forecast/Forecast';
-
-//Types
+import { useWeather } from '../hooks/useWeather';
 
 
 export const WeatherDashboard = () => {
+
+    const {
+        currentWeather,
+        forecast,
+        loading,
+        error,
+        unit,
+        fetchWeatherByCity,
+        fetchWeatherByLocation,
+        toggleUnit,
+
+    } = useWeather();
+
 
   return (
     <div className={styles['weather-app']}>
@@ -24,7 +36,11 @@ export const WeatherDashboard = () => {
                 <Navbar />
                 
                 {/*Searchbar */}
-                <Searchbar />
+                <Searchbar 
+                    onSearch={fetchWeatherByCity} 
+                    onLocationSearch={fetchWeatherByLocation} 
+                    loading={loading} 
+                />
 
                 {/*Hero */}
                 <HeroSection />

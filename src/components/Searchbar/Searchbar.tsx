@@ -4,9 +4,13 @@ import styles from './Searchbar.module.css'
 
 import { Search } from 'lucide-react'
 
-export const Searchbar = () => {
+export const Searchbar = (onSearch, onLocationSearch, loading) => {
 
-    const [query, setQuery] = useState('');
+  const [query, setQuery] = useState('');
+  const [suggestions, setSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [searchLoading, setSearchLoading] = useState(false);
+  
 
   return (
     <>
@@ -16,7 +20,7 @@ export const Searchbar = () => {
 
             <input value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder='Search for cities'
+            placeholder='Search for cities....'
             />
 
         </div>
