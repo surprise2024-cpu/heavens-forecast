@@ -152,13 +152,14 @@ export const searchCities = async (query: string) => {
                     'Invalid API key. Please check your API key and try again.'
                 );
             }
-
-        }
-        else {
+            else {
             throw new Error(
                 'Weather service is temporarily unavailable. Please try again later.'
             );
         }
+
+        }
+        
 
         const data: GeoCity[] = await response.json();
 

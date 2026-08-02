@@ -72,12 +72,11 @@
 }
 
 .suggestion-item:hover {
-  background: var(--bg-card-hover);
 }
 
 .loading-indicator {
   display: flex;
-  align-items: center;
+  align-items: left;
   justify-content: center;
   padding: 8px 16px;
   color: var(--text-muted);

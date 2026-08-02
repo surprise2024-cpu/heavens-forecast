@@ -172,6 +172,7 @@ export const Searchbar: React.FC<SearchbarProps> = ({ onSearch, onLocationSearch
                     return (
                       <button 
                         className={styles['suggestion-item']} 
+                        key={`${city.name}-${city.country}-${index}`}
                         onClick={() => handleSuggestionClick(city)}>
 
                         <div className={styles['suggestion-text']}>
