@@ -1,7 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
 
 import styles from './Searchbar.module.css'
-import { Search } from 'lucide-react'
+
+import { 
+  Search, 
+  X,
+  MapPin
+} from 'lucide-react'
+
 import { searchCities } from '../Services/WeatherAPI';
 
 interface SearchbarProps {
@@ -112,9 +118,9 @@ export const Searchbar: React.FC<SearchbarProps> = ({ onSearch, onLocationSearch
 
   return (
     <>
-        <div ref={searchRef} className={styles['search-bar']} >
-          <form>
-            <div>
+        <div ref={searchRef} >
+          <form onSubmit={handleSubmit}>
+            <div className={styles['search-bar']}>
               <Search size={16} />
 
               <input 
@@ -124,9 +130,70 @@ export const Searchbar: React.FC<SearchbarProps> = ({ onSearch, onLocationSearch
                 placeholder='Search for cities....'
               />
 
+              {/*Conditional rendering */}
+              {query && (
+                <button 
+                  type="button"
+                  onClick={clearSearch} 
+                  className={styles['clear-button']}>
+
+                  <X size={16} />
+
+                </button>
+              )}
+
+              <button 
+                className={styles['location-button']} 
+                type="button" disabled={loading}>
+                
+                <MapPin 
+                  size={16} 
+                  onClick={onLocationSearch} 
+                />
+
+              </button>
+
             </div>
           </form>
-            
+
+          {/*conditional redering for suggestions */}
+          {showSuggestions && (suggestions.length > 0 || searchLoading) && (
+            <div className={styles['suggestions-container']}>
+
+              {/*conditional rendering */}
+              {
+                searchLoading ? (<div className={styles['suggestion-item']}>
+                <div className={styles['loading-indicator']}>
+
+                </div>
+                <p>Search Cities....</p>
+                </div>) : (
+                  suggestions.map((city, index) => {
+                    return (
+                      <button 
+                        className={styles['suggestion-item']} 
+                        onClick={() => handleSuggestionClick(city)}>
+
+                        <div className={styles['suggestion-text']}>
+
+                          {city.name}
+
+                          {/*conditional rendering */}
+                          {city.state && <span>, {city.state}</span>}
+                           
+                        </div>
+
+                        <div>{city.country}</div>
+
+                        <Search size={16} />
+
+                      </button>
+                    );
+                  })
+              )}
+              
+            </div>
+          )}
         </div>
     </>
   )

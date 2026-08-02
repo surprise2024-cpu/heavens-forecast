@@ -25,3 +25,60 @@
   color: var(--text-muted);
   flex-shrink: 0;
 }
+
+.clear-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.clear-button:hover {
+  color: #fff;
+  background: var(--bg-button-hover);
+}
+
+.location-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+/*Suggestion section*/
+.suggestion-container {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--bg-panel);
+  border-radius: var(--radius-sm);
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+.suggestion-item {
+  padding: 8px 16px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.suggestion-item:hover {
+  background: var(--bg-card-hover);
+}
+
+.loading-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  color: var(--text-muted);
+}
