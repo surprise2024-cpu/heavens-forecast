@@ -162,11 +162,15 @@ export const Searchbar: React.FC<SearchbarProps> = ({ onSearch, onLocationSearch
 
               {/*conditional rendering */}
               {
-                searchLoading ? (<div className={styles['suggestion-item']}>
-                <div className={styles['loading-indicator']}>
+                searchLoading ? (
+                <div className={styles['suggestion-item']}>
 
-                </div>
-                <p>Search Cities....</p>
+                  <div className={styles['loading-indicator']}>
+
+                  </div>
+                  
+                  <p>Search Cities....</p>
+
                 </div>) : (
                   suggestions.map((city, index) => {
                     return (
@@ -175,16 +179,17 @@ export const Searchbar: React.FC<SearchbarProps> = ({ onSearch, onLocationSearch
                         key={`${city.name}-${city.country}-${index}`}
                         onClick={() => handleSuggestionClick(city)}>
 
-                        <div className={styles['suggestion-text']}>
+                        <div>
+                          <div className={styles['suggestion-text']}>
 
-                          {city.name}
+                            {city.name}
 
-                          {/*conditional rendering */}
-                          {city.state && <span>, {city.state}</span>}
+                            {/*conditional rendering */}
+                            {city.state && <span>, {city.state}</span>}
                            
+                          </div>
+                          <div>{city.country}</div>
                         </div>
-
-                        <div>{city.country}</div>
 
                         <Search size={16} />
 
