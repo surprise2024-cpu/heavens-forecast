@@ -99,3 +99,9 @@ body {
     font-size: 48px;
   }
 }
+
+.load-spinner {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2;
+}

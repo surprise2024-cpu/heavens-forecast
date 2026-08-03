@@ -9,6 +9,7 @@ import { BentoSection } from '../BentoSection/BentoSection';
 import { Forecast } from '../Forecast/Forecast';
 import { useWeather } from '../hooks/useWeather';
 import { TemperatureToggle } from '../TemperatureToggle/TemperatureToggle';
+import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
 
 
 export const WeatherDashboard = () => {
@@ -25,6 +26,14 @@ export const WeatherDashboard = () => {
 
     } = useWeather();
 
+    const handleRetry = () => {
+        if(currentWeather) {
+            fetchWeatherByCity(currentWeather.name)
+        }
+        else {
+            fetchWeatherByCity('Polokwane')
+        }
+    }
 
   return (
     <div className={styles['weather-app']}>
@@ -45,15 +54,30 @@ export const WeatherDashboard = () => {
                 {/*TemperatureToggle */}
                 <TemperatureToggle unit={unit} onToggle={toggleUnit} />
 
-                {/*Hero */}
-                <HeroSection />
+                {/*Load spinner*/}
+                <div className={styles['load-spinner']}>
+                    {/*Conditional rendering*/}
+                    {
+                        error && !loading && (
+                            <div>
+                                <ErrorMessage message={error} onRetry={handleRetry}/>
+                            </div>
+                        )
+                    }
+
+                    {/*Hero */}
+                    <HeroSection />
+                    
+                    {/*bento */}
+                    <BentoSection />
+
+
+                    {/*7 day forecast */}
+                    <Forecast />
+                    
+                </div>
+
                 
-                {/*bento */}
-                <BentoSection />
-
-
-                {/*7 day forecast */}
-                <Forecast />
 
             </div>
         </div>
