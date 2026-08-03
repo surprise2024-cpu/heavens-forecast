@@ -97,3 +97,21 @@
   margin-bottom: 0.75rem;
   letter-spacing: -0.025rem;
 }
+
+.weather-desc {
+  color: rgb(255, 255, 255 /0.9);
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  text-transform: capitalize;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.temps {
+  display: flex;
+  align-items: center;
+  margin-left: 1rem;
+  color: rgb(255, 255, 255 /0.6);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
