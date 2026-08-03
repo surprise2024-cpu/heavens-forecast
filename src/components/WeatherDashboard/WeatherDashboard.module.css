@@ -51,7 +51,7 @@ body {
   grid-template-columns: 72px 1fr 300px;
   grid-template-rows: auto auto auto;
   grid-template-areas: 
-  'nav search search'
+  'nav search temperaturetoggle '
   'nav hero forecast'
   'nav bento forecast';
 }
@@ -63,6 +63,7 @@ body {
     grid-template-columns: 72px 1fr;
     grid-template-areas: 
     'nav search'
+    'nav temperaturetoggle'
     'nav hero'
     'nav bento'
     'nav forecast';
@@ -83,6 +84,7 @@ body {
     grid-template-areas:
     'nav' 
     'search'
+    'temperaturetoggle'
     'hero'
     'bento'
     'forecast';

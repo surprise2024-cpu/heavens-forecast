@@ -37,16 +37,13 @@ export const WeatherDashboard = () => {
                 <Navbar />
                 
                 {/*Searchbar */}
-                <div>
-                    <Searchbar 
-                        onSearch={fetchWeatherByCity} 
-                        onLocationSearch={fetchWeatherByLocation} 
-                        loading={loading} 
-                    />
-                    {/*Temperature Toggle */}
-                    <TemperatureToggle unit={unit} onToggle={toggleUnit} />
-                </div>
-                
+                <Searchbar 
+                    onSearch={fetchWeatherByCity} 
+                    onLocationSearch={fetchWeatherByLocation} 
+                    loading={loading} 
+                />
+                {/*TemperatureToggle */}
+                <TemperatureToggle unit={unit} onToggle={toggleUnit} />
 
                 {/*Hero */}
                 <HeroSection />

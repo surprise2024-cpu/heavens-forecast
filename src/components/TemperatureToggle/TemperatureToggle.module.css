@@ -28,10 +28,10 @@
     background-color: rgba(255, 255, 255, 0.1);
 }
 
-/*.temp-btn-active {
+.temp-btn-active {
     background-color: #ffffff;
     color: #2563eb;
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 
     0 4px 6px -4px rgba(0, 0, 0, 0.1);
     transform: scale(1.85);
-}*/
+}
