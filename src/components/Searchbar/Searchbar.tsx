@@ -154,6 +154,7 @@ export const Searchbar: React.FC<SearchbarProps> = ({ onSearch, onLocationSearch
               </button>
 
             </div>
+            
           </form>
 
           {/*conditional redering for suggestions */}

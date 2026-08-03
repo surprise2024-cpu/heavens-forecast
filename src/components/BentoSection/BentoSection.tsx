@@ -72,64 +72,64 @@ export const BentoSection = () => {
     <>
         <div className={styles['bento-col']}>
 
-                    {/*todays forecast strip */}
-                    <div className={styles['card']}>
-                        <p className={styles['card-label']}>TODAY'S FORECAST</p>
-                        <div className={styles['hourly-grid']}>
-                            {
-                                hourly.map((h) => (
-                                    <div key={h.time} className={styles['hourly-item']}> 
+            {/*todays forecast strip */}
+            <div className={styles['card']}>
+                <p className={styles['card-label']}>TODAY'S FORECAST</p>
+                <div className={styles['hourly-grid']}>
+                    {
+                        hourly.map((h) => (
+                            <div key={h.time} className={styles['hourly-item']}> 
 
-                                        <span className={styles['hourly-time']}>{h.time}</span>
+                                <span className={styles['hourly-time']}>{h.time}</span>
 
-                                        <ConditionIcon condition={h.condition} size={26}/>
+                                <ConditionIcon condition={h.condition} size={26}/>
 
-                                        <span className={styles['hourly-temp']}>{h.temp}°C</span>
-                                    
-                                    </div>
-                                ))
-                            }
+                                <span className={styles['hourly-temp']}>{h.temp}°C</span>
+                            
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+            
+            {/*Air condition */}
+            <div className={styles['card']}>
+                <div className={styles['card-header-row']}>
+                    <p className={styles['card-label']}>AIR CONDITIONS</p>
+                    <button className={styles['see-more-btn']}>See more</button>
+                </div>
+                <div className={styles['condition-grid']}>
+                    <div className={styles['condition-item']}>
+                        <Thermometer size={16} strokeWidth={1.75}/>
+                        <div>
+                            <p className={styles['condition-label']}>Real Feel</p>
+                            <p className={styles['condition-value']}>{realFeel}</p>
                         </div>
                     </div>
-                    
-                    {/*Air condition */}
-                    <div className={styles['card']}>
-                        <div className={styles['card-header-row']}>
-                            <p className={styles['card-label']}>AIR CONDITIONS</p>
-                            <button className={styles['see-more-btn']}>See more</button>
+                    <div className={styles['condition-item']}>
+                        <Wind size={16} strokeWidth={1.75}/>
+                        <div>
+                            <p className={styles['condition-label']}>Wind</p>
+                            <p className={styles['condition-value']}>{wind}</p>
                         </div>
-                        <div className={styles['condition-grid']}>
-                            <div className={styles['condition-item']}>
-                                <Thermometer size={16} strokeWidth={1.75}/>
-                                <div>
-                                    <p className={styles['condition-label']}>Real Feel</p>
-                                    <p className={styles['condition-value']}>{realFeel}</p>
-                                </div>
-                            </div>
-                            <div className={styles['condition-item']}>
-                                <Wind size={16} strokeWidth={1.75}/>
-                                <div>
-                                    <p className={styles['condition-label']}>Wind</p>
-                                    <p className={styles['condition-value']}>{wind}</p>
-                                </div>
-                            </div>
-                            <div className={styles['condition-item']}>
-                                <Droplet size={16} strokeWidth={1.75}/>
-                                <div>
-                                    <p className={styles['condition-label']}>Chance of rain</p>
-                                    <p className={styles['condition-value']}>{chanceOfRain}%</p>
-                                </div>
-                            </div>
-                            <div className={styles['condition-item']}>
-                                <Gauge size={16} strokeWidth={1.75}/>
-                                <div>
-                                    <p className={styles['condition-label']}>UV Index</p>
-                                    <p className={styles['condition-value']}>{uvIndex}</p>
-                                </div>
-                            </div>
+                    </div>
+                    <div className={styles['condition-item']}>
+                        <Droplet size={16} strokeWidth={1.75}/>
+                        <div>
+                            <p className={styles['condition-label']}>Chance of rain</p>
+                            <p className={styles['condition-value']}>{chanceOfRain}%</p>
+                        </div>
+                    </div>
+                    <div className={styles['condition-item']}>
+                        <Gauge size={16} strokeWidth={1.75}/>
+                        <div>
+                            <p className={styles['condition-label']}>UV Index</p>
+                            <p className={styles['condition-value']}>{uvIndex}</p>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
     </>
   )
 }
