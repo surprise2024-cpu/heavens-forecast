@@ -8,6 +8,7 @@ import { HeroSection } from '../HeroSection/HeroSection';
 import { BentoSection } from '../BentoSection/BentoSection';
 import { Forecast } from '../Forecast/Forecast';
 import { useWeather } from '../hooks/useWeather';
+import { TemperatureToggle } from '../TemperatureToggle/TemperatureToggle';
 
 
 export const WeatherDashboard = () => {
@@ -36,11 +37,16 @@ export const WeatherDashboard = () => {
                 <Navbar />
                 
                 {/*Searchbar */}
-                <Searchbar 
-                    onSearch={fetchWeatherByCity} 
-                    onLocationSearch={fetchWeatherByLocation} 
-                    loading={loading} 
-                />
+                <div>
+                    <Searchbar 
+                        onSearch={fetchWeatherByCity} 
+                        onLocationSearch={fetchWeatherByLocation} 
+                        loading={loading} 
+                    />
+                    {/*Temperature Toggle */}
+                    <TemperatureToggle unit={unit} onToggle={toggleUnit} />
+                </div>
+                
 
                 {/*Hero */}
                 <HeroSection />
