@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 import styles from './TemperatureToggle.module.css'
+import { useWeather } from '../hooks/useWeather';
 
 interface TemperatureToggleProps {
   unit: string
@@ -14,6 +15,18 @@ export const TemperatureToggle: React.FC<TemperatureToggleProps> = ({ unit, onTo
     const toggleActive = (): void => {
         setIsActive((prev) => !prev);
     }
+
+        {/*const {
+            currentWeather,
+            forecast,
+            loading,
+            error,
+            unit,
+            fetchWeatherByCity,
+            fetchWeatherByLocation,
+            toggleUnit,
+    
+        } = useWeather();*/}
 
   return (
     <div className={styles['temperature-toggle']}>
