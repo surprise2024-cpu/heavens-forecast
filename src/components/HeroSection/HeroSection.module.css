@@ -115,3 +115,14 @@
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
+
+.dynamic2 {
+  color: rgb(255, 255, 255 / 0.9);
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}
+
+.dynamic2:hover {
+  transform: scale(1.1);
+}

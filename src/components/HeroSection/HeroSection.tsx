@@ -82,6 +82,10 @@ export const HeroSection: React.FC = () => {
               </div>
 
           </div>
+          <div className={styles['dynamic2']}>
+              {/*display dynamic date */}
+              d
+          </div>
             
           <Sun size={110} strokeWidth={1.25} className={styles['hero-icon']}/>
         
