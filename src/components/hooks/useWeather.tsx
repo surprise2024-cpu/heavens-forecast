@@ -5,9 +5,36 @@ import {
     getCurrentWeatherByCoords, 
     getWeatherForecast } from '../Services/WeatherAPI'
 
-export const useWeather = () => {
+type CurrentWeather = {
+    name: string;    weather?: {
+    main: string;
+    description?: string;
+    }[];
+    dt?: number;
+    sys?: {
+        country?: string;
+    };
+    main?: {
+        temp?: number;
+        temp_min?: number;
+        temp_max?: number;
+    };    
+};
 
-    const [currentWeather, setCurrentWeather] = useState(null);
+export type UseWeatherReturn = {
+    currentWeather: CurrentWeather | null;
+    forecast: unknown | null;
+    loading: boolean;
+    error: string | null;
+    unit: string;
+    fetchWeatherByCity: (city: string) => Promise<void>;
+    fetchWeatherByLocation: () => Promise<void>;
+    toggleUnit: () => void;
+};
+
+export const useWeather = (): UseWeatherReturn => {
+
+    const [currentWeather, setCurrentWeather] = useState<CurrentWeather | null>(null);
     const [forecast, setForecast] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);

@@ -31,10 +31,12 @@ export const getWeatherIcon = (weather: { main: string}) => {
         Sand: Hourglass,
         Squall: Wind,
         Tornado: TornadoIcon,
-    };
+    } as const;
 
-  return iconMap[weather.main] || 'Cloud';
+    const iconKey = weather.main as keyof typeof iconMap;
+    const Icon = iconMap[iconKey] || CloudIcon;
 
+    return Icon;
 };
 
 export const formatTemperature = (temp: number, unit: string) => {
@@ -60,7 +62,7 @@ export const formatDate = (timestamp: number) => {
     });
 };
 
-export const getwindDirection = (deg) => {
+export const getwindDirection = (deg: number) => {
     const directions = [
         'N' ,
         'NNE' ,

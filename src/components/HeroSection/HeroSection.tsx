@@ -2,14 +2,14 @@ import React from 'react'
 
 import styles from './HeroSection.module.css'
 
-import { MapPin, Sun} from 'lucide-react'
+import { MapPin, Sun } from 'lucide-react'
 import { getWeatherIcon } from '../utils/WeatherUtilities'
 
 export const HeroSection: React.FC = () => {
 
-  {/*const iconName = getWeatherIcon(weather.weather[0]);
+  const iconName = getWeatherIcon(weather.weather[0]);
   const iconComponent = LucideIcons[iconName] || LucideIcons.Cloud;
-    */}
+    
     const city = 'Madrid';
     const country = 'US';
     const chanceOfRain = 0;
@@ -87,7 +87,7 @@ export const HeroSection: React.FC = () => {
               d
           </div>
             
-          <Sun size={110} strokeWidth={1.25} className={styles['hero-icon']}/>
+          <Icon size={110} strokeWidth={1.25} className={styles['hero-icon']}/>
         
         </div>
     </>

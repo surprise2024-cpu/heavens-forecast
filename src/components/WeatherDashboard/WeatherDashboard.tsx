@@ -1,5 +1,3 @@
-import React, { useState } from 'react'
-
 import styles from './WeatherDashboard.module.css'
 
 import { Navbar } from '../Navbar/Navbar';
@@ -7,12 +5,12 @@ import { Searchbar } from '../Searchbar/Searchbar';
 import { HeroSection } from '../HeroSection/HeroSection';
 import { BentoSection } from '../BentoSection/BentoSection';
 import { Forecast } from '../Forecast/Forecast';
-import { useWeather } from '../hooks/useWeather';
+import  { useWeather } from '../hooks/useWeather';
+import type {UseWeatherReturn} from '../hooks/useWeather'
 import { TemperatureToggle } from '../TemperatureToggle/TemperatureToggle';
 import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
 
 export const WeatherDashboard = () => {
-
 
     const {
         currentWeather,
@@ -24,7 +22,7 @@ export const WeatherDashboard = () => {
         fetchWeatherByLocation,
         toggleUnit,
 
-    } = useWeather();
+    }: UseWeatherReturn = useWeather();
 
     const handleRetry = () => {
         if(currentWeather) {
@@ -33,6 +31,9 @@ export const WeatherDashboard = () => {
         else {
             fetchWeatherByCity('Polokwane')
         }
+        
+        const city = currentWeather?.name ?? 'Polokwane';
+        fetchWeatherByCity(city);
     }
 
   return (
@@ -51,6 +52,7 @@ export const WeatherDashboard = () => {
                     onLocationSearch={fetchWeatherByLocation} 
                     loading={loading} 
                 />
+
                 {/*TemperatureToggle */}
                 <TemperatureToggle unit={unit} onToggle={toggleUnit} />
 
@@ -66,14 +68,14 @@ export const WeatherDashboard = () => {
                     }
 
                     {/*Hero */}
-                    <HeroSection />
+                    <HeroSection weather={currentWeather} />
                     
                     {/*bento */}
                     <BentoSection />
 
 
                     {/*7 day forecast */}
-                    <Forecast />
+                    {forecast && <Forecast />}
                     
                 </div>
 
