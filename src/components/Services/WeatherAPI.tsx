@@ -1,4 +1,3 @@
-import React from 'react'
 
 const API_KEY = '3d555e3f7afc3df8ec94c2202cbbb0fe'
 const BASE_URL = 'https://api.openweathermap.org/data/2.5'
@@ -47,6 +46,7 @@ export interface CurrentWeatherResponse {
 export interface ForecastListItem {
     dt: number;
     main: CurrentWeatherResponse['main'];
+    weather: WeatherCondition[];
     clouds: { all: number };
     wind: { speed: number; deg: number; gust?: number };
     visibility: number;

@@ -25,18 +25,9 @@ export const WeatherDashboard = () => {
     }: UseWeatherReturn = useWeather();
 
     const handleRetry = () => {
-        if(currentWeather) {
-            fetchWeatherByCity(currentWeather.name)
-        }
-        else {
-            fetchWeatherByCity('Polokwane')
-        }
-        
         const city = currentWeather?.name ?? 'Polokwane';
         fetchWeatherByCity(city);
     }
-
-
 
   return (
     <div className={styles['weather-app']}>
@@ -62,22 +53,24 @@ export const WeatherDashboard = () => {
                 <div className={styles['load-spinner']}>
                     {/*Conditional rendering*/}
                     {
-                        error && !loading && (
+                        error && !loading ? (
+                            
+                            <ErrorMessage message={error} onRetry={handleRetry}/>
+                            
+                        ): (
                             <div>
-                                <ErrorMessage message={error} onRetry={handleRetry}/>
+                                {/*Hero */}
+                                <HeroSection weather={currentWeather} unit={unit}/>
+                                
+                                {/*bento */}
+                                <BentoSection />
+
+
+                                {/*7 day forecast */}
+                                {forecast && <Forecast forecast={forecast} unit={unit}/>}
                             </div>
                         )
                     }
-
-                    {/*Hero */}
-                    <HeroSection weather={currentWeather} unit={unit}/>
-                    
-                    {/*bento */}
-                    <BentoSection />
-
-
-                    {/*7 day forecast */}
-                    {forecast && <Forecast />}
                     
                 </div>
 
