@@ -49,65 +49,74 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ weather, unit }) => {
 
               <div className={styles['']}>
 
-                <h2 className={styles['hero-city']} >{weather.name}</h2>
+                <h2 className={styles['hero-city']} >{weather?.name}</h2>
                 <p className={styles['hero-country']}>{country}</p>
         
               </div>
 
+              {/*Weather display */}
+              <div className={styles['section2']}>
+
+                  <div className={styles['temp-cont']}>
+                    <div className={styles['main-temp']}>
+
+                      {
+                        formatTemperature(temp, unit)
+                      }°
+
+                    </div>
+                    <div className={styles['weather-desc']}>
+                      weather description
+                    </div>
+                    <div className={styles['temps']}>
+                      <span>{weather?.main?.temp_max}</span>
+                      <span>{weather?.main?.temp_min}</span>
+                    </div>
+                  </div>
+
+              </div>
+
             </div>
 
-            {/*<div className={styles['dynamic']}>
+            
+            <div className={styles['dynamic2']}>
+                {/*display dynamic date */}
+                
+            </div>
+
+          </div>
+
+          
+            <div className={styles['dynamic']}>
 
               {/*display dynamic date */}
-              {/*<div className={styles['dynamic-date1']}>
+              <div className={styles['dynamic-date1']}>
                 {
-                  new Date(weather.dt * 1000).toLocaleDateString('en-US', {
+                  new Date((weather?.dt ?? Date.now() / 1000) * 1000).toLocaleDateString('en-US', {
                     weekday: 'long', 
                     month: 'short',
                     day: 'numeric',
                   })
                 }
-              </div>*/}
+              </div>
 
               {/*display dynamic date */}
-             {/*} <div className={styles['dynamic-date2']}>
+             <div className={styles['dynamic-date2']}>
                   {
-                    new Date(weather.dt * 1000).toLocaleTimeString('en-US', {
+                    new Date((weather?.dt ?? Date.now() / 1000) * 1000).toLocaleTimeString('en-US', {
                       hour: '2-digit',
                       minute: '2-digit',
                     })
                   }
               </div>
-            </div>*/}
-          </div>
 
-          {/*Weather display */}
-          <div className={styles['section2']}>
-
-              <div className={styles['temp-cont']}>
-                <div className={styles['main-temp']}>
-
-                  {
-                    formatTemperature(temp, unit)
-                  }°
-
-                </div>
-                <div className={styles['weather-desc']}>
-                  weather description
-                </div>
-                <div className={styles['temps']}>
-                  <span>max temp</span>
-                  <span>min temp</span>
-                </div>
+              <div className={styles['the-sun']}>
+                  <Icon size={110} strokeWidth={1.25} className={styles['hero-icon']}/>
               </div>
-
-          </div>
-          <div className={styles['dynamic2']}>
-              {/*display dynamic date */}
-              d
-          </div>
+              
+            </div>
             
-          <Icon size={110} strokeWidth={1.25} className={styles['hero-icon']}/>
+          
         
         </div>
     </>
