@@ -4,13 +4,19 @@ import styles from './TemperatureToggle.module.css'
 import { useWeather } from '../hooks/useWeather';
 
 interface TemperatureToggleProps {
-  unit: string
+  unit: 'C' | 'F';
   onToggle: () => void;
 }
 
 export const TemperatureToggle: React.FC<TemperatureToggleProps> = ({ unit, onToggle }) => {
 
-    const [isActive, setIsActive] = useState<boolean>(false)
+    {/*const [isActive, setIsActive] = useState<boolean>(false)*/}
+
+    const handleSelect = (target: 'C' | 'F') => {
+        if(unit !== target) {
+            onToggle();
+        }
+    }
 
     const toggleActive = (): void => {
         setIsActive((prev) => !prev);
@@ -32,15 +38,17 @@ export const TemperatureToggle: React.FC<TemperatureToggleProps> = ({ unit, onTo
     <div className={styles['temperature-toggle']}>
         <div className={styles['temperature-buttons']}>
             <button 
-                className={`${styles['temp-btn']} ${isActive ? styles['temp-btn-active'] : ''}`} 
+                className={`${styles['temp-btn']} ${unit ==='C' ? styles['temp-btn-active'] : ''}`} 
                 
-                onClick={onToggle}
+                onClick={() => handleSelect('C')}
+                aria-pressed={unit === 'C'}
             >
                 °C
             </button>
             <button 
-                className={`${styles['temp-btn']} ${isActive ? styles['temp-btn-active'] : ''}`} 
-                onClick={onToggle}
+                className={`${styles['temp-btn']} ${unit === 'F' ? styles['temp-btn-active'] : ''}`} 
+                onClick={() => handleSelect('F')}
+                aria-pressed={unit === 'F'}
             >
                 °F
             </button>
