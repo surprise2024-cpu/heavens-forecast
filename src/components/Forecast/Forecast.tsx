@@ -12,7 +12,7 @@ import {
 import type { ForecastResponse, ForecastListItem } from '../Services/WeatherAPI'
 import { formatTemperature } from '../utils/WeatherUtilities' 
 
-type Condition = 'sunny' | 'cloudy' | 'rainy' | 'storm' 
+export type Condition = 'sunny' | 'cloudy' | 'rainy' | 'storm' 
 
 interface DailyPoint {
     day: string;
@@ -44,7 +44,7 @@ const iconClassMap: Record<Condition, string> = {
     storm: 'icon-storm',
 };
 
-function mapCondition(main: string): Condition{
+export function mapCondition(main: string): Condition{
     switch (main) {
         case 'Clear': 
         return 'sunny';

@@ -13,7 +13,10 @@ import {
     Thermometer,
 } from 'lucide-react'
 
-type Condition = 'sunny' | 'cloudy' | 'rainy' | 'storm' 
+import type { CurrentWeatherResponse, ForecastResponse } from '../Services/WeatherAPI'
+import { formatTemperature } from '../utils/WeatherUtilities'
+import { mapCondition } from '../Forecast/Forecast'
+import type { Condition } from '../Forecast/Forecast' 
 
 interface HourlyPoint {
     time: string;
@@ -22,14 +25,27 @@ interface HourlyPoint {
 }
 
 //Data
-const hourly: HourlyPoint[] = [
+{/*const hourly: HourlyPoint[] = [
     {time: '6:00 AM', condition: 'cloudy', temp: 25},
     {time: '9:00 AM', condition: 'cloudy', temp: 28},
     {time: '12:00 PM', condition: 'sunny', temp: 33},
     {time: '3:00 PM', condition: 'sunny', temp: 34},
     {time: '6:00 PM', condition: 'sunny', temp: 32},
     {time: '9:00 PM', condition: 'cloudy', temp: 30},
-];
+];*/}
+
+interface BentoSectionProps {
+    currentWeather: CurrentWeatherResponse | null;
+    forecast: ForecastResponse | null;
+    unit: string;
+}
+
+const iconClassMap: Record<Condition, string> = {
+    sunny: 'icon-sunny',
+    cloudy: 'icon-cloudy',
+    rainy: 'icon-rainy',
+    storm: 'icon-storm',
+}
 
 function ConditionIcon ({
     condition, 
@@ -54,19 +70,41 @@ function ConditionIcon ({
     }
 }
 
-const iconClassMap: Record<Condition, string> = {
-    sunny: 'icon-sunny',
-    cloudy: 'icon-cloudy',
-    rainy: 'icon-rainy',
-    storm: 'icon-storm',
-};
+function buildHourly(forecast: ForecastResponse): HourlyPoint[] {
+    return forecast.list.slice(0, 6).map((item) => {
+        const time = new Date(item.dt * 1000).toLocaleTimeString('en-US', {
+            hour: 'numeric',
+            minute: '2-digit',
+        });
 
-export const BentoSection = () => {
+        return {
+            time, 
+            condition: mapCondition(item.weather[0]?.main ?? 'Clouds'),
+            temp: Math.round(item.main.temp),
+        };
+    
+    });
+}
 
-    const chanceOfRain = 0;
-    const realFeel = 30;
-    const wind = '0.2 km/h';
-    const uvIndex = 3
+export const BentoSection: React.FC<BentoSectionProps> = ({ currentWeather, forecast, unit }) => {
+
+    if (!currentWeather || !forecast) {
+        return (
+            <div className={styles['bento-col']}>
+                <div className={styles['card']}>
+                    <p className={styles['card-label']}>TODAY'S FORECAST</p>
+                    <div className={styles['bento-loading']}>Loading....</div>
+                </div>
+            </div>
+        );
+    }
+
+    const hourly = buildHourly(forecast);
+
+    const realFeel = Math.round(currentWeather.main.feels_like);
+    const windKmh = (currentWeather.wind.speed * 3.6).toFixed(1);
+
+    const chanceOfRain = Math.round((forecast.list[0]?.pop ?? 0) * 100);
 
   return (
     <>
@@ -84,7 +122,7 @@ export const BentoSection = () => {
 
                                 <ConditionIcon condition={h.condition} size={26}/>
 
-                                <span className={styles['hourly-temp']}>{h.temp}°C</span>
+                                <span className={styles['hourly-temp']}>{formatTemperature(h.temp, unit)}°{unit}</span>
                             
                             </div>
                         ))
@@ -103,14 +141,14 @@ export const BentoSection = () => {
                         <Thermometer size={16} strokeWidth={1.75}/>
                         <div>
                             <p className={styles['condition-label']}>Real Feel</p>
-                            <p className={styles['condition-value']}>{realFeel}</p>
+                            <p className={styles['condition-value']}>{formatTemperature(realFeel, unit)}°{unit}</p>
                         </div>
                     </div>
                     <div className={styles['condition-item']}>
                         <Wind size={16} strokeWidth={1.75}/>
                         <div>
                             <p className={styles['condition-label']}>Wind</p>
-                            <p className={styles['condition-value']}>{wind}</p>
+                            <p className={styles['condition-value']}>{windKmh} km/h</p>
                         </div>
                     </div>
                     <div className={styles['condition-item']}>
@@ -124,7 +162,7 @@ export const BentoSection = () => {
                         <Gauge size={16} strokeWidth={1.75}/>
                         <div>
                             <p className={styles['condition-label']}>UV Index</p>
-                            <p className={styles['condition-value']}>{uvIndex}</p>
+                            <p className={styles['condition-value']}>N/A</p>
                         </div>
                     </div>
                 </div>
