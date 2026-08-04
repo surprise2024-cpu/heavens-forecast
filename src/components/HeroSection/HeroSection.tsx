@@ -14,15 +14,16 @@ import {
 
 import { getWeatherIcon } from '../utils/WeatherUtilities'
 import * as LucideIcons from 'lucide-react'
+import type { CurrentWeather, UseWeatherReturn } from '../hooks/useWeather'
 
-interface heroSectionProps {
-  weather: CurrentWeather | null;
+interface HeroSectionProps {
+  weather: UseWeatherReturn;
   unit: string
 }
 
-export const HeroSection: React.FC = (weather, unit) => {
+export const HeroSection: React.FC<HeroSectionProps> = ({weather, unit}) => {
 
-  const iconName = getWeatherIcon(weather.weather[0]);
+  const iconName = getWeatherIcon(weather.currentWeather);
 
   const iconComponent = LucideIcons[iconName] || LucideIcons.Cloud;
 

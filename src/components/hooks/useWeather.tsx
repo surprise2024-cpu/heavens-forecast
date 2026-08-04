@@ -3,17 +3,22 @@ import React, { useEffect, useState } from 'react'
 import { 
     getCurrentWeather, 
     getCurrentWeatherByCoords, 
-    getWeatherForecast } from '../Services/WeatherAPI'
+    getWeatherForecast 
+} from '../Services/WeatherAPI'
+
 
 export type CurrentWeather = {
-    name: string;    weather?: {
-    main: string;
-    description?: string;
+    name: string;    
+    weather?: {
+        main: string;
+        description?: string;
     }[];
+
     dt?: number;
     sys?: {
         country?: string;
     };
+
     main?: {
         temp?: number;
         temp_min?: number;
@@ -22,11 +27,7 @@ export type CurrentWeather = {
 };
 
 export type UseWeatherReturn = {
-    currentWeather: CurrentWeather | null;
-    forecast: unknown | null;
-    loading: boolean;
-    error: string | null;
-    unit: string;
+
     fetchWeatherByCity: (city: string) => Promise<void>;
     fetchWeatherByLocation: () => Promise<void>;
     toggleUnit: () => void;
