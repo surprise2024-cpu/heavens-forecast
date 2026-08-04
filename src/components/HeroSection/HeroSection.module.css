@@ -68,13 +68,13 @@
 }
 
 .dynamic-date1 {
-  color: rgb(255, 255, 255 /0.7);
+  color: rgb(255, 255, 255 / 0.7);
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
 
 .dynamic-date2 {
-  color: rgb(255, 255, 255 /0.5);
+  color: rgb(255, 255, 255 / 0.5);
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
@@ -100,7 +100,7 @@
 }
 
 .weather-desc {
-  color: rgb(255, 255, 255 /0.9);
+  color: rgb(255, 255, 255 / 0.9);
   font-size: 1.25rem;
   line-height: 1.75rem;
   text-transform: capitalize;
@@ -112,7 +112,7 @@
   display: flex;
   align-items: center;
   margin-left: 1rem;
-  color: rgb(255, 255, 255 /0.6);
+  color: rgb(255, 255, 255 / 0.6);
   font-size: 0.875rem;
   line-height: 1.25rem;
 }

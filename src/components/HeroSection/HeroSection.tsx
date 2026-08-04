@@ -1,19 +1,14 @@
 import React from 'react'
 
 import styles from './HeroSection.module.css'
+import * as LucideIcons from 'lucide-react'
 
-import { 
-  Droplet, 
-  Eye, 
-  Gauge, 
+import {  
   MapPin, 
   Sun, 
-  Thermometer, 
-  Wind 
 } from 'lucide-react'
 
 import { formatTemperature, getWeatherIcon } from '../utils/WeatherUtilities'
-import * as LucideIcons from 'lucide-react'
 import type { CurrentWeather } from '../hooks/useWeather'
 
 interface HeroSectionProps {
@@ -21,16 +16,29 @@ interface HeroSectionProps {
   unit: string
 }
 
+type LucideIconComponent = React.ComponentType<{
+  size?: number;
+  strokeWidth?: number;
+  className?: string;
+}>;
+
 export const HeroSection: React.FC<HeroSectionProps> = ({ weather, unit }) => {
 
   const iconName = getWeatherIcon(weather?.weather?.[0] ?? { main: 'Clear' });
-  const Icon = iconName;
 
-  {/*const cityName = weather?.name ?? 'Madrid';*/}
-  const country = weather?.sys?.country ?? 'US';
+  const Icon: LucideIconComponent = 
+  typeof iconName === 'string' ? ((LucideIcons as unknown as Record<string, LucideIconComponent>)[iconName] ?? Sun) : iconName;
+
+  const country = weather?.sys?.country ?? '';
   const temp = weather?.main?.temp ?? 0;
     
-  const chanceOfRain = 0;
+  if (!weather) {
+    return (
+      <div className={styles['hero']}>
+        <div className={styles['hero-loading']}>Loading weather....</div>
+      </div>
+    );
+  }
 
   return (
     <>  
@@ -47,10 +55,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ weather, unit }) => {
 
               </div>
 
-              <div className={styles['']}>
+              <div className={styles['hero-city-info']}>
 
                 <h2 className={styles['hero-city']} >{weather?.name}</h2>
-                <p className={styles['hero-country']}>{country}</p>
+                {country && <p className={styles['hero-country']}>{country}</p>}
         
               </div>
 
