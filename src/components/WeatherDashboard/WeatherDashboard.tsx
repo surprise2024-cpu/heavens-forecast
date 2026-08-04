@@ -11,8 +11,8 @@ import { useWeather } from '../hooks/useWeather';
 import { TemperatureToggle } from '../TemperatureToggle/TemperatureToggle';
 import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
 
-
 export const WeatherDashboard = () => {
+
 
     const {
         currentWeather,
@@ -76,8 +76,6 @@ export const WeatherDashboard = () => {
                     <Forecast />
                     
                 </div>
-
-                
 
             </div>
         </div>
