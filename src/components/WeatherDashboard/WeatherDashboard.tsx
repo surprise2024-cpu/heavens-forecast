@@ -36,6 +36,8 @@ export const WeatherDashboard = () => {
         fetchWeatherByCity(city);
     }
 
+
+
   return (
     <div className={styles['weather-app']}>
 
