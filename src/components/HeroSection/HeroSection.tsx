@@ -83,7 +83,7 @@ export const HeroSection: React.FC = () => {
 
           </div>
           <div className={styles['dynamic2']}>
-              {/*display dynamic date */}
+              {/*display dynamic date*/}
               d
           </div>
             
