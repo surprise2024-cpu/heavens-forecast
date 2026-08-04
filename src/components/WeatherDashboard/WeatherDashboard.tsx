@@ -63,7 +63,7 @@ export const WeatherDashboard = () => {
                                 <HeroSection weather={currentWeather} unit={unit}/>
                                 
                                 {/*bento */}
-                                <BentoSection />
+                                <BentoSection currentWeather={currentWeather} forecast={forecast} unit={unit}/>
 
 
                                 {/*7 day forecast */}
