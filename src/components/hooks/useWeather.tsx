@@ -8,7 +8,8 @@ import {
 
 
 export type CurrentWeather = {
-    name: string;    
+    name: string;
+    visibility?: number;
     weather?: {
         main: string;
         description?: string;
@@ -23,10 +24,15 @@ export type CurrentWeather = {
         temp?: number;
         temp_min?: number;
         temp_max?: number;
-    };    
+    };
 };
 
 export type UseWeatherReturn = {
+    currentWeather: CurrentWeather | null;
+    forecast: unknown | null;
+    loading: boolean;
+    error: string | null;
+    unit: string;
 
     fetchWeatherByCity: (city: string) => Promise<void>;
     fetchWeatherByLocation: () => Promise<void>;

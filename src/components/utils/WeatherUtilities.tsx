@@ -13,8 +13,6 @@ import {
     Wind, 
  } from 'lucide-react';
 
-
-
 export const getWeatherIcon = (weather: { main: string}) => {
 
     const iconMap = {

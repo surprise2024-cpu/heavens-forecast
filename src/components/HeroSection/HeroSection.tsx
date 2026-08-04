@@ -14,51 +14,20 @@ import {
 
 import { getWeatherIcon } from '../utils/WeatherUtilities'
 import * as LucideIcons from 'lucide-react'
-import type { CurrentWeather, UseWeatherReturn } from '../hooks/useWeather'
+import type { CurrentWeather } from '../hooks/useWeather'
 
 interface HeroSectionProps {
-  weather: UseWeatherReturn;
+  weather: CurrentWeather;
   unit: string
 }
 
-export const HeroSection: React.FC<HeroSectionProps> = ({weather, unit}) => {
+export const HeroSection: React.FC<HeroSectionProps> = ({ weather, unit }) => {
+  
+  const iconName = getWeatherIcon(weather?.weather?.[0] ?? { main: 'Clear' });
+  const Icon = iconName;
 
-  const iconName = getWeatherIcon(weather.currentWeather);
-
-  const iconComponent = LucideIcons[iconName] || LucideIcons.Cloud;
-
-  const WeatherStats = [
-    {
-      icon: Eye,
-      label: 'Visibility',
-      value: `${(weather.visibilty / 1000).toFixed(1)} km`,
-      color: 'text-blue-300',
-    },
-    {
-      icon: Wind,
-      label: 'Wind Speed',
-      value: `${(weather.visibilty / 1000).toFixed(1)} km`,
-      color: 'text-green-300',
-    },
-    {
-      icon: Droplet,
-      label: 'Humidity',
-      value: `${(weather.visibilty / 1000).toFixed(1)} %`,
-      color: 'text-cyan-300',
-    },
-    {
-      icon: Gauge,
-      label: 'Pressure',
-      value: `${(weather.visibilty / 1000).toFixed(1)} hPa`,
-      color: 'text-purple-300',
-    },
-    {
-      icon: Thermometer,
-      label: 'Visibility',
-      value: `${(weather.visibilty / 1000).toFixed(1)} °${unit}`,
-      color: 'text-orange-300',
-    },
-  ];
+  const cityName = weather?.name ?? 'Madrid';
+  const country = weather?.sys?.country ?? 'US';
     
     const city = 'Madrid';
     const country = 'US';
