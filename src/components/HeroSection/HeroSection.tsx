@@ -87,37 +87,35 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ weather, unit }) => {
           </div>
 
           
-            <div className={styles['dynamic']}>
+          <div className={styles['dynamic']}>
 
-              {/*display dynamic date */}
-              <div className={styles['dynamic-date1']}>
+            {/*display dynamic date */}
+            <div className={styles['dynamic-date1']}>
+              {
+                new Date((weather?.dt ?? Date.now() / 1000) * 1000).toLocaleDateString('en-US', {
+                  weekday: 'long', 
+                  month: 'short',
+                  day: 'numeric',
+                })
+              }
+            </div>
+
+            {/*display dynamic date */}
+            <div className={styles['dynamic-date2']}>
                 {
-                  new Date((weather?.dt ?? Date.now() / 1000) * 1000).toLocaleDateString('en-US', {
-                    weekday: 'long', 
-                    month: 'short',
-                    day: 'numeric',
+                  new Date((weather?.dt ?? Date.now() / 1000) * 1000).toLocaleTimeString('en-US', {
+                    hour: '2-digit',
+                    minute: '2-digit',
                   })
                 }
-              </div>
+            </div>
 
-              {/*display dynamic date */}
-             <div className={styles['dynamic-date2']}>
-                  {
-                    new Date((weather?.dt ?? Date.now() / 1000) * 1000).toLocaleTimeString('en-US', {
-                      hour: '2-digit',
-                      minute: '2-digit',
-                    })
-                  }
-              </div>
-
-              <div className={styles['the-sun']}>
-                  <Icon size={110} strokeWidth={1.25} className={styles['hero-icon']}/>
-              </div>
-              
+            <div className={styles['the-sun']}>
+                <Icon size={110} strokeWidth={1.25} className={styles['hero-icon']}/>
             </div>
             
+          </div>
           
-        
         </div>
     </>
   )
