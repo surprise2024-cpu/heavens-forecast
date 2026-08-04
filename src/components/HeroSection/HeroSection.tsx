@@ -75,8 +75,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ weather, unit }) => {
 
                     <div className={styles['temps']}>
 
-                      <span>{formatTemperature(weather?.main?.temp_max, unit)}</span>
-                      <span>{formatTemperature(weather?.main?.temp_min, unit)}</span>
+                      <span>H: {formatTemperature(weather?.main?.temp_max, unit)}°</span>
+                      <span>L: {formatTemperature(weather?.main?.temp_min, unit)}°</span>
                     
                     </div>
                   </div>
