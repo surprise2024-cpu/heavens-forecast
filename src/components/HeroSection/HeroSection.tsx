@@ -2,13 +2,62 @@ import React from 'react'
 
 import styles from './HeroSection.module.css'
 
-import { MapPin, Sun } from 'lucide-react'
-import { getWeatherIcon } from '../utils/WeatherUtilities'
+import { 
+  Droplet, 
+  Eye, 
+  Gauge, 
+  MapPin, 
+  Sun, 
+  Thermometer, 
+  Wind 
+} from 'lucide-react'
 
-export const HeroSection: React.FC = () => {
+import { getWeatherIcon } from '../utils/WeatherUtilities'
+import * as LucideIcons from 'lucide-react'
+
+interface heroSectionProps {
+  weather: CurrentWeather | null;
+  unit: string
+}
+
+export const HeroSection: React.FC = (weather, unit) => {
 
   const iconName = getWeatherIcon(weather.weather[0]);
+
   const iconComponent = LucideIcons[iconName] || LucideIcons.Cloud;
+
+  const WeatherStats = [
+    {
+      icon: Eye,
+      label: 'Visibility',
+      value: `${(weather.visibilty / 1000).toFixed(1)} km`,
+      color: 'text-blue-300',
+    },
+    {
+      icon: Wind,
+      label: 'Wind Speed',
+      value: `${(weather.visibilty / 1000).toFixed(1)} km`,
+      color: 'text-green-300',
+    },
+    {
+      icon: Droplet,
+      label: 'Humidity',
+      value: `${(weather.visibilty / 1000).toFixed(1)} %`,
+      color: 'text-cyan-300',
+    },
+    {
+      icon: Gauge,
+      label: 'Pressure',
+      value: `${(weather.visibilty / 1000).toFixed(1)} hPa`,
+      color: 'text-purple-300',
+    },
+    {
+      icon: Thermometer,
+      label: 'Visibility',
+      value: `${(weather.visibilty / 1000).toFixed(1)} °${unit}`,
+      color: 'text-orange-300',
+    },
+  ];
     
     const city = 'Madrid';
     const country = 'US';
@@ -31,7 +80,7 @@ export const HeroSection: React.FC = () => {
 
               <div className={styles['']}>
 
-                <h2 className={styles['hero-city']} >{city}</h2>
+                <h2 className={styles['hero-city']} >{weather.name}</h2>
                 <p className={styles['hero-country']}>{city}</p>
         
               </div>

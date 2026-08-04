@@ -5,7 +5,7 @@ import {
     getCurrentWeatherByCoords, 
     getWeatherForecast } from '../Services/WeatherAPI'
 
-type CurrentWeather = {
+export type CurrentWeather = {
     name: string;    weather?: {
     main: string;
     description?: string;
