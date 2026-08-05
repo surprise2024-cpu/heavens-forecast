@@ -24,16 +24,6 @@ interface HourlyPoint {
     temp: number;
 }
 
-//Data
-{/*const hourly: HourlyPoint[] = [
-    {time: '6:00 AM', condition: 'cloudy', temp: 25},
-    {time: '9:00 AM', condition: 'cloudy', temp: 28},
-    {time: '12:00 PM', condition: 'sunny', temp: 33},
-    {time: '3:00 PM', condition: 'sunny', temp: 34},
-    {time: '6:00 PM', condition: 'sunny', temp: 32},
-    {time: '9:00 PM', condition: 'cloudy', temp: 30},
-];*/}
-
 interface BentoSectionProps {
     currentWeather: CurrentWeatherResponse | null;
     forecast: ForecastResponse | null;
