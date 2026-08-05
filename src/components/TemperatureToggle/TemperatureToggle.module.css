@@ -18,8 +18,8 @@
 
 .temperature-toggle {
     grid-area: temperaturetoggle;
-    /*background-color: var(--bg-input);*/
-    /*border: 1px solid var(--border-subtle);*/
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-subtle);
     border-radius: var(--radius-pill);
     padding: 0.25rem;
     box-shadow: 0 10px 15px -3pxrgba(0, 0, 0, 0.1),
