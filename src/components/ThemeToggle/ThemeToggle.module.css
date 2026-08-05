@@ -19,8 +19,8 @@
 .theme-slider {
     position: relative;
     display: inline-block;
-    width: 60px;
-    height: 30px;
+    width: 70px;
+    height: 35px;
 }
 
 .theme-slider input {
@@ -38,14 +38,15 @@
     right: 0;
     background-color: var(--bg-card-hover);
     transition: 0.4s;
-    border-radius: 30px;
+    border-radius: 35px;
     display: flex;
     align-items: center;
 }
 
-.slider-icon {
+
+/*.slider-icon {
     color: var(--accent-amber);
-}
+}*/
 
 .slider .slider-icon {
     position: absolute;
@@ -62,7 +63,7 @@
 }
 
 
-input:checked + .slider .slider-icon  {
+.dark-mode:checked + .slider .slider-icon  {
     transform: translateX(30px);
     background-color: #1a1a1a;
 }

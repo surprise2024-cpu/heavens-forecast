@@ -27,8 +27,7 @@ export const ThemeToggle = () => {
 
   return (
     
-    <label className={styles['theme-slider']}
-    htmlFor='darkmode-toggle'>
+    <label className={styles['theme-slider']}>
         <input className={styles['dark-mode']} 
         type='checkbox'
         checked={isDark}

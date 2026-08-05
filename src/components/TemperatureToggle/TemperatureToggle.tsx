@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import styles from './TemperatureToggle.module.css'
 import { ThemeToggle } from '../ThemeToggle/ThemeToggle';
@@ -9,8 +9,6 @@ interface TemperatureToggleProps {
 }
 
 export const TemperatureToggle: React.FC<TemperatureToggleProps> = ({ unit, onToggle }) => {
-
-    {/*const [isActive, setIsActive] = useState<boolean>(false)*/}
 
     const handleSelect = (target: 'C' | 'F') => {
         if(unit !== target) {
