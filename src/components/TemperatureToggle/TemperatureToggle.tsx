@@ -38,7 +38,10 @@ export const TemperatureToggle: React.FC<TemperatureToggleProps> = ({ unit, onTo
             </button>
 
         </div>
-        <ThemeToggle />
+        <div className={styles['theme-cont']}>
+            <ThemeToggle />
+        </div>
+        
     </div>
   )
 }
