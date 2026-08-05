@@ -1,37 +1,52 @@
-.temperature-toggle {
-    background-color: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(24px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 1rem;
-    padding: 0.25rem;
-    box-shadow: 0 10px 15px -3pxrgba(0, 0, 0, 0.1),
-                0 4px 6px -4p rgba(0, 0, 0, 0.1)
 
+body {
+    background-color: var(--bg-page);
+    transition: background-color 200ms ease-in-out;
+}
+
+.temperature-toggle {
+    grid-area: temperaturetoggle;
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-pill);
+    padding: 0.25rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+                0 4px 6px -4p rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .temperature-buttons {
     display: flex;
     align-items: center;
+    gap: 5px;
 }
 
 .temp-btn {
     padding: 0.5rem 1rem;
-    border-radius: 0.75rem;
+    border-radius: var(--radius-pill);
     font-size: 0.875rem;
     line-height: 1.25rem;
     font-weight: 600;
-    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    background: none;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .temp-btn:hover {
-    color: #ffffff;
-    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    background-color: rgba(255, 255, 255, 0.06);
 }
 
 .temp-btn-active {
-    background-color: #ffffff;
-    color: #2563eb;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 
-    0 4px 6px -4px rgba(0, 0, 0, 0.1);
-    transform: scale(1.85);
+    background-color: var(--accent-blue);
+    color: #0b0e14;
+    box-shadow: 0 10px 15px -3px rgba(56, 189, 248, 0.45);
+}
+
+.temp-btn-active:hover {
+    color: #0b0e14;
+    background-color: var(--accent-blue);
 }

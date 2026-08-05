@@ -1,14 +1,32 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { 
     getCurrentWeather, 
     getCurrentWeatherByCoords, 
-    getWeatherForecast } from '../Services/WeatherAPI'
+    getWeatherForecast, 
+    type CurrentWeatherResponse, 
+    type ForecastResponse
+} from '../Services/WeatherAPI'
 
-export const useWeather = () => {
 
-    const [currentWeather, setCurrentWeather] = useState(null);
-    const [forecast, setForecast] = useState(null);
+export type CurrentWeather = CurrentWeatherResponse;
+
+export type UseWeatherReturn = {
+    currentWeather: CurrentWeather | null;
+    forecast: ForecastResponse | null;
+    loading: boolean;
+    error: string | null;
+    unit: string;
+
+    fetchWeatherByCity: (city: string) => Promise<void>;
+    fetchWeatherByLocation: () => Promise<void>;
+    toggleUnit: () => void;
+};
+
+export const useWeather = (): UseWeatherReturn => {
+
+    const [currentWeather, setCurrentWeather] = useState<CurrentWeather | null>(null);
+    const [forecast, setForecast] = useState<ForecastResponse | null>(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [unit, setUnit] = useState('C');
@@ -18,13 +36,13 @@ export const useWeather = () => {
         setError(null);
         
         try {
-            const [weatherData, forecast] = await Promise.all([
+            const [weatherData, forecastData] = await Promise.all([
                 getCurrentWeather(city),
                 getWeatherForecast(city),
             ]);
 
             setCurrentWeather(weatherData);
-            setForecast(forecast);
+            setForecast(forecastData);
             
         }
         catch (err) {
@@ -41,6 +59,7 @@ export const useWeather = () => {
 
         if(!navigator.geolocation) {
             setError('Geolocation is not supported by your browser');
+            return;
         }
         
         setLoading(true);
@@ -75,7 +94,14 @@ export const useWeather = () => {
 
             },
             (error) => {
-                setError('Unable to retrieve your location. Please allow location access and try again.');
+                
+                const message = error.code === error.PERMISSION_DENIED
+                ? 'Location access was denied. Please allow location access and try again.'
+                : error.code === error.TIMEOUT
+                ? 'Location request timed out. Please try again.'
+                : 'Unable to retrieve your location. Please allow location access and try again.'
+
+                setError(message);
                 setLoading(false);
             }
         );
@@ -83,7 +109,7 @@ export const useWeather = () => {
     };
 
     const toggleUnit = () => {
-    setUnit(unit === 'C' ? 'F' : 'C');
+    setUnit(prev => (prev === 'C' ? 'F' : 'C'));
     };
 
     //load default weather data for a default city on initial render

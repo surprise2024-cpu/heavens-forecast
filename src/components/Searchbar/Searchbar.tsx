@@ -89,7 +89,7 @@ export const Searchbar: React.FC<SearchbarProps> = ({ onSearch, onLocationSearch
 
   }, [query]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (query.trim()) {
@@ -106,9 +106,9 @@ export const Searchbar: React.FC<SearchbarProps> = ({ onSearch, onLocationSearch
   }
 
   const handleSuggestionClick = (city: City) => {
-    const cityName = city.name ? `${city.name}, ${city.country}` : city.name;
-    setQuery(cityName);
+    onSearch(city.name);
     setQuery('');
+    setSuggestions([]);
     setShowSuggestions(false);
   }
 
@@ -144,8 +144,10 @@ export const Searchbar: React.FC<SearchbarProps> = ({ onSearch, onLocationSearch
 
               <button 
                 className={styles['location-button']} 
-                type="button" disabled={loading}>
+                type="button" 
+                disabled={loading}
                 
+                >
                 <MapPin 
                   size={16} 
                   onClick={onLocationSearch} 
@@ -170,7 +172,7 @@ export const Searchbar: React.FC<SearchbarProps> = ({ onSearch, onLocationSearch
 
                   </div>
                   
-                  <p>Search Cities....</p>
+                  <p>Search for cities....</p>
 
                 </div>) : (
                   suggestions.map((city, index) => {

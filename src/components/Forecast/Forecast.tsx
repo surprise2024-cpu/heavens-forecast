@@ -7,26 +7,32 @@ import {
     Cloud,
     CloudRain, 
     CloudLightning,
+    Moon,
+    CloudMoon,
 } from 'lucide-react'
 
-type Condition = 'sunny' | 'cloudy' | 'rainy' | 'storm' 
+import type { 
+    ForecastResponse, 
+    ForecastListItem } from '../Services/WeatherAPI'
+import { formatTemperature, isNightTime } from '../utils/WeatherUtilities' 
+import type { CurrentWeather } from '../hooks/useWeather'
+
+export type Condition = 'sunny' | 'cloudy' | 'rainy' | 'storm' 
 
 interface DailyPoint {
     day: string;
     condition: Condition;
     high: number;
     low: number;
+    isNight: boolean;
 }
 
-const daily: DailyPoint[] = [
-    {day: 'Today', condition: 'sunny', high: 36, low: 22},
-    {day: 'Tue', condition: 'sunny', high: 37, low: 21},
-    {day: 'Wed', condition: 'sunny', high: 37, low: 21},
-    {day: 'Thu', condition: 'cloudy', high: 37, low: 21},
-    {day: 'Fri', condition: 'cloudy', high: 37, low: 21},
-    {day: 'Sat', condition: 'rainy', high: 37, low: 21},
-    {day: 'Sun', condition: 'storm', high: 37, low: 21},
-];
+interface ForecastProps {
+    forecast: ForecastResponse | null;
+    unit: string;
+    weather: CurrentWeather | null;
+}
+
 
 function conditionLabel(c: Condition) {
     return c === 'sunny'
@@ -45,14 +51,78 @@ const iconClassMap: Record<Condition, string> = {
     storm: 'icon-storm',
 };
 
+export function mapCondition(main: string): Condition{
+    switch (main) {
+        case 'Clear': 
+        return 'sunny';
+        case 'Clouds': 
+        return 'cloudy';
+        case 'Rain': 
+        case 'Drizzle': 
+        return 'rainy';
+        case 'Thunderstorm': 
+        return 'storm';
+        default: 
+        return 'cloudy';
+    }
+}
+
+function groupForecastByDay(list: ForecastListItem[]): DailyPoint[] {
+    const byDate = new Map<string, ForecastListItem[]>();
+
+    for (const item of list) {
+        const dateKey = item.dt_txt.split(' ')[0]; //'yyyy-mmy-dd'
+        const existing = byDate.get(dateKey) ?? [];
+        existing.push(item);
+        byDate.set(dateKey, existing);
+    }
+
+    const dayLabels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+    return Array.from(byDate.entries()).map(([dateKey, items], index) => {
+        const highs = items.map((i) => i.main.temp_max);
+        const lows = items.map((i) => i.main.temp_min);
+
+        const midday = items.reduce((closest, current) => {
+            const currentHour = Number(current.dt_txt.split(' ')[1]?.split(':')[0] ?? 0);
+            const closestHour = Number(closest.dt_txt.split(' ')[1]?.split(':')[0] ?? 0);
+
+            return Math.abs(currentHour - 12) < Math.abs(closestHour - 12) ? current : closest;
+        }, items[0]);
+
+        const date = new Date(dateKey);
+        const label = index === 0 ? 'Today' : dayLabels[date.getDay()];
+
+        return {
+            day: label,
+            condition: mapCondition(midday.weather[0]?.main ?? 'Clouds'),
+            high: Math.round(Math.max(...highs)),
+            low: Math.round(Math.min(...lows)),
+            isNight: isNightTime(midday.weather[0]?.icon),
+        }
+    });
+}
+
 function ConditionIcon ({
     condition, 
     size = 22, 
+    isNight = false,
 }: {
     condition: Condition;
     size?: number;
+    isNight?: boolean;
+    className?: string
 }) {
-    const common = { size, strokeWidth: 1.75,className: styles[iconClassMap[condition]] };
+    const common = { 
+        size, 
+        strokeWidth: 1.75, 
+        className: styles[iconClassMap[condition]] 
+    };
+
+    if (isNight) {
+        if (condition === 'sunny') return <Moon {...common}/>
+        if (condition === 'cloudy') return <CloudMoon {...common}/>
+    }
 
     switch (condition) {
         case 'sunny': 
@@ -68,21 +138,44 @@ function ConditionIcon ({
     }
 }
 
-export const Forecast = () => {
+export const Forecast: React.FC<ForecastProps> = ({ forecast, unit, weather }) => {
+
+    const isNight = isNightTime(weather?.weather?.[0]?.icon);
+
+    if (!forecast) {
+        return (
+            <div className={styles['forecast-col']}>
+                <p className={styles['card-label']}>DAILY FORECAST</p>
+                <div className={styles['forecast-loading']}> Loading forecast....</div>
+            </div>
+        );
+    }
+
+    const daily = groupForecastByDay(forecast.list)
+    
+
   return (
     <>
         <div className={styles['forecast-col']}>
-            <p className={styles['card-label']}>DAY FORECAST</p>
+            <p className={styles['card-label']}>DAILY FORECAST</p>
             <div className={styles['forecast-list']}>
                 {
-                    daily.map((d) => (
-                        <div className={styles['forecast-row']}>
+                    daily.map((d, index) => (
+                        <div  
+                        key={`${d.day}-${index}`} className={styles['forecast-row']}>
 
                             <span className={styles['forecast-day']}>{d.day}</span>
 
                             <div className={styles['forecast-condition']}>
 
-                                <ConditionIcon condition={d.condition} size={18} />
+                                
+
+                                <ConditionIcon 
+                                    condition={d.condition} 
+                                    size={18} 
+                                    isNight={d.isNight} 
+                                    className={styles[isNight ? 'fore-icon-night' : 'fore-icon']}
+                                />
 
                                 <span>{conditionLabel(d.condition)}</span>
 
@@ -90,8 +183,8 @@ export const Forecast = () => {
 
                             <span className={styles['forecast-temps']}>
 
-                                {d.high}
-                                <span className={styles['low']}>/{d.low}</span>
+                                {formatTemperature(d.high, unit)}
+                                <span className={styles['low']}>/{formatTemperature(d.low, unit)}</span>
 
                             </span>
                         </div>

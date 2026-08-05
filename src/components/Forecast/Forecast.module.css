@@ -1,20 +1,3 @@
-:root {
-  --bg-page: #0b0e14;
-  --bg-panel: #12151d;
-  --bg-card: rgba(255, 255, 255, 0.03);
-  --bg-card-hover: rgba(255, 255, 255, 0.05);
-  --bg-input: rgba(255, 255, 255, 0.04);
-  --border-subtle: rgba(255, 255, 255, 0.05);
-  --text-primary: #f4f6fa;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
-  --accent-blue: #38bdf8;
-  --accent-amber: #fbbf24;
-  --raduis-lg: 24px;
-  --radius-md: 16px;
-  --radius-sm: 12px;
-  --radius-pill: 999px;
-}
 
 .forecast-col {
   grid-area: forecast;
@@ -50,6 +33,7 @@
 .forecast-condition {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   flex: 1;
   padding-left: 8px;
@@ -85,4 +69,14 @@
 
 .icon-storm {
   color: #fcd34d;
+}
+
+.fore-icon-night {
+  color: #cbd5e1;
+  filter: drop-shadow(0 0 25px rgba(148, 197, 253, 0.35));
+}
+
+.fore-icon {
+  color: var(--accent-amber);
+  filter: drop-shadow(0 0 25px rgba(251, 191, 36, 0.35));
 }
