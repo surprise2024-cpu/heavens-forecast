@@ -7,14 +7,19 @@ import {
     Cloud,
     CloudRain, 
     CloudLightning,
+    Moon,
+    CloudMoon,
     Wind,
     Droplet,
     Gauge, 
     Thermometer,
 } from 'lucide-react'
 
-import type { CurrentWeatherResponse, ForecastResponse } from '../Services/WeatherAPI'
-import { formatTemperature } from '../utils/WeatherUtilities'
+import type { 
+    CurrentWeatherResponse, 
+    ForecastResponse } from '../Services/WeatherAPI'
+
+import { formatTemperature, isNightTime } from '../utils/WeatherUtilities'
 import { mapCondition } from '../Forecast/Forecast'
 import type { Condition } from '../Forecast/Forecast' 
 
@@ -22,6 +27,7 @@ interface HourlyPoint {
     time: string;
     condition: Condition;
     temp: number;
+    isNight: boolean;
 }
 
 interface BentoSectionProps {
@@ -39,12 +45,20 @@ const iconClassMap: Record<Condition, string> = {
 
 function ConditionIcon ({
     condition, 
-    size = 22, 
+    size = 22,
+    isNight = false, 
 }: {
     condition: Condition;
     size?: number;
+    isNight?: boolean;
 }) {
-    const common = { size, strokeWidth: 1.75,className: styles[iconClassMap[condition]] };
+    const common = { 
+        size, 
+        strokeWidth: 1.75,
+        className: styles[iconClassMap[condition]] 
+    };
+
+
 
     switch (condition) {
         case 'sunny': 
@@ -71,6 +85,7 @@ function buildHourly(forecast: ForecastResponse): HourlyPoint[] {
             time, 
             condition: mapCondition(item.weather[0]?.main ?? 'Clouds'),
             temp: Math.round(item.main.temp),
+            isNight: isNightTime(item.weather[0]?.icon),
         };
     
     });
@@ -110,7 +125,11 @@ export const BentoSection: React.FC<BentoSectionProps> = ({ currentWeather, fore
 
                                 <span className={styles['hourly-time']}>{h.time}</span>
 
-                                <ConditionIcon condition={h.condition} size={26}/>
+                                <ConditionIcon 
+                                    condition={h.condition} 
+                                    size={26}
+                                    isNight={h.isNight}
+                                />
 
                                 <span className={styles['hourly-temp']}>{formatTemperature(h.temp, unit)}°{unit}</span>
                             

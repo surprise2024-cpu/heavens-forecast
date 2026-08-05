@@ -10,10 +10,16 @@
   padding: 24px;
 }
 
+.hero-loading {
+  color: #64748b;
+  font-size: 14px;
+  padding: 24px 0;
+}
+
 .hero-city {
   font-size: 30px;
   font-weight: 600;
-  color: var(--text-primary);
+  color: #f4f6fa;
   margin: 0;
 }
 
@@ -36,10 +42,16 @@
   filter: drop-shadow(0 0 25px rgba(251, 191, 36, 0.35));
 }
 
+.hero-icon-night {
+  color: #cbd5e1;
+  filter: drop-shadow(0 0 25px rgba(148, 197, 253, 0.35));
+}
+
 .section1 {
   display: flex; 
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
   margin-bottom: 2rem;
 }
 

@@ -7,10 +7,14 @@ import {
     Cloud,
     CloudRain, 
     CloudLightning,
+    Moon,
+    CloudMoon,
 } from 'lucide-react'
 
-import type { ForecastResponse, ForecastListItem } from '../Services/WeatherAPI'
-import { formatTemperature } from '../utils/WeatherUtilities' 
+import type { 
+    ForecastResponse, 
+    ForecastListItem } from '../Services/WeatherAPI'
+import { formatTemperature, isNightTime } from '../utils/WeatherUtilities' 
 
 export type Condition = 'sunny' | 'cloudy' | 'rainy' | 'storm' 
 
@@ -19,6 +23,7 @@ interface DailyPoint {
     condition: Condition;
     high: number;
     low: number;
+    isNight: boolean;
 }
 
 interface ForecastProps {
@@ -90,7 +95,8 @@ function groupForecastByDay(list: ForecastListItem[]): DailyPoint[] {
             day: label,
             condition: mapCondition(midday.weather[0]?.main ?? 'Clouds'),
             high: Math.round(Math.max(...highs)),
-            low: Math.round(Math.min(...lows))
+            low: Math.round(Math.min(...lows)),
+            isNight: isNightTime(midday.weather[0]?.icon),
         }
     });
 }
@@ -98,11 +104,22 @@ function groupForecastByDay(list: ForecastListItem[]): DailyPoint[] {
 function ConditionIcon ({
     condition, 
     size = 22, 
+    isNight = false,
 }: {
     condition: Condition;
     size?: number;
+    isNight?: boolean;
 }) {
-    const common = { size, strokeWidth: 1.75,className: styles[iconClassMap[condition]] };
+    const common = { 
+        size, 
+        strokeWidth: 1.75, 
+        className: styles[iconClassMap[condition]] 
+    };
+
+    if (isNight) {
+        if (condition === 'sunny') return <Moon {...common}/>
+        if (condition === 'cloudy') return <CloudMoon {...common}/>
+    }
 
     switch (condition) {
         case 'sunny': 
@@ -137,14 +154,19 @@ export const Forecast: React.FC<ForecastProps> = ({ forecast, unit }) => {
             <p className={styles['card-label']}>DAILY FORECAST</p>
             <div className={styles['forecast-list']}>
                 {
-                    daily.map((d) => (
-                        <div className={styles['forecast-row']}>
+                    daily.map((d, index) => (
+                        <div  
+                        key={`${d.day}-${index}`} className={styles['forecast-row']}>
 
                             <span className={styles['forecast-day']}>{d.day}</span>
 
                             <div className={styles['forecast-condition']}>
 
-                                <ConditionIcon condition={d.condition} size={18} />
+                                <ConditionIcon 
+                                    condition={d.condition} 
+                                    size={18} 
+                                    isNight={d.isNight} 
+                                />
 
                                 <span>{conditionLabel(d.condition)}</span>
 

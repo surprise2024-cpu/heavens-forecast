@@ -43,11 +43,15 @@ const nightIconOverrides: Partial<Record<keyof typeof dayIconMap, LucideIcon>> =
     Clouds: CloudMoon,
 };
 
+export const isNightTime = (iconCode?: string): boolean => {
+    return iconCode?.endsWith('n') ?? false;
+};
+
 export const getWeatherIcon = (weather: WeatherIconInput) => {
 
     const iconKey = weather.main as keyof typeof dayIconMap;
     
-    const isNight = weather.icon?.endsWith('n') ?? false;
+    const isNight = isNightTime(weather.icon);
 
     if (isNight && nightIconOverrides[iconKey]) {
         return nightIconOverrides[iconKey]!;
