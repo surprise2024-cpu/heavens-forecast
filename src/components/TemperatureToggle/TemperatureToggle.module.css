@@ -18,8 +18,8 @@
 
 .temperature-toggle {
     grid-area: temperaturetoggle;
-    background-color: var(--bg-input);
-    border: 1px solid var(--border-subtle);
+    /*background-color: var(--bg-input);*/
+    /*border: 1px solid var(--border-subtle);*/
     border-radius: var(--radius-pill);
     padding: 0.25rem;
     box-shadow: 0 10px 15px -3pxrgba(0, 0, 0, 0.1),
@@ -32,6 +32,7 @@
 .temperature-buttons {
     display: flex;
     align-items: center;
+    gap: 5px;
 }
 
 .temp-btn {
@@ -55,7 +56,6 @@
     background-color: var(--accent-blue);
     color: #0b0e14;
     box-shadow: 0 10px 15px -3px rgba(56, 189, 248, 0.45);
-    /*transform: scale(1.85);*/
 }
 
 .temp-btn-active:hover {
