@@ -15,6 +15,7 @@ import type {
     ForecastResponse, 
     ForecastListItem } from '../Services/WeatherAPI'
 import { formatTemperature, isNightTime } from '../utils/WeatherUtilities' 
+import type { CurrentWeather } from '../hooks/useWeather'
 
 export type Condition = 'sunny' | 'cloudy' | 'rainy' | 'storm' 
 
@@ -29,6 +30,7 @@ interface DailyPoint {
 interface ForecastProps {
     forecast: ForecastResponse | null;
     unit: string;
+    weather: CurrentWeather | null;
 }
 
 
@@ -109,6 +111,7 @@ function ConditionIcon ({
     condition: Condition;
     size?: number;
     isNight?: boolean;
+    className?: string
 }) {
     const common = { 
         size, 
@@ -135,7 +138,9 @@ function ConditionIcon ({
     }
 }
 
-export const Forecast: React.FC<ForecastProps> = ({ forecast, unit }) => {
+export const Forecast: React.FC<ForecastProps> = ({ forecast, unit, weather }) => {
+
+    const isNight = isNightTime(weather?.weather?.[0]?.icon);
 
     if (!forecast) {
         return (
@@ -147,6 +152,7 @@ export const Forecast: React.FC<ForecastProps> = ({ forecast, unit }) => {
     }
 
     const daily = groupForecastByDay(forecast.list)
+    
 
   return (
     <>
@@ -162,10 +168,13 @@ export const Forecast: React.FC<ForecastProps> = ({ forecast, unit }) => {
 
                             <div className={styles['forecast-condition']}>
 
+                                
+
                                 <ConditionIcon 
                                     condition={d.condition} 
                                     size={18} 
                                     isNight={d.isNight} 
+                                    className={styles[isNight ? 'fore-icon-night' : 'fore-icon']}
                                 />
 
                                 <span>{conditionLabel(d.condition)}</span>
