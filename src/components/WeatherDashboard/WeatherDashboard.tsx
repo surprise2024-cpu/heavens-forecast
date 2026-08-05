@@ -50,7 +50,7 @@ export const WeatherDashboard = () => {
                 <TemperatureToggle unit={unit} onToggle={toggleUnit} />
 
                 {/*Load spinner*/}
-                <div className={styles['load-spinner']}>
+                {/*<div className={styles['load-spinner']}>*/}
                     {/*Conditional rendering*/}
                     {
                         error && !loading ? (
@@ -58,7 +58,7 @@ export const WeatherDashboard = () => {
                             <ErrorMessage message={error} onRetry={handleRetry}/>
                             
                         ): (
-                            <div>
+                            <>
                                 {/*Hero */}
                                 <HeroSection weather={currentWeather} unit={unit}/>
                                 
@@ -68,11 +68,11 @@ export const WeatherDashboard = () => {
 
                                 {/*7 day forecast */}
                                 {forecast && <Forecast forecast={forecast} unit={unit}/>}
-                            </div>
+                            </>
                         )
                     }
                     
-                </div>
+                {/*</div>*/}
 
             </div>
         </div>
