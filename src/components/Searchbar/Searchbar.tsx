@@ -146,10 +146,11 @@ export const Searchbar: React.FC<SearchbarProps> = ({ onSearch, onLocationSearch
                 className={styles['location-button']} 
                 type="button" 
                 disabled={loading}
-                onClick={onLocationSearch}
+                
                 >
                 <MapPin 
-                  size={16}  
+                  size={16} 
+                  onClick={onLocationSearch} 
                 />
 
               </button>
@@ -171,7 +172,7 @@ export const Searchbar: React.FC<SearchbarProps> = ({ onSearch, onLocationSearch
 
                   </div>
                   
-                  <p>Search Cities....</p>
+                  <p>Search for cities....</p>
 
                 </div>) : (
                   suggestions.map((city, index) => {

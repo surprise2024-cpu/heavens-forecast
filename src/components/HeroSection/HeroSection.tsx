@@ -6,6 +6,7 @@ import * as LucideIcons from 'lucide-react'
 import {  
   MapPin, 
   Sun, 
+  MoonIcon,
 } from 'lucide-react'
 
 import { formatTemperature, getWeatherIcon } from '../utils/WeatherUtilities'
@@ -27,7 +28,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ weather, unit }) => {
   const iconName = getWeatherIcon(weather?.weather?.[0] ?? { main: 'Clear' });
 
   const Icon: LucideIconComponent = 
-  typeof iconName === 'string' ? ((LucideIcons as unknown as Record<string, LucideIconComponent>)[iconName] ?? Sun) : iconName;
+  typeof iconName === 'string' ? ((LucideIcons as unknown as Record<string, LucideIconComponent>)[iconName] ?? MoonIcon) : iconName;
 
   const country = weather?.sys?.country ?? '';
   const temp = weather?.main?.temp ?? 0;
@@ -84,6 +85,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ weather, unit }) => {
                     <div className={styles['temps']}>
 
                       <span>H: {formatTemperature(weather?.main?.temp_max, unit)}°{unit}</span>
+                      
                       <span>L: {formatTemperature(weather?.main?.temp_min, unit)}°{unit}</span>
                     
                     </div>
