@@ -16,10 +16,12 @@
   --radius-pill: 999px;
 }
 
+
+
 .theme-slider {
     position: relative;
     display: inline-block;
-    width: 70px;
+    width: 65px;
     height: 35px;
 }
 
@@ -64,6 +66,6 @@
 
 
 .dark-mode:checked + .slider .slider-icon  {
-    transform: translateX(30px);
+    transform: translateX(35px);
     background-color: #1a1a1a;
 }
