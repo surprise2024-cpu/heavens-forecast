@@ -25,16 +25,19 @@ export const ErrorMessage: React.FC<ErrorMessageProps> = ({message, onRetry}) =>
 
         {/*Conditional rendering */}
         {
-            onRetry && (
-                <button 
+            onRetry && ( 
+                <div className={styles['btn-cont']}>
+                    <button 
                     className={styles['refresh-btn']}
                     onClick={onRetry}
-                >
+                    >
 
-                <RefreshCw size={16} />
-                <span className={styles['btn-mess']}>Try Agan</span>
+                    <RefreshCw size={16} />
+                    <span className={styles['btn-mess']}>Try Agan</span>
 
-            </button>
+                </button>
+                </div>
+                
             )
         }
     </div>
