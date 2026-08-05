@@ -1,0 +1,42 @@
+.theme-slider {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+}
+
+.theme-slider input {
+    position: absolute;cursor: pointer;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: #CCC;
+    transition: 0.4s;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+}
+
+.slider .slider-icon {
+    position: absolute;
+    left: 3px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: #fff;
+    transition: 0.4s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
+
+input:checked + .slider {
+    background-color: #2b2b2b;
+}
+
+input:checked + .slider .icon {
+    transform: translateX(30px);
+    background-color: #1a1a1a;
+}

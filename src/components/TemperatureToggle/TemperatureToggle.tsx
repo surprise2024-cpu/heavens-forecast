@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 import styles from './TemperatureToggle.module.css'
+import { ThemeToggle } from '../ThemeToggle/ThemeToggle';
 
 interface TemperatureToggleProps {
   unit: string;
@@ -37,7 +38,7 @@ export const TemperatureToggle: React.FC<TemperatureToggleProps> = ({ unit, onTo
             </button>
 
         </div>
-
+        <ThemeToggle />
     </div>
   )
 }
