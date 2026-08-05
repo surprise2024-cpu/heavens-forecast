@@ -127,7 +127,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ weather, unit }) => {
                 }
             </div>
 
-            <div className={styles['the-sun']}>
+            <div className={styles['the-sun']}>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
                 <Icon size={110} strokeWidth={1.25} className={styles['hero-icon']}/>
             </div>
             
