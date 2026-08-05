@@ -28,7 +28,8 @@ export const ThemeToggle: React.FC = () => {
   return (
     
     <label className={styles['theme-slider']}>
-        <input className={styles['dark-mode']} 
+        <input 
+        className={styles['dark-mode']} 
         type='checkbox'
         checked={isDark}
         onChange={(e) => setIsDark(e.target.checked)}
