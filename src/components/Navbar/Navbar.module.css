@@ -1,11 +1,3 @@
-:root {
-    --bg-input: rgba(255, 255, 255, 0.04);
-    --text-primary: #f4f6fa;
-    --text-secondary: #94a3b8;
-    --text-muted: #64748b;
-    --accent-blue: #38bdf8;
-    --radius-sm: 12px;
-}
 
 /*sidebar*/
 .nav {
