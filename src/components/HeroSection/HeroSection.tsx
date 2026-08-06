@@ -61,7 +61,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ weather, unit }) => {
 
             <div className={styles['section1-pin']}>
 
-              <MapPin size={16} className={styles['pin']}/>
+              <MapPin size={20} className={styles['pin']}/>
 
             </div>
 
