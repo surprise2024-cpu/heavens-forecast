@@ -1,6 +1,7 @@
 import React from 'react'
 
 import styles from './Forecast.module.css'
+import { Text } from '../Text/Text'
 
 import {
     Sun, 
@@ -145,7 +146,7 @@ export const Forecast: React.FC<ForecastProps> = ({ forecast, unit, weather }) =
     if (!forecast) {
         return (
             <div className={styles['forecast-col']}>
-                <p className={styles['card-label']}>DAILY FORECAST</p>
+                <Text variant='p' className={styles['card-label']}>DAILY FORECAST</Text>
                 <div className={styles['forecast-loading']}> Loading forecast....</div>
             </div>
         );
@@ -153,22 +154,21 @@ export const Forecast: React.FC<ForecastProps> = ({ forecast, unit, weather }) =
 
     const daily = groupForecastByDay(forecast.list)
     
-
   return (
     <>
         <div className={styles['forecast-col']}>
-            <p className={styles['card-label']}>DAILY FORECAST</p>
+
+            <Text variant='p' className={styles['card-label']}>DAILY FORECAST</Text>
+
             <div className={styles['forecast-list']}>
                 {
                     daily.map((d, index) => (
                         <div  
-                        key={`${d.day}-${index}`} className={styles['forecast-row']}>
+                            key={`${d.day}-${index}`} className={styles['forecast-row']}>
 
-                            <span className={styles['forecast-day']}>{d.day}</span>
+                            <Text variant='span' className={styles['forecast-day']}>{d.day}</Text>
 
                             <div className={styles['forecast-condition']}>
-
-                                
 
                                 <ConditionIcon 
                                     condition={d.condition} 
@@ -177,14 +177,14 @@ export const Forecast: React.FC<ForecastProps> = ({ forecast, unit, weather }) =
                                     className={styles[isNight ? 'fore-icon-night' : 'fore-icon']}
                                 />
 
-                                <span>{conditionLabel(d.condition)}</span>
+                                <Text variant='span'>{conditionLabel(d.condition)}</Text>
 
                             </div>
 
                             <span className={styles['forecast-temps']}>
 
                                 {formatTemperature(d.high, unit)}
-                                <span className={styles['low']}>/{formatTemperature(d.low, unit)}</span>
+                                <Text variant='span' className={styles['low']}>/{formatTemperature(d.low, unit)}</Text>
 
                             </span>
                         </div>

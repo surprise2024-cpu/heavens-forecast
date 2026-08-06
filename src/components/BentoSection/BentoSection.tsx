@@ -59,7 +59,10 @@ function ConditionIcon ({
         className: styles[iconClassMap[condition]] 
     };
 
-
+    if (isNight) {
+        if (condition === 'sunny') return <Moon {...common}/>
+        if (condition === 'cloudy') return <CloudMoon {...common}/>
+    }
 
     switch (condition) {
         case 'sunny': 
