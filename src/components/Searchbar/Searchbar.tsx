@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 
 import styles from './Searchbar.module.css'
+import { Text } from '../Text/Text';
 
 import { 
   Search, 
@@ -119,8 +120,11 @@ export const Searchbar: React.FC<SearchbarProps> = ({ onSearch, onLocationSearch
   return (
     <>
         <div ref={searchRef} >
+
           <form onSubmit={handleSubmit}>
+
             <div className={styles['search-bar']}>
+
               <Search size={16} />
 
               <input 
@@ -154,13 +158,12 @@ export const Searchbar: React.FC<SearchbarProps> = ({ onSearch, onLocationSearch
                 />
 
               </button>
-
             </div>
-            
           </form>
 
           {/*conditional redering for suggestions */}
           {showSuggestions && (suggestions.length > 0 || searchLoading) && (
+
             <div className={styles['suggestions-container']}>
 
               {/*conditional rendering */}
@@ -172,25 +175,28 @@ export const Searchbar: React.FC<SearchbarProps> = ({ onSearch, onLocationSearch
 
                   </div>
                   
-                  <p>Search for cities....</p>
+                  <Text variant='p'>Search for cities....</Text>
 
                 </div>) : (
                   suggestions.map((city, index) => {
                     return (
+
                       <button 
                         className={styles['suggestion-item']} 
                         key={`${city.name}-${city.country}-${index}`}
                         onClick={() => handleSuggestionClick(city)}>
 
                         <div>
+
                           <div className={styles['suggestion-text']}>
 
                             {city.name}
 
                             {/*conditional rendering */}
-                            {city.state && <span>, {city.state}</span>}
+                            {city.state && <Text variant='span'>, {city.state}</Text>}
                            
                           </div>
+
                           <div>{city.country}</div>
                         </div>
 
@@ -200,7 +206,6 @@ export const Searchbar: React.FC<SearchbarProps> = ({ onSearch, onLocationSearch
                     );
                   })
               )}
-              
             </div>
           )}
         </div>
