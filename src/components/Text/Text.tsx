@@ -2,7 +2,7 @@ import React, { type JSX } from 'react'
 
 import styles from './Text.module.css'
 
-type Variant = 'h1' | 'h2' | 'p' | 'span';
+type Variant = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span';
 
 interface TextProps {
   variant?: Variant,
@@ -16,6 +16,10 @@ const variantMapping: Record<Variant, keyof JSX.IntrinsicElements> = {
   h2: 'h2',
   p: 'p',
   span: 'span',
+  h3: 'h3',
+  h4: 'h4',
+  h5: 'h5',
+  h6: 'h6'
 };
 
 export const Text = ({ variant = 'p', children, ...props }: TextProps) => {
