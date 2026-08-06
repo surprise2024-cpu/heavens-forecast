@@ -1,20 +1,32 @@
-import React from 'react'
+import React, { type JSX } from 'react'
 
 import styles from './Text.module.css'
 
-type TextProps = {
-    variant: string;
-    children: React.ReactNode;
-    style?: React.CSSProperties;
-    className?: string
+type Variant = 'h1' | 'h2' | 'p' | 'span';
+
+interface TextProps {
+  variant?: Variant,
+  children: React.ReactNode,
+  style?: React.CSSProperties,
+  className?: string,
 }
 
-export const Text: React.FC<TextProps> = ({ children, style, variant, className }) => {
-    if(variant='h1') return <h1 className={className} style={style} >{children}</h1>
-    if(variant='h2') return <h2 className={className} style={style} >{children}</h2>
-    if(variant='p') return <p className={className} style={style} >{children}</p>
-    if(variant='span') return <span className={className} style={style} >{children}</span>
+const variantMapping: Record<Variant, keyof JSX.IntrinsicElements> = {
+  h1: 'h1',
+  h2: 'h2',
+  p: 'p',
+  span: 'span',
+};
+
+export const Text = ({ variant = 'p', children, ...props }: TextProps) => {
+
+  const Tag = variantMapping[variant] || 'p';
+
   return (
-    <div>{children}</div>
+
+    <Tag {...props}>
+      {children}
+    </Tag>
+
   )
 }
