@@ -14,11 +14,13 @@ import {
 
 import type { 
     ForecastResponse, 
-    ForecastListItem } from '../Services/WeatherAPI'
+    ForecastListItem 
+} from '../Services/WeatherAPI'
+
 import { formatTemperature, isNightTime } from '../utils/WeatherUtilities' 
 import type { CurrentWeather } from '../hooks/useWeather'
 
-export type Condition = 'sunny' | 'cloudy' | 'rainy' | 'storm' 
+export type Condition = 'sunny' | 'cloudy' | 'rainy' | 'storm' | 'night'
 
 interface DailyPoint {
     day: string;
@@ -40,9 +42,9 @@ function conditionLabel(c: Condition) {
     ? 'Sunny'
     : c === 'cloudy'
     ? 'Cloudy'
-    : c === 'rainy'
-    ? 'Rainy'
-    : 'Storm';
+    : c === 'rainy' ? 'Rainy'
+    : c === 'storm' ? 'Storm'
+    : 'Night';
 }
 
 const iconClassMap: Record<Condition, string> = {
@@ -50,6 +52,7 @@ const iconClassMap: Record<Condition, string> = {
     cloudy: 'icon-cloudy',
     rainy: 'icon-rainy',
     storm: 'icon-storm',
+    night: 'icon-moon'
 };
 
 export function mapCondition(main: string): Condition{
@@ -63,6 +66,8 @@ export function mapCondition(main: string): Condition{
         return 'rainy';
         case 'Thunderstorm': 
         return 'storm';
+        /*case 'Night': 
+        return 'Moon';*/
         default: 
         return 'cloudy';
     }

@@ -121,12 +121,12 @@
   color: #fcd34d;
 }
 
-.hero-icon-night {
+.bento-icon-night {
   color: #cbd5e1;
   filter: drop-shadow(0 0 25px rgba(148, 197, 253, 0.35));
 }
 
-.hero-icon {
+.bento-icon {
   color: var(--accent-amber);
   filter: drop-shadow(0 0 25px rgba(251, 191, 36, 0.35));
 }

@@ -41,7 +41,7 @@ interface BentoSectionProps {
 }
 
 const iconClassMap: Record<Condition, string> = {
-    night: 'icon-moon',
+    /*night: 'icon-moon',*/
     sunny: 'icon-sunny',
     cloudy: 'icon-cloudy',
     rainy: 'icon-rainy',
@@ -140,7 +140,7 @@ export const BentoSection: React.FC<BentoSectionProps> = ({ weather, currentWeat
                                     condition={h.condition} 
                                     size={26}
                                     isNight={h.isNight}
-                                    className={styles[isNight ? 'hero-icon-night' : 'hero-icon']}
+                                    className={styles[isNight ? 'bento-icon-night' : 'bento-icon']}
                                 />
 
                                 <Text variant='span' className={styles['hourly-temp']}>{formatTemperature(h.temp, unit)}°{unit}</Text>
