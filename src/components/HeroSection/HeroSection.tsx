@@ -2,6 +2,7 @@ import React from 'react'
 
 import styles from './HeroSection.module.css'
 import * as LucideIcons from 'lucide-react'
+import { Text } from '../Text/Text'
 
 import {  
   MapPin, 
@@ -67,8 +68,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ weather, unit }) => {
 
             <div className={styles['hero-city-info']}>
 
-              <h2 className={styles['hero-city']} >{weather?.name}</h2>
-              {country && <p className={styles['hero-country']}>{country}</p>}
+              <Text variant='h2' className={styles['hero-city']} >{weather?.name}</Text>
+              {country && <Text variant='p' className={styles['hero-country']}>{country}</Text>}
       
             </div>
 
@@ -78,24 +79,23 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ weather, unit }) => {
                 <div className={styles['temp-cont']}>
                   <div className={styles['main-temp']}>
 
-                    {
-                      formatTemperature(temp, unit)
-                    }°
-                    <span>{unit}</span>
+                    <Text variant='span'>{formatTemperature(temp, unit)}°{unit}</Text>
 
                   </div>
 
                   <div className={styles['weather-desc']}>
 
-                    {weather?.weather?.[0]?.description}
+                    <Text variant='span'>{weather?.weather?.[0]?.description}</Text>
+
+                    
                   
                   </div>
 
                   <div className={styles['temps']}>
 
-                    <span>H: {formatTemperature(tempMax, unit)}°{unit}</span>
+                    <Text variant='span'>H: {formatTemperature(tempMax, unit)}°{unit}</Text>
                     
-                    <span>L: {formatTemperature(tempMin, unit)}°{unit}</span>
+                    <Text variant='span'>L: {formatTemperature(tempMin, unit)}°{unit}</Text>
                   
                   </div>
                 </div>
