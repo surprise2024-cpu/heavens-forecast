@@ -71,7 +71,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ weather, unit }) => {
             <Text variant='h2' 
             className={styles['hero-city']} >
 
-              {weather?.name}
+              {weather?.name}, {weather?.name}
 
             </Text>
 

@@ -6,9 +6,27 @@ import { HeroSection } from '../HeroSection/HeroSection';
 import { BentoSection } from '../BentoSection/BentoSection';
 import { Forecast } from '../Forecast/Forecast';
 import  { useWeather } from '../hooks/useWeather';
-import type {UseWeatherReturn} from '../hooks/useWeather'
+import type {CurrentWeather, UseWeatherReturn} from '../hooks/useWeather'
 import { TemperatureToggle } from '../TemperatureToggle/TemperatureToggle';
 import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
+import type { DailyPoint } from '../Forecast/Forecast'
+import { useState } from 'react';
+import type { ForecastResponse } from '../Services/WeatherAPI';
+
+function buildDisplayWeather(base: CurrentWeather, day: DailyPoint): CurrentWeather {
+
+    const item = day.representative;
+
+    return {
+        ...base,
+        main: item.main,
+        weather: item.weather, 
+        wind: item.wind,
+        clouds: item.clouds,
+        visibility: item.visibility,
+        dt: item.dt,
+    };
+}
 
 export const WeatherDashboard = () => {
 
@@ -23,6 +41,32 @@ export const WeatherDashboard = () => {
         toggleUnit,
 
     }: UseWeatherReturn = useWeather();
+
+    const [selectedDay, setSelectedDay] = useState<DailyPoint | null>(null);
+
+    const handleSelectDay = (day: DailyPoint, index: number) => {
+        setSelectedDay(index === 0 ? null: day); 
+    };
+
+    const handleSearch = (city: string) => {
+        setSelectedDay(null);
+        fetchWeatherByCity(city);
+    }
+
+    const handleLocationSearch = () => {
+        setSelectedDay(null);
+        fetchWeatherByLocation();
+    }
+
+    const displayWeather: CurrentWeather | null = 
+        selectedDay && currentWeather
+            ? buildDisplayWeather(currentWeather, selectedDay)
+            : currentWeather;
+
+    const displayForecast: ForecastResponse | null = 
+        selectedDay && forecast
+            ? { ...forecast, list: selectedDay.items }
+            : forecast;
 
     const handleRetry = () => {
         const city = currentWeather?.name ?? 'Polokwane';
@@ -41,8 +85,8 @@ export const WeatherDashboard = () => {
                 
                 {/*Searchbar */}
                 <Searchbar 
-                    onSearch={fetchWeatherByCity} 
-                    onLocationSearch={fetchWeatherByLocation} 
+                    onSearch={handleSearch} 
+                    onLocationSearch={handleLocationSearch} 
                     loading={loading} 
                 />
 
@@ -60,14 +104,20 @@ export const WeatherDashboard = () => {
                         ): (
                             <>
                                 {/*Hero */}
-                                <HeroSection weather={currentWeather} unit={unit}/>
+                                <HeroSection weather={displayWeather} unit={unit}/>
                                 
                                 {/*bento */}
-                                <BentoSection currentWeather={currentWeather} forecast={forecast} unit={unit}/>
+                                <BentoSection currentWeather={displayWeather} forecast={displayForecast} unit={unit}/>
 
 
                                 {/*7 day forecast */}
-                                {forecast && <Forecast forecast={forecast} unit={unit} weather={currentWeather}/>}
+                                {forecast && 
+                                <Forecast 
+                                    forecast={forecast} 
+                                    unit={unit} 
+                                    weather={currentWeather}
+                                    onSelectDay={handleSelectDay}
+                                />}
                             </>
                         )
                     }

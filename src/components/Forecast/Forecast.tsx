@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import styles from './Forecast.module.css'
 import { Text } from '../Text/Text'
@@ -22,18 +22,23 @@ import type { CurrentWeather } from '../hooks/useWeather'
 
 export type Condition = 'sunny' | 'cloudy' | 'rainy' | 'storm' | 'night'
 
-interface DailyPoint {
+export interface DailyPoint {
     day: string;
     condition: Condition;
     high: number;
     low: number;
     isNight: boolean;
+
+    representative: ForecastListItem;
+    items: ForecastListItem[];
 }
 
 interface ForecastProps {
     forecast: ForecastResponse | null;
     unit: string;
     weather: CurrentWeather | null;
+
+    onSelectDay?: (day: DailyPoint, index: number) => void;
 }
 
 
@@ -105,6 +110,8 @@ function groupForecastByDay(list: ForecastListItem[]): DailyPoint[] {
             high: Math.round(Math.max(...highs)),
             low: Math.round(Math.min(...lows)),
             isNight: isNightTime(midday.weather[0]?.icon),
+            representative: midday,
+            items,
         }
     });
 }
@@ -113,6 +120,7 @@ function ConditionIcon ({
     condition, 
     size = 22, 
     isNight = false,
+    className = '',
 }: {
     condition: Condition;
     size?: number;
@@ -122,7 +130,7 @@ function ConditionIcon ({
     const common = { 
         size, 
         strokeWidth: 1.75, 
-        className: styles[iconClassMap[condition]] 
+        className: `${styles[iconClassMap[condition]]} ${className}`.trim(),
     };
 
     if (isNight) {
@@ -144,9 +152,16 @@ function ConditionIcon ({
     }
 }
 
-export const Forecast: React.FC<ForecastProps> = ({ forecast, unit, weather }) => {
+export const Forecast: React.FC<ForecastProps> = ({ forecast, unit, weather, onSelectDay }) => {
 
     const isNight = isNightTime(weather?.weather?.[0]?.icon);
+
+    const [selectedIndex, setSelectedIndex] = useState(0);
+
+    useEffect(() => {
+        setSelectedIndex(0);
+
+    }, [forecast]);
 
     if (!forecast) {
         return (
@@ -161,6 +176,11 @@ export const Forecast: React.FC<ForecastProps> = ({ forecast, unit, weather }) =
     }
 
     const daily = groupForecastByDay(forecast.list)
+
+    const handleSelect = (day: DailyPoint, index: number) => {
+        setSelectedIndex(index);
+        onSelectDay?.(day, index);
+    };
     
   return (
     <>
@@ -171,8 +191,12 @@ export const Forecast: React.FC<ForecastProps> = ({ forecast, unit, weather }) =
             <div className={styles['forecast-list']}>
                 {
                     daily.map((d, index) => (
-                        <div  
-                            key={`${d.day}-${index}`} className={styles['forecast-row']}>
+                        <button  
+                            key={`${d.day}-${index}`} 
+                            type='button'
+                            onClick={() => handleSelect(d, index)}
+                            aria-pressed={index === selectedIndex}
+                            className={`${styles['forecast-row']} ${index === selectedIndex ? styles['selected'] : ''}`}>
 
                             <Text variant='span' className={styles['forecast-day']}>{d.day}</Text>
 
@@ -189,13 +213,13 @@ export const Forecast: React.FC<ForecastProps> = ({ forecast, unit, weather }) =
 
                             </div>
 
-                            <span className={styles['forecast-temps']}>
+                            <Text variant='span' className={styles['forecast-temps']}>
 
                                 {formatTemperature(d.high, unit)}
                                 <Text variant='span' className={styles['low']}>/{formatTemperature(d.low, unit)}</Text>
 
-                            </span>
-                        </div>
+                            </Text>
+                        </button>
                     ))
                 }
             </div>
@@ -203,3 +227,4 @@ export const Forecast: React.FC<ForecastProps> = ({ forecast, unit, weather }) =
     </>
   )
 }
+

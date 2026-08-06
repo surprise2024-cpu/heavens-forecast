@@ -6,7 +6,9 @@ import { Text } from '../Text/Text';
 import { 
   Search, 
   X,
-  MapPin
+  MapPin,
+  Loader2,
+  ChevronRight,
 } from 'lucide-react'
 
 import { searchCities } from '../Services/WeatherAPI';
@@ -119,7 +121,7 @@ export const Searchbar: React.FC<SearchbarProps> = ({ onSearch, onLocationSearch
 
   return (
     <>
-        <div ref={searchRef} >
+        <div ref={searchRef} className={styles['searchbar-wrapper']}>
 
           <form onSubmit={handleSubmit}>
 
@@ -173,9 +175,10 @@ export const Searchbar: React.FC<SearchbarProps> = ({ onSearch, onLocationSearch
 
                   <div className={styles['loading-indicator']}>
 
+                    <Loader2 size={16} className={styles['spinner']} />
+                    <Text variant='p'>Search for cities....</Text>
+
                   </div>
-                  
-                  <Text variant='p'>Search for cities....</Text>
 
                 </div>) : (
                   suggestions.map((city, index) => {
@@ -186,21 +189,27 @@ export const Searchbar: React.FC<SearchbarProps> = ({ onSearch, onLocationSearch
                         key={`${city.name}-${city.country}-${index}`}
                         onClick={() => handleSuggestionClick(city)}>
 
-                        <div>
+                        <div className={styles['suggestion-info']}>
 
                           <div className={styles['suggestion-text']}>
 
                             {city.name}
 
                             {/*conditional rendering */}
-                            {city.state && <Text variant='span'>, {city.state}</Text>}
+                            {
+                              city.state && 
+                              <Text variant='span' 
+                                className={styles['suggestion-state']}>
+                                , {city.state}'
+                              </Text>
+                            }
                            
                           </div>
 
-                          <div>{city.country}</div>
+                          <div className={styles['suggestion-country']}>{city.country}</div>
                         </div>
 
-                        <Search size={16} />
+                        <ChevronRight size={16} className={styles['suggestion-chevron']}/>
 
                       </button>
                     );
