@@ -30,7 +30,7 @@ interface NavbarProps {
     onSelect?: (label: string) => void;
 }
 
-export const Navbar = ({ navItems = defaultNavItems, onSelect }: NavbarProps) => {
+export const Navbar: React.FC = ({ navItems = defaultNavItems, onSelect }: NavbarProps) => {
   return (
     <>
         {/*Sidebar*/}
