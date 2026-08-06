@@ -68,8 +68,21 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ weather, unit }) => {
 
           <div className={styles['hero-city-info']}>
 
-            <Text variant='h2' className={styles['hero-city']} >{weather?.name}</Text>
-            {country && <Text variant='p' className={styles['hero-country']}>{country}</Text>}
+            <Text variant='h2' 
+            className={styles['hero-city']} >
+
+              {weather?.name}
+
+            </Text>
+
+            {country 
+              && <Text variant='p' 
+                className={styles['hero-country']}>
+
+                {country}
+
+              </Text>
+            }
     
           </div>
 

@@ -18,11 +18,13 @@ import {
 
 import type { 
     CurrentWeatherResponse, 
-    ForecastResponse } from '../Services/WeatherAPI'
+    ForecastResponse 
+} from '../Services/WeatherAPI'
 
 import { formatTemperature, isNightTime } from '../utils/WeatherUtilities'
 import { mapCondition } from '../Forecast/Forecast'
 import type { Condition } from '../Forecast/Forecast' 
+import type { CurrentWeather } from '../hooks/useWeather'
 
 interface HourlyPoint {
     time: string;
@@ -35,9 +37,11 @@ interface BentoSectionProps {
     currentWeather: CurrentWeatherResponse | null;
     forecast: ForecastResponse | null;
     unit: string;
+    weather?: CurrentWeather | null; 
 }
 
 const iconClassMap: Record<Condition, string> = {
+    night: 'icon-moon',
     sunny: 'icon-sunny',
     cloudy: 'icon-cloudy',
     rainy: 'icon-rainy',
@@ -52,6 +56,7 @@ function ConditionIcon ({
     condition: Condition;
     size?: number;
     isNight?: boolean;
+    className?: string
 }) {
     const common = { 
         size, 
@@ -95,7 +100,9 @@ function buildHourly(forecast: ForecastResponse): HourlyPoint[] {
     });
 }
 
-export const BentoSection: React.FC<BentoSectionProps> = ({ currentWeather, forecast, unit }) => {
+export const BentoSection: React.FC<BentoSectionProps> = ({ weather, currentWeather, forecast, unit }) => {
+
+    const isNight = isNightTime(weather?.weather?.[0]?.icon);
 
     if (!currentWeather || !forecast) {
         return (
@@ -133,6 +140,7 @@ export const BentoSection: React.FC<BentoSectionProps> = ({ currentWeather, fore
                                     condition={h.condition} 
                                     size={26}
                                     isNight={h.isNight}
+                                    className={styles[isNight ? 'hero-icon-night' : 'hero-icon']}
                                 />
 
                                 <Text variant='span' className={styles['hourly-temp']}>{formatTemperature(h.temp, unit)}°{unit}</Text>
