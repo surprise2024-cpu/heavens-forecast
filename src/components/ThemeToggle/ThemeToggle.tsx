@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import styles from './ThemeToggle.module.css'
 import { Moon, Sun } from 'lucide-react';
+import { Text } from '../Text/Text';
 
 export const ThemeToggle: React.FC = () => {
 
@@ -10,6 +11,7 @@ export const ThemeToggle: React.FC = () => {
     });
 
     useEffect(() => {
+        
         if (isDark) {
             
             document.documentElement.classList.add('dark');
@@ -22,22 +24,28 @@ export const ThemeToggle: React.FC = () => {
             localStorage.setItem('theme', 'light');
             
         }
-
     }, [isDark]);
 
   return (
     
     <label className={styles['theme-slider']}>
+
         <input 
-        className={styles['dark-mode']} 
-        type='checkbox'
-        checked={isDark}
-        onChange={(e) => setIsDark(e.target.checked)}
+            className={styles['dark-mode']} 
+            type='checkbox'
+            checked={isDark}
+            onChange={(e) => setIsDark(e.target.checked)}
         />
-        <span className={styles['slider']}>
-            <span className={styles['slider-icon']}>{isDark ? <Moon /> : <Sun />}</span>
-        </span>
+
+        <Text variant='span' className={styles['slider']}>
+
+            <Text variant='span' 
+
+                className={styles['slider-icon']}>
+                {isDark ? <Moon /> : <Sun />}
+
+            </Text>
+        </Text>
     </label>
-    
   )
 }

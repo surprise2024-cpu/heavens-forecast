@@ -67,7 +67,7 @@ export const WeatherDashboard = () => {
 
 
                                 {/*7 day forecast */}
-                                {forecast && <Forecast forecast={forecast} unit={unit}/>}
+                                {forecast && <Forecast forecast={forecast} unit={unit} weather={currentWeather}/>}
                             </>
                         )
                     }

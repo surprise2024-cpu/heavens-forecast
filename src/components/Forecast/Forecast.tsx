@@ -145,9 +145,12 @@ export const Forecast: React.FC<ForecastProps> = ({ forecast, unit, weather }) =
 
     if (!forecast) {
         return (
+            
             <div className={styles['forecast-col']}>
+
                 <Text variant='p' className={styles['card-label']}>DAILY FORECAST</Text>
                 <div className={styles['forecast-loading']}> Loading forecast....</div>
+
             </div>
         );
     }
