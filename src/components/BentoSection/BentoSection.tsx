@@ -1,6 +1,7 @@
 import React from 'react'
 
 import styles from './BentoSection.module.css'
+import { Text } from '../Text/Text'
 
 import {
     Sun, 
@@ -97,7 +98,7 @@ export const BentoSection: React.FC<BentoSectionProps> = ({ currentWeather, fore
         return (
             <div className={styles['bento-col']}>
                 <div className={styles['card']}>
-                    <p className={styles['card-label']}>TODAY'S FORECAST</p>
+                    <Text variant='p' className={styles['card-label']}>TODAY'S FORECAST</Text>
                     <div className={styles['bento-loading']}>Loading....</div>
                 </div>
             </div>
@@ -117,13 +118,13 @@ export const BentoSection: React.FC<BentoSectionProps> = ({ currentWeather, fore
 
             {/*todays forecast strip */}
             <div className={styles['card']}>
-                <p className={styles['card-label']}>TODAY'S FORECAST</p>
+                <Text variant='p' className={styles['card-label']}>TODAY'S FORECAST</Text>
                 <div className={styles['hourly-grid']}>
                     {
                         hourly.map((h) => (
                             <div key={h.time} className={styles['hourly-item']}> 
 
-                                <span className={styles['hourly-time']}>{h.time}</span>
+                                <Text variant='span' className={styles['hourly-time']}>{h.time}</Text>
 
                                 <ConditionIcon 
                                     condition={h.condition} 
@@ -131,7 +132,7 @@ export const BentoSection: React.FC<BentoSectionProps> = ({ currentWeather, fore
                                     isNight={h.isNight}
                                 />
 
-                                <span className={styles['hourly-temp']}>{formatTemperature(h.temp, unit)}°{unit}</span>
+                                <Text variant='span' className={styles['hourly-temp']}>{formatTemperature(h.temp, unit)}°{unit}</Text>
                             
                             </div>
                         ))
@@ -141,37 +142,59 @@ export const BentoSection: React.FC<BentoSectionProps> = ({ currentWeather, fore
             
             {/*Air condition */}
             <div className={styles['card']}>
+
                 <div className={styles['card-header-row']}>
-                    <p className={styles['card-label']}>AIR CONDITIONS</p>
+
+                    <Text variant='p' className={styles['card-label']}>AIR CONDITIONS</Text>
                     <button className={styles['see-more-btn']}>See more</button>
+
                 </div>
+
                 <div className={styles['condition-grid']}>
+
                     <div className={styles['condition-item']}>
+
                         <Thermometer size={16} strokeWidth={1.75}/>
+
                         <div>
-                            <p className={styles['condition-label']}>Real Feel</p>
-                            <p className={styles['condition-value']}>{formatTemperature(realFeel, unit)}°{unit}</p>
+
+                            <Text variant='p' className={styles['condition-label']}>Real Feel</Text>
+                            <Text variant='p' className={styles['condition-value']}>{formatTemperature(realFeel, unit)}°{unit}</Text>
+                        
                         </div>
                     </div>
+                    
                     <div className={styles['condition-item']}>
+                        
                         <Wind size={16} strokeWidth={1.75}/>
+                        
                         <div>
-                            <p className={styles['condition-label']}>Wind</p>
-                            <p className={styles['condition-value']}>{windKmh} km/h</p>
+                            
+                            <Text variant='p' className={styles['condition-label']}>Wind</Text>
+                            <Text variant='p' className={styles['condition-value']}>{windKmh} km/h</Text>
+                        
                         </div>
                     </div>
+                    
                     <div className={styles['condition-item']}>
+                        
                         <Droplet size={16} strokeWidth={1.75}/>
+                        
                         <div>
-                            <p className={styles['condition-label']}>Chance of rain</p>
-                            <p className={styles['condition-value']}>{chanceOfRain}%</p>
+                            
+                            <Text variant='p' className={styles['condition-label']}>Chance of rain</Text>
+                            <Text variant='p' className={styles['condition-value']}>{chanceOfRain}%</Text>
                         </div>
                     </div>
+                    
                     <div className={styles['condition-item']}>
+                        
                         <Gauge size={16} strokeWidth={1.75}/>
+                        
                         <div>
-                            <p className={styles['condition-label']}>UV Index</p>
-                            <p className={styles['condition-value']}>N/A</p>
+                            
+                            <Text variant='p' className={styles['condition-label']}>UV Index</Text>
+                            <Text variant='p' className={styles['condition-value']}>N/A</Text>
                         </div>
                     </div>
                 </div>

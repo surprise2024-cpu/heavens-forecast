@@ -77,6 +77,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ weather, unit }) => {
             <div className={styles['section2']}>
 
                 <div className={styles['temp-cont']}>
+                  
                   <div className={styles['main-temp']}>
 
                     <Text variant='span'>{formatTemperature(temp, unit)}°{unit}</Text>
@@ -87,8 +88,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ weather, unit }) => {
 
                     <Text variant='span'>{weather?.weather?.[0]?.description}</Text>
 
-                    
-                  
                   </div>
 
                   <div className={styles['temps']}>
