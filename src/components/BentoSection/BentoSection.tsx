@@ -108,7 +108,7 @@ export const BentoSection: React.FC<BentoSectionProps> = ({ weather, currentWeat
         return (
             <div className={styles['bento-col']}>
                 <div className={styles['card']}>
-                    <Text variant='p' className={styles['card-label']}>TODAY'S FORECAST</Text>
+                    <Text variant='p' className={styles['card-label']}>HOURLY FORECAST</Text>
                     <div className={styles['bento-loading']}>Loading....</div>
                 </div>
             </div>
@@ -128,7 +128,7 @@ export const BentoSection: React.FC<BentoSectionProps> = ({ weather, currentWeat
 
             {/*todays forecast strip */}
             <div className={styles['card']}>
-                <Text variant='p' className={styles['card-label']}>TODAY'S FORECAST</Text>
+                <Text variant='p' className={styles['card-label']}>HOURLY FORECAST</Text>
                 <div className={styles['hourly-grid']}>
                     {
                         hourly.map((h) => (
