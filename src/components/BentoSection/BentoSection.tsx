@@ -41,7 +41,7 @@ interface BentoSectionProps {
 }
 
 const iconClassMap: Record<Condition, string> = {
-    /*night: 'icon-moon',*/
+    night: 'icon-moon',
     sunny: 'icon-sunny',
     cloudy: 'icon-cloudy',
     rainy: 'icon-rainy',
