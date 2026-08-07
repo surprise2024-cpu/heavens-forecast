@@ -71,7 +71,8 @@
   width: 30px;
   height: 30px;
   padding: 0.5rem;
-  background-color: var(--bg-card);
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-subtle);
   border-radius: 9999px;
   display: flex;
   justify-content: center;
