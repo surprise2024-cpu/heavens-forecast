@@ -19,7 +19,7 @@ import { WeatherAlertNotifier } from '../hooks/WeatherAlertNotifier';
 import { WeatherAlertBanner } from '../WeatherAlertBanner/WeatherAlertBanner';
 
 import { useSavedLocations } from '../hooks/useSavedLocations';
-import { SavedLocation } from '../hooks/useSavedLocations';
+import type { SavedLocation } from '../hooks/useSavedLocations';
 import { Cities } from '../Cities/Cities';
 
 function buildDisplayWeather(base: CurrentWeather, day: DailyPoint): CurrentWeather {
