@@ -4,9 +4,7 @@ import styles from './HeroSection.module.css'
 import * as LucideIcons from 'lucide-react'
 import { Text } from '../Text/Text'
 
-import {  
-  MapPin, 
-  Sun, 
+import { 
   MoonIcon,
 } from 'lucide-react'
 
@@ -60,18 +58,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ weather, unit }) => {
 
         <div className={styles['section1-info']}>
 
-          <div className={styles['section1-pin']}>
-
-            <MapPin size={20} className={styles['pin']}/>
-
-          </div>
-
           <div className={styles['hero-city-info']}>
 
             <Text variant='h2' 
-            className={styles['hero-city']} >
+              className={styles['hero-city']} >
 
-              {weather?.name}, {weather?.name}
+              {weather?.name}
 
             </Text>
 

@@ -1,4 +1,3 @@
-/*Hero: current weather*/
 
 .hero {
   grid-area: hero;
@@ -20,11 +19,12 @@
   font-size: 30px;
   font-weight: 600;
   color: var(--text-primary);
-  margin: 0;
+  margin-bottom: 15px;
 }
 
 .hero-country {
   color: var(--text-primary);
+   margin-bottom: 15px;
 }
 
 .hero-subtext {
