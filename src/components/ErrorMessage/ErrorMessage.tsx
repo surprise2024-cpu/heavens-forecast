@@ -2,6 +2,7 @@ import React from 'react'
 
 import styles from './ErrorMessage.module.css'
 import { AlertCircle, RefreshCw } from 'lucide-react'
+import { Text } from '../Text/Text'
 
 interface ErrorMessageProps {
     message: string,
@@ -11,36 +12,42 @@ interface ErrorMessageProps {
 
 export const ErrorMessage: React.FC<ErrorMessageProps> = ({message, onRetry}) => {
   return (
+
     <div className={styles['error-container']}>
+
         <div className={styles['error']}>
+
              <div className={styles['alert-circle']}>
+
                 <AlertCircle size={16}/>
+
             </div>
-            <h3 className={styles['error-mess']}>
+
+            <Text variant='h3' className={styles['error-mess']}>
                 Something went wrong
-            </h3>
+            </Text>
         </div>
 
-        <p className={styles['mess']}>{message}</p>
+        <Text variant='p' className={styles['mess']}>{message}</Text>
 
         {/*Conditional rendering */}
         {
             onRetry && ( 
+
                 <div className={styles['btn-cont']}>
+
                     <button 
                     className={styles['refresh-btn']}
                     onClick={onRetry}
                     >
 
                     <RefreshCw size={16} />
-                    <span className={styles['btn-mess']}>Try Agan</span>
+                    <Text variant='span' className={styles['btn-mess']}>Try Agan</Text>
 
                 </button>
                 </div>
-                
             )
         }
     </div>
-    
   );
 }

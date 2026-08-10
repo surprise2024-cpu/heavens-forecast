@@ -2,6 +2,7 @@ import React from 'react'
 
 import styles from './HeroSection.module.css'
 import * as LucideIcons from 'lucide-react'
+import { Text } from '../Text/Text'
 
 import {  
   MapPin, 
@@ -52,100 +53,109 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ weather, unit }) => {
   }
 
   return ( 
-      <div className={styles['hero']}>
-                  
-        {/*header */}
-        <div className={styles['section1']}>
+    <div className={styles['hero']}>
+                
+      {/*header */}
+      <div className={styles['section1']}>
 
-          <div className={styles['section1-info']}>
+        <div className={styles['section1-info']}>
 
-            <div className={styles['section1-pin']}>
+          <div className={styles['section1-pin']}>
 
-              <MapPin size={16} className={styles['pin']}/>
-
-            </div>
-
-            <div className={styles['hero-city-info']}>
-
-              <h2 className={styles['hero-city']} >{weather?.name}</h2>
-              {country && <p className={styles['hero-country']}>{country}</p>}
-      
-            </div>
-
-            {/*Weather display */}
-            <div className={styles['section2']}>
-
-                <div className={styles['temp-cont']}>
-                  <div className={styles['main-temp']}>
-
-                    {
-                      formatTemperature(temp, unit)
-                    }°
-                    <span>{unit}</span>
-
-                  </div>
-
-                  <div className={styles['weather-desc']}>
-
-                    {weather?.weather?.[0]?.description}
-                  
-                  </div>
-
-                  <div className={styles['temps']}>
-
-                    <span>H: {formatTemperature(tempMax, unit)}°{unit}</span>
-                    
-                    <span>L: {formatTemperature(tempMin, unit)}°{unit}</span>
-                  
-                  </div>
-                </div>
-
-            </div>
+            <MapPin size={20} className={styles['pin']}/>
 
           </div>
 
-          
-          <div className={styles['dynamic2']}>
-              {/*display dynamic date */}
-              
+          <div className={styles['hero-city-info']}>
+
+            <Text variant='h2' 
+            className={styles['hero-city']} >
+
+              {weather?.name}, {weather?.name}
+
+            </Text>
+
+            {country 
+              && <Text variant='p' 
+                className={styles['hero-country']}>
+
+                {country}
+
+              </Text>
+            }
+    
+          </div>
+
+          {/*Weather display */}
+          <div className={styles['section2']}>
+
+              <div className={styles['temp-cont']}>
+                
+                <div className={styles['main-temp']}>
+
+                  <Text variant='span'>{formatTemperature(temp, unit)}°{unit}</Text>
+
+                </div>
+
+                <div className={styles['weather-desc']}>
+
+                  <Text variant='span'>{weather?.weather?.[0]?.description}</Text>
+
+                </div>
+
+                <div className={styles['temps']}>
+
+                  <Text variant='span'>H: {formatTemperature(tempMax, unit)}°{unit}</Text>
+                  
+                  <Text variant='span'>L: {formatTemperature(tempMin, unit)}°{unit}</Text>
+                
+                </div>
+              </div>
+
           </div>
 
         </div>
 
         
-        <div className={styles['dynamic']}>
-
-          {/*display dynamic date */}
-          <div className={styles['dynamic-date1']}>
-            {
-              new Date((weather?.dt ?? Date.now() / 1000) * 1000).toLocaleDateString('en-US', {
-                weekday: 'long', 
-                month: 'short',
-                day: 'numeric',
-              })
-            }
-          </div>
-
-          {/*display dynamic date */}
-          <div className={styles['dynamic-date2']}>
-              {
-                new Date((weather?.dt ?? Date.now() / 1000) * 1000).toLocaleTimeString('en-US', {
-                  hour: '2-digit',
-                  minute: '2-digit',
-                })
-              }
-          </div>
-
-          <div className={styles['the-sun']}>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
-              <Icon 
-                size={100} 
-                strokeWidth={1.25} 
-                className={styles[isNight ? 'hero-icon-night' : 'hero-icon']}
-              />
-          </div>
-          
+        <div className={styles['dynamic2']}>
+            {/*display dynamic date */}
+            
         </div>
 
       </div>
+
+      
+      <div className={styles['dynamic']}>
+
+        {/*display dynamic date */}
+        <div className={styles['dynamic-date1']}>
+          {
+            new Date((weather?.dt ?? Date.now() / 1000) * 1000).toLocaleDateString('en-US', {
+              weekday: 'long', 
+              month: 'short',
+              day: 'numeric',
+            })
+          }
+        </div>
+
+        {/*display dynamic date */}
+        <div className={styles['dynamic-date2']}>
+            {
+              new Date((weather?.dt ?? Date.now() / 1000) * 1000).toLocaleTimeString('en-US', {
+                hour: '2-digit',
+                minute: '2-digit',
+              })
+            }
+        </div>
+
+        <div className={styles['the-sun']}>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+            <Icon 
+              size={100} 
+              strokeWidth={1.25} 
+              className={styles[isNight ? 'hero-icon-night' : 'hero-icon']}
+            />
+        </div>
+      </div>
+    </div>
   )
 }

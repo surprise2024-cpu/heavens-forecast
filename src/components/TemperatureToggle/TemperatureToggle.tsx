@@ -18,15 +18,18 @@ export const TemperatureToggle: React.FC<TemperatureToggleProps> = ({ unit, onTo
 
   return (
     <div className={styles['temperature-toggle']}>
+
         <div className={styles['temperature-buttons']}>
+
             <button 
-                className={`${styles['temp-btn']} ${unit ==='C' ? styles['temp-btn-active'] : ''}`} 
-                
+                className={`${styles['temp-btn']} 
+                ${unit ==='C' ? styles['temp-btn-active'] : ''}`} 
                 onClick={() => handleSelect('C')}
                 aria-pressed={unit === 'C'}
             >
                 °C
             </button>
+
             <button 
                 className={`${styles['temp-btn']} ${unit === 'F' ? styles['temp-btn-active'] : ''}`} 
                 onClick={() => handleSelect('F')}
@@ -34,12 +37,13 @@ export const TemperatureToggle: React.FC<TemperatureToggleProps> = ({ unit, onTo
             >
                 °F
             </button>
+        </div>
+
+        <div className={styles['theme-cont']}>
+
+            <ThemeToggle />
 
         </div>
-        <div className={styles['theme-cont']}>
-            <ThemeToggle />
-        </div>
-        
     </div>
   )
 }

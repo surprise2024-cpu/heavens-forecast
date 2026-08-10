@@ -1,0 +1,86 @@
+.banner {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 18px;
+    border-radius: var(--radius-md);
+    margin-bottom: 16px;
+    border: 1px solid transparent;
+}
+
+.banner.severe {
+    background: rgba(248, 113, 113, 0.1);
+    border-color: rgba(248, 113, 113, 0.3);
+}
+
+.banner.severe .icon {
+    color: #f87171;
+}
+
+.banner.warning {
+    background: rgba(251, 191, 36, 0.1);
+    border-color: rgba(251, 191, 36, 0.3);
+}
+
+.banner.warning .icon {
+    color: #fbbf24;
+}
+
+.icon {
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.content {
+    flex: 1;
+    min-width: 0;
+}
+
+.title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 2px;
+}
+
+.message {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.enable-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--accent-blue);
+    color: #0b0e14;
+    border: none;
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+.enable-btn:hover {
+    opacity: 0.9;
+}
+
+.dismiss-btn {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+}
+
+.dismiss-btn:hover {
+    color: var(--text-primary);
+}

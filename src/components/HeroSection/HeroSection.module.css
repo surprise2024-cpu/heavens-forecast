@@ -19,8 +19,12 @@
 .hero-city {
   font-size: 30px;
   font-weight: 600;
-  color: #f4f6fa;
+  color: var(--text-primary);
   margin: 0;
+}
+
+.hero-country {
+  color: var(--text-primary);
 }
 
 .hero-subtext {
@@ -64,19 +68,26 @@
 }
 
 .section1-pin {
+  width: 30px;
+  height: 30px;
   padding: 0.5rem;
-  background-color: rgb(255, 255, 255);
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-subtle);
   border-radius: 9999px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .pin {
-  width: 1.25rem;
-  height: 1.25rem;
-  color: rgb(255, 255, 255 / 0.8);
+  width: 5rem;
+  height: 5rem;
+  color: var(--text-primary);
 }
 
 .dynamic {
   text-align: right;
+  color: var(--text-primary);
 }
 
 .dynamic-date1 {
@@ -106,13 +117,13 @@
   font-size: 2rem;
   line-height: 1;
   font-weight: 700;
-  color: #fff;
+  color: var(--text-primary);
   margin-bottom: 0.75rem;
   letter-spacing: -0.025rem;
 }
 
 .weather-desc {
-  color: rgb(255, 255, 255 / 0.9);
+  color: var(--text-primary);
   font-size: 1.25rem;
   line-height: 1.75rem;
   text-transform: capitalize;
@@ -124,9 +135,10 @@
   display: flex;
   align-items: center;
   margin-left: 1rem;
-  color: rgb(255, 255, 255 / 0.6);
+  color: var(--text-primary);
   font-size: 0.875rem;
   line-height: 1.25rem;
+  gap: 5px;
 }
 
 .dynamic2 {

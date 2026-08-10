@@ -1,9 +1,7 @@
 
-const API_KEY = '3d555e3f7afc3df8ec94c2202cbbb0fe'
+const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
 const BASE_URL = 'https://api.openweathermap.org/data/2.5'
 const GEO_URL = 'https://api.openweathermap.org/geo/1.0'
-
-//API response types
 
 export interface WeatherCondition {
     id: number;
@@ -16,7 +14,7 @@ export interface CurrentWeatherResponse {
     coord: { lon: number; lat: number };
     weather: WeatherCondition[];
     base: string;
-    main: {
+    main: { 
         temp: number;
         feels_like: number;
         temp_min: number;

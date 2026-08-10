@@ -1,6 +1,7 @@
 import React from 'react'
 
 import styles from './Navbar.module.css'
+import { Text } from '../Text/Text';
 
 import {
     Wind, 
@@ -46,19 +47,18 @@ export const Navbar: React.FC = ({ navItems = defaultNavItems, onSelect }: Navba
                 navItems.map(({ icon: Icon, label, active }) => (
 
                     <button key={label} 
-                    className={`${styles['nav-item']} ${active ? styles['active'] : ''}`}
-                    onClick={() => onSelect?.(label)}>
+                    
+                        className={`${styles['nav-item']} ${active ? styles['active'] : ''}`}
+                        onClick={() => onSelect?.(label)}>
 
                         <Icon size={20} strokeWidth={1.75} />
 
-                        <span>{label}</span>
+                        <Text variant='span'>{label}</Text>
 
                     </button>
                 ))
             }
-
         </aside>
     </>
-        
   );
 }
