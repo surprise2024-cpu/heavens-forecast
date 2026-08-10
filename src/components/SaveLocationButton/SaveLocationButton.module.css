@@ -1,0 +1,30 @@
+.save-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 999px;
+    transition: color 150ms ease, background-color 150ms ease, transform 150ms ease;
+}
+
+.save-btn:hover:not(:disabled) {
+    color: var(--accent-blue);
+    background: var(--bg-button-hover);
+}
+
+.save-btn.saved {
+    color: var(--accent-blue);
+}
+
+.save-btn:active:not(:disabled) {
+    transform: scale(0.9);
+}
+
+.save-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
