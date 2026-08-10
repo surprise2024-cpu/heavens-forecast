@@ -1,18 +1,21 @@
 import React, { useCallback, useState } from 'react'
 
-export type PermissionState = NotificationPermission | 'unsupported';
+export type NotificationPermissionState = 
+    NotificationPermission | 'unsupported';
 
 interface UseNotificationPermissionReturn {
     supported: boolean;
-    permission: PermissionState;
+    permission: NotificationPermissionState;
     requestPermission: () => Promise<void>;
 }
 
 export function UseNotificationPermission(): UseNotificationPermissionReturn {
 
-    const supported = typeof window !== 'undefined' && 'Notification' in window;
+    const supported = 
+        typeof window !== 'undefined' && 'Notification' in window;
 
-    const [permission, setPermission] = useState<PermissionState>(
+    const [permission, setPermission] = 
+        useState<NotificationPermissionState>(
         supported ? Notification.permission : 'unsupported'
     );
 
@@ -28,5 +31,9 @@ export function UseNotificationPermission(): UseNotificationPermissionReturn {
         }
     }, [supported]);
 
-  return { supported, permission, requestPermission };
+  return { 
+        supported, 
+        permission, 
+        requestPermission 
+    };
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import type { WeatherAlert } from '../WeatherAlerts/WeatherAlerts'
+import type { WeatherAlert } from '../hooks/WeatherAlerts'
 import styles from './WeatherAlertBanner.module.css'
 import { AlertTriangle, Bell, X } from 'lucide-react';
 import { Text } from '../Text/Text';

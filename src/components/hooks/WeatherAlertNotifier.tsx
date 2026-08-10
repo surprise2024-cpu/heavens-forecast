@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 
-import type { WeatherAlert } from '../WeatherAlerts/WeatherAlerts'
+import type { WeatherAlert } from './WeatherAlerts'
 
 
 export function WeatherAlertNotifier(
