@@ -14,6 +14,7 @@ import {
     Droplet,
     Gauge, 
     Thermometer,
+    Droplets,
 } from 'lucide-react'
 
 import type { 
@@ -51,7 +52,8 @@ const iconClassMap: Record<Condition, string> = {
 function ConditionIcon ({
     condition, 
     size = 22,
-    isNight = false, 
+    isNight = false,
+    className = '', 
 }: {
     condition: Condition;
     size?: number;
@@ -61,7 +63,7 @@ function ConditionIcon ({
     const common = { 
         size, 
         strokeWidth: 1.75,
-        className: styles[iconClassMap[condition]] 
+        className: `${styles[iconClassMap[condition]]} ${className}`.trim(),
     };
 
     if (isNight) {
@@ -119,7 +121,7 @@ export const BentoSection: React.FC<BentoSectionProps> = ({ weather, currentWeat
 
     const realFeel = Math.round(currentWeather.main.feels_like);
     const windKmh = (currentWeather.wind.speed * 3.6).toFixed(1);
-
+    const humidity = currentWeather.main.humidity;
     const chanceOfRain = Math.round((forecast.list[0]?.pop ?? 0) * 100);
 
   return (
@@ -185,7 +187,7 @@ export const BentoSection: React.FC<BentoSectionProps> = ({ weather, currentWeat
                         <div>
                             
                             <Text variant='p' className={styles['condition-label']}>Wind</Text>
-                            <Text variant='p' className={styles['condition-value']}>{windKmh} km/h</Text>
+                            <Text variant='p' className={styles['condition-value']}>{windKmh}km/h</Text>
                         
                         </div>
                     </div>
@@ -203,12 +205,12 @@ export const BentoSection: React.FC<BentoSectionProps> = ({ weather, currentWeat
                     
                     <div className={styles['condition-item']}>
                         
-                        <Gauge size={16} strokeWidth={1.75}/>
+                        <Droplets size={16} strokeWidth={1.75}/>
                         
                         <div>
                             
-                            <Text variant='p' className={styles['condition-label']}>UV Index</Text>
-                            <Text variant='p' className={styles['condition-value']}>N/A</Text>
+                            <Text variant='p' className={styles['condition-label']}>Humidity</Text>
+                            <Text variant='p' className={styles['condition-value']}>{humidity}%</Text>
                         </div>
                     </div>
                 </div>
