@@ -12,6 +12,7 @@ import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
 import type { DailyPoint } from '../Forecast/Forecast'
 import { useState } from 'react';
 import type { ForecastResponse } from '../Services/WeatherAPI';
+import { UseNotificationPermission } from '../UseNotificationPermission/UseNotificationPermission';
 
 function buildDisplayWeather(base: CurrentWeather, day: DailyPoint): CurrentWeather {
 
@@ -72,6 +73,8 @@ export const WeatherDashboard = () => {
         const city = currentWeather?.name ?? 'Polokwane';
         fetchWeatherByCity(city);
     }
+
+    const {supported, permission, requestPermission } = UseNotificationPermission();
 
   return (
     <div className={styles['weather-app']}>
