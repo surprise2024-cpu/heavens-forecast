@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 
 import type { WeatherAlert } from './WeatherAlerts'
 
@@ -6,7 +6,7 @@ import type { WeatherAlert } from './WeatherAlerts'
 export function WeatherAlertNotifier(
 
     alert: WeatherAlert | null,
-    permission: PermissionState
+    permission: NotificationPermission | 'unsupported'
 
 ): void {
     const lastNotifiedId = useRef<string | null>(null);

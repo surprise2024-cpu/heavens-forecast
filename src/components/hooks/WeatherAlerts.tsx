@@ -36,7 +36,7 @@ export function getWeatherAlerts(weather: CurrentWeatherResponse | null): Weathe
         };
     }
 
-    if (tempC && EXTREME_HEAT_C) {
+    if (tempC >= EXTREME_HEAT_C) {
         return {
             id: `${city}-heat-${Math.round(tempC)}`,
             severity: 'warning',
@@ -45,7 +45,7 @@ export function getWeatherAlerts(weather: CurrentWeatherResponse | null): Weathe
         };
     }
 
-    if (tempC && EXTREME_COLD_C) {
+    if (tempC <= EXTREME_COLD_C) {
         return {
             id: `${city}-cold-${Math.round(tempC)}`,
             severity: 'warning',
@@ -54,7 +54,7 @@ export function getWeatherAlerts(weather: CurrentWeatherResponse | null): Weathe
         };
     }
 
-    if (wind && HIGH_WIND_KMH) {
+    if (wind >= HIGH_WIND_KMH) {
         return {
             id: `${city}-wind-${condition}`,
             severity: 'warning',
