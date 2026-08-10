@@ -10,9 +10,17 @@ import type {CurrentWeather, UseWeatherReturn} from '../hooks/useWeather'
 import { TemperatureToggle } from '../TemperatureToggle/TemperatureToggle';
 import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
 import type { DailyPoint } from '../Forecast/Forecast'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { ForecastResponse } from '../Services/WeatherAPI';
-import { UseNotificationPermission } from '../UseNotificationPermission/UseNotificationPermission';
+
+import { UseNotificationPermission } from '../hooks/UseNotificationPermission';
+import { getWeatherAlerts } from '../hooks/WeatherAlerts';
+import { WeatherAlertNotifier } from '../hooks/WeatherAlertNotifier';
+import { WeatherAlertBanner } from '../WeatherAlertBanner/WeatherAlertBanner';
+
+import { useSavedLocations } from '../hooks/useSavedLocations';
+import type { SavedLocation } from '../hooks/useSavedLocations';
+import { Cities } from '../Cities/Cities';
 
 function buildDisplayWeather(base: CurrentWeather, day: DailyPoint): CurrentWeather {
 
@@ -76,10 +84,28 @@ export const WeatherDashboard = () => {
 
     const {supported, permission, requestPermission } = UseNotificationPermission();
 
+    const alert = getWeatherAlerts(currentWeather);
+    WeatherAlertNotifier(alert, permission);
+
+    const [alertDismissed, setAlertDismissed] = useState(false);
+
+    useEffect(() => {
+        setAlertDismissed(false);
+    }, [alert?.id]);
+
   return (
     <div className={styles['weather-app']}>
 
         <div className={styles['weather-panel']}>
+
+            <WeatherAlertBanner 
+                alert={alert}
+                dismissed={alertDismissed}
+                notificationsSupported={supported}
+                permission={permission}
+                onEnableNotifications={requestPermission}
+                onDismiss={() => setAlertDismissed(true)}
+            /> 
 
             <div className={styles['weather-grid']}>
 
@@ -94,7 +120,10 @@ export const WeatherDashboard = () => {
                 />
 
                 {/*TemperatureToggle */}
-                <TemperatureToggle unit={unit} onToggle={toggleUnit} />
+                <TemperatureToggle 
+                    unit={unit} 
+                    onToggle={toggleUnit} 
+                />
 
                 {/*Load spinner*/}
                 {/*<div className={styles['load-spinner']}>*/}
@@ -102,15 +131,25 @@ export const WeatherDashboard = () => {
                     {
                         error && !loading ? (
                             
-                            <ErrorMessage message={error} onRetry={handleRetry}/>
+                            <ErrorMessage 
+                                message={error} 
+                                onRetry={handleRetry}
+                            />
                             
                         ): (
                             <>
                                 {/*Hero */}
-                                <HeroSection weather={displayWeather} unit={unit}/>
+                                <HeroSection 
+                                    weather={displayWeather} 
+                                    unit={unit}
+                                />
                                 
                                 {/*bento */}
-                                <BentoSection currentWeather={displayWeather} forecast={displayForecast} unit={unit}/>
+                                <BentoSection 
+                                    currentWeather={displayWeather} 
+                                    forecast={displayForecast}
+                                    unit={unit}
+                                />
 
 
                                 {/*7 day forecast */}
