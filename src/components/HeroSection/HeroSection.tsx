@@ -42,7 +42,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ weather, unit, saved =
 
   const country = weather?.sys?.country ?? '';
   const temp = weather?.main?.temp ?? 0;
-  const tempMax = weather?.main?.temp_max ?? temp;
+  const tempMax = weather?.main.temp_max ?? temp;
   const tempMin = weather?.main?.temp_min ?? temp;
     
   if (!weather) {
