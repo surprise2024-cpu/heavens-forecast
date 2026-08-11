@@ -84,7 +84,7 @@
   right: 0;
   z-index: 50;
   margin-top: 0.5rem;
-  background: #12151d;
+  background: var(--bg-suggestion);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.5);
@@ -133,7 +133,7 @@
 .suggestion-text {
   font-size: 14px;
   font-weight: 500;
-  color: var(--text-primary);
+  color: var(--text-secondary);
 }
 
 .suggestion-state {
