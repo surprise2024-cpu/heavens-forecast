@@ -15,6 +15,7 @@ import {
     Gauge, 
     Thermometer,
     Droplets,
+    CloudRainIcon,
 } from 'lucide-react'
 
 import type { 
@@ -194,7 +195,7 @@ export const BentoSection: React.FC<BentoSectionProps> = ({ weather, currentWeat
                     
                     <div className={styles['condition-item']}>
                         
-                        <Droplet size={16} strokeWidth={1.75}/>
+                        <CloudRainIcon size={16} strokeWidth={1.75}/>
                         
                         <div>
                             
