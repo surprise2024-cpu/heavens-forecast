@@ -60,6 +60,13 @@
   filter: drop-shadow(0 0 25px rgba(148, 197, 253, 0.35));
 }
 
+.hero-bookmark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+}
+
 .section1 {
   display: flex; 
   flex-direction: column;
