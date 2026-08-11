@@ -144,7 +144,7 @@ export const BentoSection: React.FC<BentoSectionProps> = ({ weather, currentWeat
 
                                 <ConditionIcon 
                                     condition={h.condition} 
-                                    size={26}
+                                    size={30}
                                     isNight={h.isNight}
                                     className={styles[isNight ? 'bento-icon-night' : 'bento-icon']}
                                 />
@@ -171,7 +171,7 @@ export const BentoSection: React.FC<BentoSectionProps> = ({ weather, currentWeat
 
                     <div className={styles['condition-item']}>
 
-                        <Thermometer size={16} strokeWidth={1.75}/>
+                        <Thermometer size={18} strokeWidth={1.75}/>
 
                         <div>
 
@@ -183,7 +183,7 @@ export const BentoSection: React.FC<BentoSectionProps> = ({ weather, currentWeat
                     
                     <div className={styles['condition-item']}>
                         
-                        <Wind size={16} strokeWidth={1.75}/>
+                        <Wind size={18} strokeWidth={1.75}/>
                         
                         <div>
                             
@@ -195,7 +195,7 @@ export const BentoSection: React.FC<BentoSectionProps> = ({ weather, currentWeat
                     
                     <div className={styles['condition-item']}>
                         
-                        <CloudRainIcon size={16} strokeWidth={1.75}/>
+                        <CloudRainIcon size={18} strokeWidth={1.75}/>
                         
                         <div>
                             
@@ -206,7 +206,7 @@ export const BentoSection: React.FC<BentoSectionProps> = ({ weather, currentWeat
                     
                     <div className={styles['condition-item']}>
                         
-                        <Droplets size={16} strokeWidth={1.75}/>
+                        <Droplets size={18} strokeWidth={1.75}/>
                         
                         <div>
                             
