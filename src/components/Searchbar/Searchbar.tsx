@@ -200,7 +200,7 @@ export const Searchbar: React.FC<SearchbarProps> = ({ onSearch, onLocationSearch
                               city.state && 
                               <Text variant='span' 
                                 className={styles['suggestion-state']}>
-                                , {city.state}'
+                                , {city.state}
                               </Text>
                             }
                            
