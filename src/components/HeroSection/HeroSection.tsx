@@ -14,10 +14,13 @@ import {
   isNightTime} from '../utils/WeatherUtilities'
 
 import type { CurrentWeather } from '../hooks/useWeather'
+import { SaveLocationButton } from '../SaveLocationButton/SaveLocationButton'
 
 interface HeroSectionProps {
   weather: CurrentWeather | null;
-  unit: string
+  unit: string;
+  saved?: boolean;
+  onToggleSave?: () => void;
 }
 
 type LucideIconComponent = React.ComponentType<{
@@ -26,7 +29,7 @@ type LucideIconComponent = React.ComponentType<{
   className?: string;
 }>;
 
-export const HeroSection: React.FC<HeroSectionProps> = ({ weather, unit }) => {
+export const HeroSection: React.FC<HeroSectionProps> = ({ weather, unit, saved = false, onToggleSave }) => {
 
   const iconName = getWeatherIcon(weather?.weather?.[0] ?? { main: 'Clear', icon: '01d' });
 
@@ -60,21 +63,34 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ weather, unit }) => {
 
           <div className={styles['hero-city-info']}>
 
-            <Text variant='h2' 
+            <div className={styles['hero-city-row']}>
+
+              <Text variant='h2' 
               className={styles['hero-city']} >
 
               {weather?.name}
 
-            </Text>
-
-            {country 
-              && <Text variant='p' 
-                className={styles['hero-country']}>
-
-                {country}
-
               </Text>
-            }
+
+              {
+                onToggleSave && (
+                  <SaveLocationButton 
+                    saved={saved} 
+                    onToggle={onToggleSave} 
+                  />
+                )
+              }
+              
+            </div>
+
+              {country 
+                && <Text variant='p' 
+                  className={styles['hero-country']}>
+
+                  {country}
+
+                </Text>
+              }
     
           </div>
 

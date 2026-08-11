@@ -93,6 +93,32 @@ export const WeatherDashboard = () => {
         setAlertDismissed(false);
     }, [alert?.id]);
 
+    const [activeView, setActiveView] = useState<'weather' | 'cities'>('weather')
+
+    const handleNavigate = (label: string) => {
+        setActiveView(label === 'Cities' ? 'cities' : 'weather');
+    };
+
+    const { locations, isSaved, toggleLocation, removeLocation } = useSavedLocations();
+
+    const currentLocation: SavedLocation | null = currentWeather
+    ? {
+        name: currentWeather.name,
+        country: currentWeather.sys.country,
+        lat: currentWeather.coord.lat,
+        lon: currentWeather.coord.lon
+    } : null;
+
+    const handleToggleSaveCurrent = () => {
+        if (currentLocation) toggleLocation(currentLocation);
+    };
+
+    const handleSelectCity = (loc: SavedLocation) => {
+        setSelectedDay(null);
+        setActiveView('weather')
+        fetchWeatherByCity(loc.name);
+    };
+
   return (
     <div className={styles['weather-app']}>
 
@@ -110,59 +136,79 @@ export const WeatherDashboard = () => {
             <div className={styles['weather-grid']}>
 
                 {/*Sidebar*/}
-                <Navbar />
-                
-                {/*Searchbar */}
-                <Searchbar 
-                    onSearch={handleSearch} 
-                    onLocationSearch={handleLocationSearch} 
-                    loading={loading} 
+                <Navbar activeLabel={activeView === 'cities' ? 'Cities' : 'Weather'}
+                onSelect={handleNavigate}
                 />
 
-                {/*TemperatureToggle */}
-                <TemperatureToggle 
-                    unit={unit} 
-                    onToggle={toggleUnit} 
-                />
-
-                {/*Load spinner*/}
-                {/*<div className={styles['load-spinner']}>*/}
-                    {/*Conditional rendering*/}
-                    {
-                        error && !loading ? (
-                            
-                            <ErrorMessage 
-                                message={error} 
-                                onRetry={handleRetry}
+                {
+                    activeView === 'cities' ? (
+                        <div className={styles['cities-area']}>
+                            <Cities locations={locations}
+                                unit={unit}
+                                onSelectCity={handleSelectCity}
+                                onRemoveCity={removeLocation}
                             />
-                            
-                        ): (
-                            <>
-                                {/*Hero */}
-                                <HeroSection 
-                                    weather={displayWeather} 
-                                    unit={unit}
-                                />
-                                
-                                {/*bento */}
-                                <BentoSection 
-                                    currentWeather={displayWeather} 
-                                    forecast={displayForecast}
-                                    unit={unit}
-                                />
+                        </div>
+                    ) : (
+                        <>
+                            {/*Searchbar */}
+                        <Searchbar 
+                            onSearch={handleSearch} 
+                            onLocationSearch={handleLocationSearch} 
+                            loading={loading} 
+                        />
+
+                        {/*TemperatureToggle */}
+                        <TemperatureToggle 
+                            unit={unit} 
+                            onToggle={toggleUnit} 
+                        />
+
+                        {/*Load spinner*/}
+                        {/*<div className={styles['load-spinner']}>*/}
+                            {/*Conditional rendering*/}
+                            {
+                                error && !loading ? (
+                                    
+                                    <ErrorMessage 
+                                        message={error} 
+                                        onRetry={handleRetry}
+                                    />
+                                    
+                                ): (
+                                    <>
+                                        {/*Hero */}
+                                        <HeroSection 
+                                            weather={displayWeather} 
+                                            unit={unit}
+                                            saved={currentLocation ? isSaved(currentLocation) : false}
+                                            onToggleSave={currentLocation ? handleToggleSaveCurrent : undefined}
+                                        />
+                                        
+                                        {/*bento */}
+                                        <BentoSection 
+                                            currentWeather={displayWeather} 
+                                            forecast={displayForecast}
+                                            unit={unit}
+                                        />
 
 
-                                {/*7 day forecast */}
-                                {forecast && 
-                                <Forecast 
-                                    forecast={forecast} 
-                                    unit={unit} 
-                                    weather={currentWeather}
-                                    onSelectDay={handleSelectDay}
-                                />}
-                            </>
-                        )
-                    }
+                                        {/*7 day forecast */}
+                                        {forecast && 
+                                        <Forecast 
+                                            forecast={forecast} 
+                                            unit={unit} 
+                                            weather={currentWeather}
+                                            onSelectDay={handleSelectDay}
+                                        />}
+                                    </>
+                                )
+                            }
+                        </>
+                    )
+                }
+                
+                
                     
                 {/*</div>*/}
 

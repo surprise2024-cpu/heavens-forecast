@@ -36,6 +36,22 @@ body {
   'nav bento forecast';
 }
 
+.weather-grid--cities {
+  grid-template-columns: 72px 1fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas: 
+  'nav'
+  'cities cities';
+}
+
+.weather-grid--cities .cities-area {
+  grid-area: cities;
+  grid-column: unset;
+  grid-row: unset;
+  min-height: auto;
+}
+
+
 /*7-day forecast*/
 
 @media (max-width: 1023px) {

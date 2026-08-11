@@ -28,10 +28,11 @@ const defaultNavItems: NavItem[] = [
 
 interface NavbarProps {
     navItems?: NavItem[];
+    activeLabel?: string;
     onSelect?: (label: string) => void;
 }
 
-export const Navbar: React.FC = ({ navItems = defaultNavItems, onSelect }: NavbarProps) => {
+export const Navbar: React.FC<NavbarProps> = ({ navItems = defaultNavItems, activeLabel = 'Weather', onSelect }) => {
   return (
     <>
         {/*Sidebar*/}
@@ -44,10 +45,12 @@ export const Navbar: React.FC = ({ navItems = defaultNavItems, onSelect }: Navba
             </div>
 
             {
-                navItems.map(({ icon: Icon, label, active }) => (
+                navItems.map(({ icon: Icon, label}) => {
+                    const active = label === activeLabel;
+                
+                    return (
 
                     <button key={label} 
-                    
                         className={`${styles['nav-item']} ${active ? styles['active'] : ''}`}
                         onClick={() => onSelect?.(label)}>
 
@@ -56,7 +59,8 @@ export const Navbar: React.FC = ({ navItems = defaultNavItems, onSelect }: Navba
                         <Text variant='span'>{label}</Text>
 
                     </button>
-                ))
+                );
+                })
             }
         </aside>
     </>

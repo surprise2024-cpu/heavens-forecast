@@ -20,7 +20,7 @@ function locationKey(loc: Pick<SavedLocation, 'name' | 'country'>): string {
     return `${loc.name}-${loc.country}`.toLowerCase();
 }
 
-export const Cities: React.FC<CitiesProps> = ({ locations, unit, onSelectCity, onRemoveCity }) => {
+export const Cities: React.FC<CitiesProps> = ({ locations = [], unit, onSelectCity, onRemoveCity }) => {
 
     const [previews, setPreviews] = useState<Record<string, PreviewEntry>>({});
 
