@@ -162,7 +162,7 @@ export const BentoSection: React.FC<BentoSectionProps> = ({ weather, currentWeat
                 <div className={styles['card-header-row']}>
 
                     <Text variant='p' className={styles['card-label']}>AIR CONDITIONS</Text>
-                    <button className={styles['see-more-btn']}>See more</button>
+                    {/*<button className={styles['see-more-btn']}>See more</button>*/}
 
                 </div>
 
