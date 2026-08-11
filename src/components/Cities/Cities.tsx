@@ -58,7 +58,7 @@ export const Cities: React.FC<CitiesProps> = ({ locations = [], unit, onSelectCi
             <div className={styles['cities-empty']}>
                 <MapPin size={32} />
                 <Text variant='p' className={styles['cities-empty-title']}>No saved cities yet</Text>
-                <Text variant='p' className={styles['cities-empty-hint']}>Search for a city and tap the bookmark icon save it here.</Text>
+                <Text variant='p' className={styles['cities-empty-hint']}>Search for a city and tap the bookmark icon to save it here.</Text>
             </div>
         );
     }
