@@ -65,21 +65,25 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ weather, unit, saved =
 
             <div className={styles['hero-city-row']}>
 
-              <Text variant='h2' 
-              className={styles['hero-city']} >
+              <div>
+                {
+                  onToggleSave && (
+                    <SaveLocationButton 
+                      saved={saved} 
+                      onToggle={onToggleSave} 
+                    />
+                  )
+                }
+              </div>
 
-              {weather?.name}
+              <div>
+                <Text variant='h2' 
+                  className={styles['hero-city']} >
 
-              </Text>
+                  {weather?.name}
 
-              {
-                onToggleSave && (
-                  <SaveLocationButton 
-                    saved={saved} 
-                    onToggle={onToggleSave} 
-                  />
-                )
-              }
+                </Text>
+              </div>
               
             </div>
 
