@@ -153,6 +153,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ weather, unit, saved =
 
         {/*display dynamic date */}
         <div className={styles['dynamic-date2']}>
+          <Text variant='p'>Last updated:</Text>
             {
               new Date((weather?.dt ?? Date.now() / 1000) * 1000).toLocaleTimeString('en-US', {
                 hour: '2-digit',

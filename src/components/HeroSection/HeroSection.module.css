@@ -98,6 +98,9 @@
   color: rgb(255, 255, 255 / 0.5);
   font-size: 0.875rem;
   line-height: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .section2 {
