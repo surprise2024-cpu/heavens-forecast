@@ -26,7 +26,6 @@
     align-items: center;
 }
 
-
 .sun-icon {
     color: var(--accent-amber);
     border-radius: 20px;
@@ -36,7 +35,6 @@
     color: var(--accent-blue);
     border-radius: 20px;
 }
-
 
 .slider .slider-icon {
     position: absolute;
@@ -50,9 +48,6 @@
     justify-content: center;
     font-size: 12px;
 }
-
-
-
 
 .dark-mode:checked + .slider .slider-icon  {
     transform: translateX(35px);
