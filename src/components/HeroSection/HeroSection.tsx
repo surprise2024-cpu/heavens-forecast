@@ -74,7 +74,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ weather, unit, saved =
                     />
                   )
                 }
-                <Text variant='p'>Bookmark</Text>
               </div>
 
               <div>
