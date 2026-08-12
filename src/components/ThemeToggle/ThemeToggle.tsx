@@ -42,7 +42,8 @@ export const ThemeToggle: React.FC = () => {
             <Text variant='span' 
 
                 className={styles['slider-icon']}>
-                {isDark ? <Moon /> : <Sun />}
+                {isDark ? <Moon className={`${styles['moon-icon']} ${styles['moon-icon-active']}`}/> 
+                : <Sun className={`${styles['sun-icon']} ${styles['sun-icon-active']}`} />}
 
             </Text>
         </Text>

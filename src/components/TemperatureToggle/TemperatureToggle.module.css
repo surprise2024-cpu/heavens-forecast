@@ -30,6 +30,8 @@ body {
     line-height: 1.25rem;
     font-weight: 600;
     background: none;
+    background-color: var(--bg-card-hover);
+    border: none;
     cursor: pointer;
     color: var(--text-muted);
     transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -43,7 +45,7 @@ body {
 .temp-btn-active {
     background-color: var(--accent-blue);
     color: #0b0e14;
-    box-shadow: 0 10px 15px -3px rgba(56, 189, 248, 0.45);
+    box-shadow: 0 8px 13px -3px rgba(56, 189, 248, 0.45);
 }
 
 .temp-btn-active:hover {
