@@ -11,8 +11,6 @@ import {
     Moon,
     CloudMoon,
     Wind,
-    Droplet,
-    Gauge, 
     Thermometer,
     Droplets,
     CloudRainIcon,

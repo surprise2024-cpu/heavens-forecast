@@ -74,10 +74,10 @@
 
 /*air conditions*/
 .condition-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  row-gap: 20px;
-  column-gap: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: -10px;
 }
 
 .condition-item {
