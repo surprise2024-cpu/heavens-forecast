@@ -20,7 +20,7 @@ export const SaveLocationButton: React.FC<SaveLocationButtonProps> = ({ saved, o
         aria-label={saved ? 'Remove from saved cities' : 'Save city'}
     >
         <Bookmark size={18} fill={saved ? 'currentColor' : 'none'} strokeWidth={1.75}/>
-        <Text variant='p'>Save</Text>
+        <Text variant='p'>Save Location</Text>
     </button>
   )
 }
