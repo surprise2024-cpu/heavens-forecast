@@ -21,6 +21,8 @@ import { WeatherAlertBanner } from '../WeatherAlertBanner/WeatherAlertBanner';
 import { useSavedLocations } from '../hooks/useSavedLocations';
 import type { SavedLocation } from '../hooks/useSavedLocations';
 import { Cities } from '../Cities/Cities';
+import { Navigate, Route, Routes } from 'react-router';
+import { WeatherView } from './WeatherView';
 
 function buildDisplayWeather(base: CurrentWeather, day: DailyPoint): CurrentWeather {
 
@@ -136,81 +138,54 @@ export const WeatherDashboard = () => {
             <div className={styles['weather-grid']}>
 
                 {/*Sidebar*/}
-                <Navbar activeLabel={activeView === 'cities' ? 'Cities' : 'Weather'}
-                onSelect={handleNavigate}
-                />
+                <Navbar />
 
-                {
-                    activeView === 'cities' ? (
+                <Routes>
+                    <Route path='/' element={
+                        <WeatherView 
+                            loading={loading}
+                            error={error}
+                            onRetry={handleRetry}
+                            onSearch={handleSearch}
+                            onLocationSearch={handleLocationSearch}
+                            unit={unit}
+                            onToggleUnit={toggleUnit}
+                            displayWeather={displayWeather}
+                            displayForecast={displayForecast}
+                            forecast={forecast}
+                            currentWeather={currentWeather}
+                            saved={currentLocation ? isSaved(currentLocation): false}
+                            onToggleSave={currentLocation ? handleToggleSaveCurrent : undefined}
+                            onSelectDay={handleSelectDay}
+                        />
+                    }/>
+
+                    <Route path='/cities' element={
                         <div className={styles['cities-area']}>
-                            <Cities locations={locations}
+                            <Cities 
+                                locations={locations}
                                 unit={unit}
                                 onSelectCity={handleSelectCity}
                                 onRemoveCity={removeLocation}
                             />
                         </div>
-                    ) : (
-                        <>
-                            {/*Searchbar */}
-                        <Searchbar 
-                            onSearch={handleSearch} 
-                            onLocationSearch={handleLocationSearch} 
-                            loading={loading} 
-                        />
+                    }/>
 
-                        {/*TemperatureToggle */}
-                        <TemperatureToggle 
-                            unit={unit} 
-                            onToggle={toggleUnit} 
-                        />
+                    {/*<Route path='/map' element={
+                        <div>
 
-                        {/*Load spinner*/}
-                        {/*<div className={styles['load-spinner']}>*/}
-                            {/*Conditional rendering*/}
-                            {
-                                error && !loading ? (
-                                    
-                                    <ErrorMessage 
-                                        message={error} 
-                                        onRetry={handleRetry}
-                                    />
-                                    
-                                ): (
-                                    <>
-                                        {/*Hero */}
-                                        <HeroSection 
-                                            weather={displayWeather} 
-                                            unit={unit}
-                                            saved={currentLocation ? isSaved(currentLocation) : false}
-                                            onToggleSave={currentLocation ? handleToggleSaveCurrent : undefined}
-                                        />
-                                        
-                                        {/*bento */}
-                                        <BentoSection 
-                                            currentWeather={displayWeather} 
-                                            forecast={displayForecast}
-                                            unit={unit}
-                                        />
+                        </div>
+                    }/>
 
+                    <Route path='/settings' element={
+                        <div>
+                            
+                        </div>
+                    }/>*/}
 
-                                        {/*7 day forecast */}
-                                        {forecast && 
-                                        <Forecast 
-                                            forecast={forecast} 
-                                            unit={unit} 
-                                            weather={currentWeather}
-                                            onSelectDay={handleSelectDay}
-                                        />}
-                                    </>
-                                )
-                            }
-                        </>
-                    )
-                }
-                
-                
+                    <Route path='*' element={<Navigate to='/' />}/>
                     
-                {/*</div>*/}
+                </Routes>
 
             </div>
         </div>

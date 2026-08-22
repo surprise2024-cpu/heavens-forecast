@@ -36,6 +36,7 @@
   cursor: pointer;
   color: var(--text-muted);
   transition: color 0.15s ease;
+  text-decoration: none;
 }
 
 .nav-item:hover {

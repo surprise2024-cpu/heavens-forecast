@@ -12,27 +12,26 @@ import {
  
     type LucideIcon,
 } from 'lucide-react'
+import { NavLink } from 'react-router';
 
 export interface NavItem {
     icon: LucideIcon;
     label: string;
-    active: boolean;
+    path: string;
 }
 
 const defaultNavItems: NavItem[] = [
-    {icon: CloudSun, label: 'Weather', active: true},
-    {icon: List, label: 'Cities', active: false},
-    {icon: MapIcon, label: 'Map', active: false},
-    {icon: Settings, label: 'Settings', active: false},
+    {icon: CloudSun, label: 'Weather', path: '/'},
+    {icon: List, label: 'Cities', path: '/cities'},
+    {icon: MapIcon, label: 'Map', path: '/map'},
+    {icon: Settings, label: 'Settings', path: '/settings'},
 ];
 
 interface NavbarProps {
     navItems?: NavItem[];
-    activeLabel?: string;
-    onSelect?: (label: string) => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ navItems = defaultNavItems, activeLabel = 'Weather', onSelect }) => {
+export const Navbar: React.FC<NavbarProps> = ({ navItems = defaultNavItems }) => {
   return (
     <>
         {/*Sidebar*/}
@@ -45,20 +44,23 @@ export const Navbar: React.FC<NavbarProps> = ({ navItems = defaultNavItems, acti
             </div>
 
             {
-                navItems.map(({ icon: Icon, label}) => {
-                    const active = label === activeLabel;
+                navItems.map(({ icon: Icon, label, path}) => {
                 
                     return (
 
-                    <button key={label} 
-                        className={`${styles['nav-item']} ${active ? styles['active'] : ''}`}
-                        onClick={() => onSelect?.(label)}>
+                    <NavLink 
+                        key={label} 
+                        to={path}
+                        end={path === '/'}
+                        className={({ isActive }) => `${styles['nav-item']} ${isActive ? styles['active'] : ''}`}
+                        
+                    >
 
                         <Icon size={20} strokeWidth={1.75} />
 
                         <Text variant='span'>{label}</Text>
 
-                    </button>
+                    </NavLink>
                 );
                 })
             }
