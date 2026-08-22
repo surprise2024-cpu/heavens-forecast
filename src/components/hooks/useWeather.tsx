@@ -7,6 +7,8 @@ import {
     type CurrentWeatherResponse, 
     type ForecastResponse
 } from '../Services/WeatherAPI'
+import { formatCacheAge, loadWeatherCache, saveWeatherCache } from './WeatherCache';
+import { UseOnlineStatus } from './UseOnlineStatus';
 
 
 export type CurrentWeather = CurrentWeatherResponse;
@@ -17,6 +19,10 @@ export type UseWeatherReturn = {
     loading: boolean;
     error: string | null;
     unit: string;
+
+    isOnline: boolean;
+    usingCache: boolean;
+    cacheAge: string | null;
 
     fetchWeatherByCity: (city: string) => Promise<void>;
     fetchWeatherByLocation: () => Promise<void>;
@@ -31,9 +37,35 @@ export const useWeather = (): UseWeatherReturn => {
     const [error, setError] = useState<string | null>(null);
     const [unit, setUnit] = useState('C');
 
+    const [usingCache, setUsingCache] = useState(false);
+    const [cacheAge, setCacheAge] = useState<string | null>(null);
+    const isOnline = UseOnlineStatus();
+
+    const loadFromCache = (): boolean => {
+        const cached = loadWeatherCache();
+        if (!cached) return false;
+
+        setCurrentWeather(cached.currentWeather);
+        setForecast(cached.forecast);
+        setUsingCache(true);
+        setCacheAge(formatCacheAge(cached.cachedAt));
+        setError(null);
+        return true;
+    }
+    
     const fetchWeatherByCity = async (city: string) => {
         setLoading(true);
         setError(null);
+
+        if (!navigator.onLine) {
+            const hadCache = loadFromCache();
+            if (!hadCache) {
+                setError('You are offline and no cached weather data is available yet');
+            }
+
+            setLoading(false);
+            return;
+        }
         
         try {
             const [weatherData, forecastData] = await Promise.all([
@@ -43,12 +75,24 @@ export const useWeather = (): UseWeatherReturn => {
 
             setCurrentWeather(weatherData);
             setForecast(forecastData);
+
+            setUsingCache(false);
+            setCacheAge(null);
+
+            saveWeatherCache(city, weatherData, forecastData);
             
         }
         catch (err) {
-            setError(
-                err instanceof Error ? err.message : 'Failed to fetch weather data'
-            );
+
+            const hadCache = loadFromCache();
+
+            if (!hadCache) {
+
+                setError(
+                    err instanceof Error ? err.message : 'Failed to fetch weather data'
+                );
+            }
+            
         }
         finally {
             setLoading(false)
@@ -64,6 +108,16 @@ export const useWeather = (): UseWeatherReturn => {
         
         setLoading(true);
         setError(null);
+
+        if (!navigator.onLine) {
+            const hadCache = loadFromCache();
+            if (!hadCache) {
+                setError('You are offline and no cached weather data is available yet');
+            }
+
+            setLoading(false);
+            return;
+        }
 
         navigator.geolocation.getCurrentPosition(async (position) => {
 
@@ -82,11 +136,21 @@ export const useWeather = (): UseWeatherReturn => {
                     const forecastData = await getWeatherForecast(weatherData.name);
                     setForecast(forecastData);
 
+                    setUsingCache(false);
+                    setCacheAge(null);
+
+                    saveWeatherCache(weatherData.name, weatherData, forecastData);
+
                 }
                 catch (err) {
-                    setError(
-                        err instanceof Error ? err.message : 'Failed to fetch weather data'
-                    );
+                    const hadCache = loadFromCache();
+
+                    if (!hadCache) {
+
+                        setError(
+                            err instanceof Error ? err.message : 'Failed to fetch weather data'
+                        );
+                    }
                 }
                 finally {
                     setLoading(false);
@@ -124,6 +188,11 @@ export const useWeather = (): UseWeatherReturn => {
         loading, 
         error, 
         unit, 
+
+        isOnline,
+        usingCache,
+        cacheAge,
+
         fetchWeatherByCity, 
         fetchWeatherByLocation, 
         toggleUnit 
