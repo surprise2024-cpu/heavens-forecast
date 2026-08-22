@@ -31,6 +31,13 @@
     line-height: 1.625;
 }
 
+.hint {
+    color: var(--text-primary);
+    font-size: 13px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
 .btn-cont {
     display: flex;
     align-items: center;

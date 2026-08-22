@@ -176,11 +176,6 @@ export const useWeather = (): UseWeatherReturn => {
     setUnit(prev => (prev === 'C' ? 'F' : 'C'));
     };
 
-    //load default weather data for a default city on initial render
-
-    useEffect(() => {
-        fetchWeatherByCity('Polokwane');
-    },[])
 
     return { 
         currentWeather, 

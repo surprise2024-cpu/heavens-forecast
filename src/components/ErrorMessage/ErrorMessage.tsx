@@ -30,6 +30,10 @@ export const ErrorMessage: React.FC<ErrorMessageProps> = ({message, onRetry}) =>
 
         <Text variant='p' className={styles['mess']}>{message}</Text>
 
+        <Text variant='p' className={styles['hint']}>
+            You can also search for a city using the search bar above.
+        </Text>
+
         {/*Conditional rendering */}
         {
             onRetry && ( 
@@ -42,7 +46,7 @@ export const ErrorMessage: React.FC<ErrorMessageProps> = ({message, onRetry}) =>
                     >
 
                     <RefreshCw size={16} />
-                    <Text variant='span' className={styles['btn-mess']}>Try Agan</Text>
+                    <Text variant='span' className={styles['btn-mess']}>Try Agian</Text>
 
                 </button>
                 </div>
