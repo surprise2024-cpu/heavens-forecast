@@ -171,6 +171,7 @@ export const WeatherDashboard = () => {
                         </div>
                     }/>
 
+                    {/*Future add on */}
                     {/*<Route path='/map' element={
                         <div>
 
