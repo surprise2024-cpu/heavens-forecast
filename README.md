@@ -8,7 +8,7 @@ A location-first weather dashboard built with **React**, **TypeScript** and the 
 
 
 ![Dark themed dashboard](/src/assets/dashboard.png)
-![Light themed dashboard](/src/assets/cities.png)
+![Light themed dashboard](/src/assets/white%20dashboard.png.png)
 ![Saved cities](/src/assets/cities.png)
 
 
