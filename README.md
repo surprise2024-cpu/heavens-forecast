@@ -7,8 +7,10 @@ A location-first weather dashboard built with **React**, **TypeScript** and the 
 ## Screenshots
 
 
-![Dashboard showing current conditions](/src/assets/dashboard.png)
+![Dark themed dashboard](/src/assets/dashboard.png)
+![Light themed dashboard](/src/assets/cities.png)
 ![Saved cities](/src/assets/cities.png)
+
 
 > Screenshots are taken from active development builds.
 
