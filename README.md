@@ -197,7 +197,7 @@ The app runs at `http://localhost:5173` by default.
 |---|---|
 | `VITE_OWN_API_KEY` | Your OpenWeatherMap API key |
 
-> Nevere commit `.env` it's gitignored. For security.
+> Neve re-commit `.env` it's gitignored. For security.
 
 ---
 
