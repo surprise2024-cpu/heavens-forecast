@@ -46,7 +46,7 @@ export const ErrorMessage: React.FC<ErrorMessageProps> = ({message, onRetry}) =>
                     >
 
                     <RefreshCw size={16} />
-                    <Text variant='span' className={styles['btn-mess']}>Try Agian</Text>
+                    <Text variant='span' className={styles['btn-mess']}>Refresh</Text>
 
                 </button>
                 </div>
