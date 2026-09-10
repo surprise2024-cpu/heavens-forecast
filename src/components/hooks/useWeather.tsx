@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 import { 
     getCurrentWeather, 
@@ -41,7 +41,7 @@ export const useWeather = (): UseWeatherReturn => {
     const [cacheAge, setCacheAge] = useState<string | null>(null);
     const isOnline = UseOnlineStatus();
 
-    const loadFromCache = (): boolean => {
+    const loadFromCache = useCallback((): boolean => {
         const cached = loadWeatherCache();
         if (!cached) return false;
 
@@ -51,7 +51,7 @@ export const useWeather = (): UseWeatherReturn => {
         setCacheAge(formatCacheAge(cached.cachedAt));
         setError(null);
         return true;
-    }
+    }, [])
     
     const fetchWeatherByCity = async (city: string) => {
         setLoading(true);
@@ -99,7 +99,7 @@ export const useWeather = (): UseWeatherReturn => {
         }
     };
 
-    const fetchWeatherByLocation = async () => {
+    const fetchWeatherByLocation = useCallback( async () => {
 
         if(!navigator.geolocation) {
             setError('Geolocation is not supported by your browser');
@@ -167,14 +167,32 @@ export const useWeather = (): UseWeatherReturn => {
 
                 setError(message);
                 setLoading(false);
+            },
+
+            // stops the app from non stop loading within 10s
+            {
+                timeout: 10000,
+                maximumAge: 5 * 60 * 1000,
+                enableHighAccuracy: false,
             }
+
         );
 
-    };
+    }, [loadFromCache]);
 
     const toggleUnit = () => {
     setUnit(prev => (prev === 'C' ? 'F' : 'C'));
     };
+
+    // makes sure that the browsers permission prompt is called
+    useEffect(() => {
+        const timeoutId = setTimeout(() => {
+            fetchWeatherByLocation();
+        })
+        
+        return () => clearTimeout(timeoutId);
+
+    }, [fetchWeatherByLocation]);
 
 
     return { 
