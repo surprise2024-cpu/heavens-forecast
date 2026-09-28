@@ -13,7 +13,7 @@ import type { DailyPoint } from '../Forecast/Forecast'
 import { useEffect, useState } from 'react';
 import type { ForecastResponse } from '../Services/WeatherAPI';
 
-import { UseNotificationPermission } from '../hooks/UseNotificationPermission';
+import { useNotificationPermission } from '../hooks/UseNotificationPermission';
 import { getWeatherAlerts } from '../hooks/WeatherAlerts';
 import { WeatherAlertNotifier } from '../hooks/WeatherAlertNotifier';
 import { WeatherAlertBanner } from '../WeatherAlertBanner/WeatherAlertBanner';
@@ -84,7 +84,7 @@ export const WeatherDashboard = () => {
         fetchWeatherByCity(city);
     }
 
-    const {supported, permission, requestPermission } = UseNotificationPermission();
+    const {supported, permission, requestPermission } = useNotificationPermission();
 
     const alert = getWeatherAlerts(currentWeather);
     WeatherAlertNotifier(alert, permission);
