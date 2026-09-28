@@ -4,13 +4,23 @@ import styles from './ErrorMessage.module.css'
 import { AlertCircle, RefreshCw } from 'lucide-react'
 import { Text } from '../Text/Text'
 
+// props required by the errormessage component.
 interface ErrorMessageProps {
+
+    // error message shown to the user.
     message: string,
-    onRetry: () => void
+
+    // function that runs when the user tries again.
+    onRetry?: () => void
 }
 
+// displays an error state together with a retry option.
+export const ErrorMessage: React.FC<ErrorMessageProps> = ({
+    message, 
+    onRetry
 
-export const ErrorMessage: React.FC<ErrorMessageProps> = ({message, onRetry}) => {
+}) => {
+
   return (
 
     <div className={styles['error-container']}>
@@ -28,13 +38,23 @@ export const ErrorMessage: React.FC<ErrorMessageProps> = ({message, onRetry}) =>
             </Text>
         </div>
 
-        <Text variant='p' className={styles['mess']}>{message}</Text>
+        {/* displays the specific error message received. */}
+        <Text 
+            variant='p' 
+            className={styles['mess']}
+        >
+            {message}
+        </Text>
 
-        <Text variant='p' className={styles['hint']}>
+        {/* gives the user an alternative action. */}
+        <Text 
+            variant='p' 
+            className={styles['hint']}
+        >
             You can also search for a city using the search bar above.
         </Text>
 
-        {/*Conditional rendering */}
+        {/* show the retry button when a retry function is avalable. */}
         {
             onRetry && ( 
 
