@@ -8,7 +8,7 @@ import {
     type ForecastResponse
 } from '../Services/WeatherAPI'
 import { formatCacheAge, loadWeatherCache, saveWeatherCache } from './WeatherCache';
-import { UseOnlineStatus } from './UseOnlineStatus';
+import { useOnlineStatus } from './UseOnlineStatus';
 
 
 export type CurrentWeather = CurrentWeatherResponse;
@@ -39,7 +39,7 @@ export const useWeather = (): UseWeatherReturn => {
 
     const [usingCache, setUsingCache] = useState(false);
     const [cacheAge, setCacheAge] = useState<string | null>(null);
-    const isOnline = UseOnlineStatus();
+    const isOnline = useOnlineStatus();
 
     const loadFromCache = useCallback((): boolean => {
         const cached = loadWeatherCache();
