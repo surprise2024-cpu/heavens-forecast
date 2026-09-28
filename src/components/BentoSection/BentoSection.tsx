@@ -143,14 +143,14 @@ function buildHourly(forecast: ForecastResponse): HourlyPoint[] {
 
 // Dispays the hourly forecast and current air-condition information
 export const BentoSection: React.FC<BentoSectionProps> = ({ 
-    weather, 
+    // weather, 
     currentWeather, 
     forecast, 
     unit 
 }) => {
 
     // Determine whether the current weather is durig the night.
-    const isNight = isNightTime(weather?.weather?.[0]?.icon);
+    // const isNight = isNightTime(weather?.weather?.[0]?.icon);
 
     // Dispaying a loading state while the weather data is being fetched.
     if (!currentWeather || !forecast) {
@@ -210,7 +210,7 @@ export const BentoSection: React.FC<BentoSectionProps> = ({
                                     condition={h.condition} 
                                     size={30}
                                     isNight={h.isNight}
-                                    className={styles[isNight ? 'bento-icon-night' : 'bento-icon']}
+                                    className={styles[h.isNight ? 'bento-icon-night' : 'bento-icon']}
                                 />
 
                                 {/*Forecast temperature */}
