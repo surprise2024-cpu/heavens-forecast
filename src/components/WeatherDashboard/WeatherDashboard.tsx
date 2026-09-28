@@ -1,14 +1,8 @@
 import styles from './WeatherDashboard.module.css'
 
 import { Navbar } from '../Navbar/Navbar';
-import { Searchbar } from '../Searchbar/Searchbar';
-import { HeroSection } from '../HeroSection/HeroSection';
-import { BentoSection } from '../BentoSection/BentoSection';
-import { Forecast } from '../Forecast/Forecast';
 import  { useWeather } from '../hooks/useWeather';
 import type {CurrentWeather, UseWeatherReturn} from '../hooks/useWeather'
-import { TemperatureToggle } from '../TemperatureToggle/TemperatureToggle';
-import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
 import type { DailyPoint } from '../Forecast/Forecast'
 import { useEffect, useState } from 'react';
 import type { ForecastResponse } from '../Services/WeatherAPI';
