@@ -101,7 +101,7 @@ src/
             UseOnlineStatus.tsx
             useSavedLocation.tsx
             useWeather.tsx
-            WeatherAlertNotifier.tsx
+            useWeatherAlertNotifier.tsx
             WeatherAlerts.tsx
             WeatherCache.tsx
         Navbar/

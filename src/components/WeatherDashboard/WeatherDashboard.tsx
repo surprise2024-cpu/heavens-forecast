@@ -9,7 +9,7 @@ import type { ForecastResponse } from '../Services/WeatherAPI';
 
 import { useNotificationPermission } from '../hooks/UseNotificationPermission';
 import { getWeatherAlerts } from '../hooks/WeatherAlerts';
-import { WeatherAlertNotifier } from '../hooks/WeatherAlertNotifier';
+import { useWeatherAlertNotifier } from '../hooks/WeatherAlertNotifier';
 import { WeatherAlertBanner } from '../WeatherAlertBanner/WeatherAlertBanner';
 
 import { useSavedLocations } from '../hooks/useSavedLocations';
@@ -81,7 +81,7 @@ export const WeatherDashboard = () => {
     const {supported, permission, requestPermission } = useNotificationPermission();
 
     const alert = getWeatherAlerts(currentWeather);
-    WeatherAlertNotifier(alert, permission);
+    useWeatherAlertNotifier(alert, permission);
 
     const [alertDismissed, setAlertDismissed] = useState(false);
 
