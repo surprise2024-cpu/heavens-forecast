@@ -4,7 +4,7 @@ import { Navbar } from '../Navbar/Navbar';
 import  { useWeather } from '../hooks/useWeather';
 import type {CurrentWeather, useWeatherReturn} from '../hooks/useWeather'
 import type { DailyPoint } from '../Forecast/Forecast'
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import type { ForecastResponse } from '../Services/WeatherAPI';
 
 import { useNotificationPermission } from '../hooks/UseNotificationPermission';
@@ -151,20 +151,12 @@ export const WeatherDashboard = () => {
         permission
     );
 
-    // Tracks whether the current alert banner
-    // has been dismissed by the user.
-    const [
-        alertDismissed, 
-        setAlertDismissed
-    ] = useState(false);
+    const [dismissedAlertId, setDismissedAlertId] =
+        useState<string | null>(null);
 
-    useEffect(() => {
-
-        // Whenever a completely new alert arrives,
-        // allow the alert banner to appear again.
-        setAlertDismissed(false);
-
-    }, [alert?.id]);
+    const alertDismissed =
+        alert !== null &&
+        dismissedAlertId === alert.id;
 
     // Saved location state and helper functions.
     const { 
@@ -222,7 +214,12 @@ export const WeatherDashboard = () => {
                 notificationsSupported={supported}
                 permission={permission}
                 onEnableNotifications={requestPermission}
-                onDismiss={() => setAlertDismissed(true)}
+                onDismiss={() => {
+                    if(alert) {
+                        setDismissedAlertId(alert.id);
+                    }
+                    
+                }}
             /> 
 
             <div className={styles['weather-grid']}>
