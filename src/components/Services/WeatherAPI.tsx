@@ -260,7 +260,11 @@ export const getCurrentWeather = async (
         if(isNetworkError(error)) {
 
             throw new Error(
-                'Network error: Unable to reach the weather service. Please check your internet connection and try again.');
+                'Network error: Unable to reach the weather service. Please check your internet connection and try again.',
+                {
+                    cause: error
+                }
+            );
         }
 
         // re-throw api erros created above
@@ -311,7 +315,10 @@ export const getCurrentWeatherByCoords = async (
         if(isNetworkError(error)) {
 
             throw new Error(
-                'Network error: Unable to reach the weather service. Please check your internet connection and try again.'
+                'Network error: Unable to reach the weather service. Please check your internet connection and try again.',
+                {
+                    cause: error
+                }
             );
 
         }
@@ -351,7 +358,10 @@ export const getWeatherForecast = async (
         if(isNetworkError(error)) {
 
             throw new Error(
-                'Network error: Unable to reach the weather service. Please check your internet connection and try again.'
+                'Network error: Unable to reach the weather service. Please check your internet connection and try again.',
+                {
+                    cause: error
+                }
             );
 
         }
@@ -405,7 +415,10 @@ export const searchCities = async (
         if(isNetworkError(error)) {
 
             throw new Error(
-                'Network error: Unable to reach the weather service. Please check your internet connection and try again.'
+                'Network error: Unable to reach the weather service. Please check your internet connection and try again.',
+                {
+                    cause: error
+                }
             );
         }
 
