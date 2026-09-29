@@ -45,11 +45,11 @@ function loadFromStorage(): SavedLocation[] {
 // without comparing the whole object.
 function locationId(
 
-    loc: SavedLocation
+    loc: Pick<SavedLocation, 'name' | 'country'>
 
 ): string {
 
-    return `${loc.name}-${loc.lat}-${loc.lon}`.toLowerCase();
+    return `${loc.name}-${loc.country}`.toLowerCase();
 }
 
 // describes everything returned by the custom hook
