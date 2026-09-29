@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 import styles from './Forecast.module.css'
 import { Text } from '../Text/Text'
@@ -299,15 +299,7 @@ export const Forecast: React.FC<ForecastProps> = ({
     );*/}
 
     // tracks which forecast day is currently selected.
-    const [selectedIndex, setSelectedIndex] = useState(0);
-
-    useEffect(() => {
-
-        // reset the selected day whenever
-        // a new forecast is loaded.
-        setSelectedIndex(0);
-
-    }, [forecast]);
+    const [selectedDayId, setSelectedDayId] = useState<number | null>(null);
 
     // display a loading state until forecast data is available
     if (!forecast) {
@@ -338,6 +330,14 @@ export const Forecast: React.FC<ForecastProps> = ({
         forecast.list
     );
 
+    const selectedIndex = selectedDayId === null
+        ? 0
+        : daily.findIndex(
+            (day) => day.representative.dt === selectedDayId
+        );
+
+    const activeIndex = selectedIndex >= 0 ? selectedIndex : 0;
+
     // handles selection of a forecast day.
     const handleSelect = (
 
@@ -347,7 +347,11 @@ export const Forecast: React.FC<ForecastProps> = ({
     ) => {
 
         // update the selected row locally
-        setSelectedIndex(index);
+        setSelectedDayId(
+            index === 0
+                ? null
+                : day.representative.dt
+            );
 
         // notify the parent component if a callback was supplied
         onSelectDay?.(day, index);
@@ -377,11 +381,11 @@ export const Forecast: React.FC<ForecastProps> = ({
 
                             // helps screen readers understand
                             // which forecast day is selected.
-                            aria-pressed={index === selectedIndex}
+                            aria-pressed={index === activeIndex}
                             className={`
                                 ${styles['forecast-row']} 
                                 ${
-                                    index === selectedIndex 
+                                    index === activeIndex 
                                     ? styles['selected'] 
                                     : ''
                                     }
