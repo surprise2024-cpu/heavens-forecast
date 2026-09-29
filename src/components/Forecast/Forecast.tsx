@@ -458,5 +458,3 @@ export const Forecast: React.FC<ForecastProps> = ({
 
 }
 
-export { mapCondition, Condition }
-
