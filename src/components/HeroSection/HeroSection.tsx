@@ -1,16 +1,19 @@
 import React from 'react'
 
 import styles from './HeroSection.module.css'
-import * as LucideIcons from 'lucide-react'
 import { Text } from '../Text/Text'
 
 import { 
-  MoonIcon,
+  Cloud,
+  CloudLightning,
+  CloudMoon,
+  CloudRain,
+  Moon,
+  Sun,
 } from 'lucide-react'
 
 import { 
   formatTemperature, 
-  getWeatherIcon, 
   isNightTime} from '../utils/WeatherUtilities'
 
 import type { CurrentWeather } from '../hooks/useWeather'
@@ -33,12 +36,83 @@ interface HeroSectionProps {
 
 }
 
-// descrbes the props expected by a lucide icon component.
-type LucideIconComponent = React.ComponentType<{
-  size?: number;
-  strokeWidth?: number;
-  className?: string;
-}>;
+function renderWeatherIcon(
+  main: string,
+  isNight: boolean,
+  className: string
+) {
+
+  if (isNight) {
+
+    if (main === 'Clear') {
+      return (
+        <Moon
+          size={100}
+          strokeWidth={1.25}
+          className={className}
+        />
+      );
+    }
+
+    if (main === 'Clouds') {
+      return (
+        <CloudMoon
+          size={100}
+          strokeWidth={1.25}
+          className={className}
+        />
+      );
+    }
+  }
+
+  switch (main) {
+
+    case 'Clear':
+      return (
+        <Sun
+          size={100}
+          strokeWidth={1.25}
+          className={className}
+        />
+      );
+
+    case 'Clouds':
+      return (
+        <Cloud
+          size={100}
+          strokeWidth={1.25}
+          className={className}
+        />
+      );
+
+    case 'Rain':
+      return (
+        <CloudRain
+          size={100}
+          strokeWidth={1.25}
+          className={className}
+        />
+      );
+
+    case 'Thunderstorm':
+      return (
+        <CloudLightning
+          size={100}
+          strokeWidth={1.25}
+          className={className}
+        />
+      );
+
+    default:
+      return (
+        <Cloud
+          size={100}
+          strokeWidth={1.25}
+          className={className}
+        />
+      );
+  }
+}
 
 // displays the main current-weather information for the selected city.
 export const HeroSection: React.FC<HeroSectionProps> = ({
@@ -50,41 +124,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
 }) => {
 
-  // get the weather icon that matches the current condition.
-  //
-  // if weather data is not available yet, use a clear daytime
-  // condition as a temporary fallback.
-  const iconName = getWeatherIcon(
-
-    weather?.weather?.[0] ?? { 
-      main: 'Clear', 
-      icon: '01d' 
-    }
-
-  );
 
   // determine whether the current weather occurs at night.
   const isNight = isNightTime(
     weather?.weather?.[0]?.icon
   );
-
-  // getWeatherIcon can return either an icon component
-  // or the name of a lucide icon.
-  //
-  // if it returns a string, look up that icon inside
-  // the complete lucideIcons colletions.
-  const Icon: LucideIconComponent = 
-    typeof iconName === 'string' 
-      ? (
-          (
-            LucideIcons as unknown as Record<
-              string, 
-              LucideIconComponent
-            >
-          )[iconName] ?? MoonIcon
-        ) 
-
-      : iconName;
 
   // extract the main values needed by the UI.
   // fallback values prevent undefined values from reaching the display.
@@ -238,9 +282,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           {
             new Date(
               (
-                weather?.dt ?? 
-                Date.now() / 1000
-              ) * 1000
+                weather?.dt * 1000
+              ) 
             ).toLocaleDateString(
               'en-US', 
               {
@@ -264,9 +307,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             {
               new Date(
                 (
-                  weather?.dt ?? 
-                  Date.now() / 1000
-                ) * 1000
+                  weather?.dt * 1000
+                )
               ).toLocaleTimeString(
                 'en-US', 
                 {
@@ -281,17 +323,19 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         {/* main weather condition icon */}
         <div className={styles['the-sun']}>   
 
-            <Icon 
-              size={100} 
-              strokeWidth={1.25} 
-              className={
-                styles[
-                  isNight 
-                    ? 'hero-icon-night' 
-                    : 'hero-icon'
-                ]
-              }
-            />
+            {
+              renderWeatherIcon( 
+                weather.weather[0]?.main ?? 'Clouds',
+                isNight, 
+                  styles[
+                    isNight 
+                      ? 'hero-icon-night' 
+                      : 'hero-icon'
+                  ]
+
+              )
+
+            }
 
         </div>
 
