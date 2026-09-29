@@ -12,14 +12,19 @@ import {
  
     type LucideIcon,
 } from 'lucide-react'
-import { NavLink } from 'react-router';
 
+import { 
+    NavLink 
+} from 'react-router';
+
+// describes the structure of each navigation item.
 export interface NavItem {
     icon: LucideIcon;
     label: string;
     path: string;
 }
 
+// default navigation options used by the sidebar.
 const defaultNavItems: NavItem[] = [
     {icon: CloudSun, label: 'Weather', path: '/'},
     {icon: List, label: 'Cities', path: '/cities'},
@@ -27,44 +32,81 @@ const defaultNavItems: NavItem[] = [
     {icon: Settings, label: 'Settings', path: '/settings'},
 ];
 
+// props accepted by the navbar component.
 interface NavbarProps {
+
+    // optonal and custom navigation list
     navItems?: NavItem[];
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ navItems = defaultNavItems }) => {
+// displays the application's sidebar navigation.
+export const Navbar: React.FC<NavbarProps> = ({ 
+
+    navItems = defaultNavItems 
+
+}) => {
+
   return (
     <>
-        {/*Sidebar*/}
-        <aside className={styles['nav']}>
+    {/*Sidebar*/}
+    <aside className={styles['nav']}>
 
-            <div className={styles['nav-logo']}>
+        {/*App logo*/}
+        <div className={styles['nav-logo']}>
 
-                <Wind size={20} strokeWidth={1.75}/>
+            <Wind size={20} strokeWidth={1.75}/>
 
-            </div>
+        </div>
 
-            {
-                navItems.map(({ icon: Icon, label, path}) => {
-                
-                    return (
+        {/* create a navigation link for each item */}
+        {
+            navItems.map(
+                ({ 
+
+                    icon: Icon, 
+                    label, 
+                    path
+
+                }) => {
+            
+                return (
 
                     <NavLink 
                         key={label} 
                         to={path}
+
+                        // prevent the root '/' from
+                        // staying active on every other page.
                         end={path === '/'}
-                        className={({ isActive }) => `${styles['nav-item']} ${isActive ? styles['active'] : ''}`}
+
+                        // apply the active css class when
+                        // the current URL matches this route
+                        className={({ isActive }) => 
+                            `${styles['nav-item']} ${
+                                isActive 
+                                ? styles['active'] 
+                                : ''
+                            }`
+                        }
                         
                     >
-
+                        {/* navigation icon */}
                         <Icon size={20} strokeWidth={1.75} />
 
+                        {/* navigation label */}
                         <Text variant='span'>{label}</Text>
 
                     </NavLink>
                 );
-                })
-            }
-        </aside>
+
+            })
+
+        }
+
+    </aside>
+
     </>
+
   );
+
 }
