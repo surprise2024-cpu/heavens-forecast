@@ -57,7 +57,7 @@ export const SaveLocationButton: React.FC<SaveLocationButtonProps> = ({
         />
 
         <Text variant='p'>
-          {saved ? 'Saved' : 'Save Location'}
+          {saved ? 'Remove Location' : 'Save Location'}
         </Text>
 
     </button>
