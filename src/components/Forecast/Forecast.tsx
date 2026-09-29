@@ -17,16 +17,15 @@ import type {
     ForecastListItem 
 } from '../Services/WeatherAPI'
 
-import { formatTemperature, isNightTime } from '../utils/WeatherUtilities' 
+import { 
+    formatTemperature, 
+    isNightTime,
+    mapCondition,
+    type Condition 
+} from '../utils/WeatherUtilities' 
+
 import type { CurrentWeather } from '../hooks/useWeather'
 
-{/* simplified weather conditions used throughout the UI */}
-export type Condition = 
-    | 'sunny' 
-    | 'cloudy' 
-    | 'rainy' 
-    | 'storm' 
-    | 'night'
 
 // represents one dat inside the daily forecast.
 export interface DailyPoint {
@@ -96,28 +95,6 @@ const iconClassMap: Record<Condition, string> = {
     night: 'icon-moon'
 };
 
-// converts openweather condition names into the
-// simplified condition types used by the application
-export function mapCondition(main: string): Condition{
-    switch (main) {
-
-        case 'Clear': 
-            return 'sunny';
-
-        case 'Clouds': 
-            return 'cloudy';
-
-        case 'Rain': 
-        case 'Drizzle': 
-            return 'rainy';
-
-        case 'Thunderstorm': 
-            return 'storm';
-
-        default: 
-            return 'cloudy';
-    }
-}
 
 // groups the API's individual forecast entries into days.
 //

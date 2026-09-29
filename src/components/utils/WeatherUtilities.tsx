@@ -210,5 +210,33 @@ export const getWindDirection = (
 
 };
 
+{/* simplified weather conditions used throughout the UI */}
+export type Condition = 
+    | 'sunny' 
+    | 'cloudy' 
+    | 'rainy' 
+    | 'storm' 
+    | 'night'
 
+// converts openweather condition names into the
+// simplified condition types used by the application
+export function mapCondition(main: string): Condition{
+    switch (main) {
 
+        case 'Clear': 
+            return 'sunny';
+
+        case 'Clouds': 
+            return 'cloudy';
+
+        case 'Rain': 
+        case 'Drizzle': 
+            return 'rainy';
+
+        case 'Thunderstorm': 
+            return 'storm';
+
+        default: 
+            return 'cloudy';
+    }
+}
