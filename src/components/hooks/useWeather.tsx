@@ -351,9 +351,17 @@ export const useWeather = (): useWeatherReturn => {
 
     useEffect(() => {
         
-        // attempt to fetch weather for the user's 
-        // current location when the hook first loads.
-        fetchWeatherByLocation();
+        const timeoutId = window.setTimeout(() => {
+
+            // attempt to fetch weather for the user's 
+            // current location when the hook first loads.
+            fetchWeatherByLocation();
+            
+        }, 0);
+        
+        return () => {
+            window.clearTimeout(timeoutId)
+        }
 
     }, [fetchWeatherByLocation]);
 
