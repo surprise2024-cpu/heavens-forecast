@@ -15,7 +15,7 @@ import { useOnlineStatus } from './UseOnlineStatus';
 export type CurrentWeather = CurrentWeatherResponse;
 
 // describes everything returned by the useWeather hook
-export type UseWeatherReturn = {
+export type useWeatherReturn = {
 
     // current weather information
     currentWeather: CurrentWeather | null;
@@ -30,7 +30,7 @@ export type UseWeatherReturn = {
     error: string | null;
 
     // currentlt selected temperature unit.
-    unit: string;
+    unit: 'C' | 'F';
 
     // indicates whether the browser is currently online
     isOnline: boolean;
@@ -56,7 +56,7 @@ export type UseWeatherReturn = {
 
 // main custom hook responsible for managing
 // weather data and weather-related state.
-export const useWeather = (): UseWeatherReturn => {
+export const useWeather = (): useWeatherReturn => {
 
     // stores the current display weather.
     const [currentWeather, setCurrentWeather] = 
@@ -76,7 +76,7 @@ export const useWeather = (): UseWeatherReturn => {
 
     // stores the user's selected temperature unit
     const [unit, setUnit] = 
-        useState('C');
+        useState<'C' | 'F'>('C');
 
     // tracks whether cached weather data is being shown.
     const [usingCache, setUsingCache] = 

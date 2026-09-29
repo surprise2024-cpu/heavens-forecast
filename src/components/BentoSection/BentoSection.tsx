@@ -51,7 +51,7 @@ interface BentoSectionProps {
     forecast: ForecastResponse | null;
 
     // Temperature unit selected by the user
-    unit: string;
+    unit: 'C' | 'F';
 
     // Weather data used to determine whether it  is currently day or night
     weather?: CurrentWeather | null; 

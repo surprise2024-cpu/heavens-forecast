@@ -23,7 +23,7 @@ interface HeroSectionProps {
   weather: CurrentWeather | null;
 
   // temperature uni currently selected by the user.
-  unit: string;
+  unit: 'C' | 'F';
 
   // indicates whether the current locaton has already been save.
   saved?: boolean;

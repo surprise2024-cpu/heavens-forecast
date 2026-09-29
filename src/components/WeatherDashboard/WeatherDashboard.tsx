@@ -2,7 +2,7 @@ import styles from './WeatherDashboard.module.css'
 
 import { Navbar } from '../Navbar/Navbar';
 import  { useWeather } from '../hooks/useWeather';
-import type {CurrentWeather, UseWeatherReturn} from '../hooks/useWeather'
+import type {CurrentWeather, useWeatherReturn} from '../hooks/useWeather'
 import type { DailyPoint } from '../Forecast/Forecast'
 import { useEffect, useState } from 'react';
 import type { ForecastResponse } from '../Services/WeatherAPI';
@@ -64,7 +64,7 @@ export const WeatherDashboard = () => {
         fetchWeatherByLocation,
         toggleUnit,
 
-    }: UseWeatherReturn = useWeather();
+    }: useWeatherReturn = useWeather();
 
     // Stores the forecast day currently selected by the user.
     // null means the UI should display current weather.

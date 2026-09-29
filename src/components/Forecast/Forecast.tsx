@@ -59,7 +59,7 @@ interface ForecastProps {
     forecast: ForecastResponse | null;
 
     // temperature unit selected by the user.
-    unit: string;
+    unit: 'C' | 'F';
 
     // current weather data used for day/night styling.
     weather: CurrentWeather | null;

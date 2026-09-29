@@ -12,7 +12,7 @@ interface CitiesProps {
     locations: SavedLocation[];
 
     // currently selected teperature unit.
-    unit: string;
+    unit: 'C' | 'F';
 
     // rus when the user selects one of their saved cities.
     onSelectCity: (location: SavedLocation) => void;
