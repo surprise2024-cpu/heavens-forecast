@@ -27,8 +27,8 @@ import type {
 import { formatTemperature, isNightTime } from '../utils/WeatherUtilities'
 
 // used by the application's weather icons.
-import { mapCondition } from '../Forecast/Forecast'
-import type { Condition } from '../Forecast/Forecast' 
+import { mapCondition } from '../utils/WeatherUtilities'
+import type { Condition } from '../utils/WeatherUtilities' 
 
 // Current weathetype returned by the custom useWeather hook.
 import type { CurrentWeather } from '../hooks/useWeather'
