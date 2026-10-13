@@ -86,7 +86,7 @@ export const useWeather = (): useWeatherReturn => {
     const [cacheAge, setCacheAge] = 
         useState<string | null>(null);
 
-    // wathc the browser's online/offline status.
+    // watch the browser's online/offline status.
     const isOnline = 
         useOnlineStatus();
 
